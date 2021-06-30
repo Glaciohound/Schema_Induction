@@ -19,7 +19,7 @@ def get_args():
                             '_', '*', "-",
                             '[mask]'
                         ])
-    parser.add_argument("--concise", action="store_true")
+    parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args()
     return args
 
@@ -129,7 +129,7 @@ def main(args):
                 f.write(input_line+'\n')
                 for one_prediction in predictions:
                     f.write(one_prediction+'\n')
-                if not args.concise:
+                if args.verbose:
                     f.write(sample_output+'\n')
 
 
