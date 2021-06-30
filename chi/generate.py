@@ -19,6 +19,7 @@ def get_args():
                             '_', '*', "-",
                             '[mask]'
                         ])
+    parser.add_argument("--concise", action="store_true")
     args = parser.parse_args()
     return args
 
@@ -30,6 +31,45 @@ def set_readline():
     readline.read_history_file(histfile)
     readline.set_history_length(10000)
     atexit.register(readline.write_history_file, histfile)
+
+
+def LM_prompt(text, tokenizer, maskedLM, args):
+    text = f" {text} "
+    for custom_mask in args.custom_masks:
+        while f" {custom_mask} " in text:
+            text = text.replace(
+                f" {custom_mask} ", f" {tokenizer.mask_token} "
+            )
+    text = text[1:-1]
+    if tokenizer.mask_token not in text:
+        return [], text, "accumulating"
+    if 'uncased' in args.model_name:
+        text = text.lower().replace(
+            tokenizer.mask_token.lower(), tokenizer.mask_token
+        )
+    ids = torch.tensor([tokenizer.encode(
+        text, truncation=True, max_length=512
+    )]).long()
+    mask_pos = torch.nonzero(ids == tokenizer.mask_token_id)
+    ids = ids.cuda()
+    with torch.no_grad():
+        predictions = maskedLM(ids)[0]
+    predicted_tokens = []
+    for item in mask_pos:
+        predicted_tokens.append([
+            tokenizer.convert_ids_to_tokens(idx.item())
+            for idx in torch.topk(
+                predictions[item[0], item[1]], k=args.top_k
+            )[1]
+        ])
+    sample_output = copy.copy(text)
+    for i in range(mask_pos.shape[0]):
+        sample_output = sample_output.replace(
+            tokenizer.mask_token,
+            predicted_tokens[i][0],
+            1
+        )
+    return predicted_tokens, sample_output, "success"
 
 
 def main(args):
@@ -89,46 +129,8 @@ def main(args):
                 f.write(input_line+'\n')
                 for one_prediction in predictions:
                     f.write(one_prediction+'\n')
-                f.write(sample_output+'\n')
-
-
-def LM_prompt(text, tokenizer, maskedLM, args):
-    text = f" {text} "
-    for custom_mask in args.custom_masks:
-        while f" {custom_mask} " in text:
-            text = text.replace(
-                f" {custom_mask} ", f" {tokenizer.mask_token} "
-            )
-    text = text[1:-1]
-    if tokenizer.mask_token not in text:
-        return [], text, "accumulating"
-    if 'uncased' in args.model_name:
-        text = text.lower().replace(
-            tokenizer.mask_token.lower(), tokenizer.mask_token
-        )
-    ids = torch.tensor([tokenizer.encode(
-        text, truncation=True, max_length=512
-    )]).long()
-    mask_pos = torch.nonzero(ids == tokenizer.mask_token_id)
-    ids = ids.cuda()
-    with torch.no_grad():
-        predictions = maskedLM(ids)[0]
-    predicted_tokens = []
-    for item in mask_pos:
-        predicted_tokens.append([
-            tokenizer.convert_ids_to_tokens(idx.item())
-            for idx in torch.topk(
-                predictions[item[0], item[1]], k=args.top_k
-            )[1]
-        ])
-    sample_output = copy.copy(text)
-    for i in range(mask_pos.shape[0]):
-        sample_output = sample_output.replace(
-            tokenizer.mask_token,
-            predicted_tokens[i][0],
-            1
-        )
-    return predicted_tokens, sample_output, "success"
+                if not args.concise:
+                    f.write(sample_output+'\n')
 
 
 if __name__ == "__main__":
