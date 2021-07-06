@@ -24,7 +24,7 @@ def main(args):
     for _type, _samples in dev_grouped.items():
         print(_type)
         print("=" * 30)
-        for _sample in _samples[:5]:
+        for _sample in _samples[:10]:
             print(_sample)
             print_contents(dev_corpora_dict[_sample["MESSAGE: ID"]],
                            cased=True)
