@@ -63,7 +63,8 @@ def read_muc_article(filename, proper_nouns):
                 split_pos += 1
                 _paragraph_split.append(_paragraph[last_split_pos:split_pos])
                 last_split_pos = split_pos
-            article["content-cased-split"].append(_paragraph_split)
+            if _paragraph_split != []:
+                article["content-cased-split"].append(_paragraph_split)
 
     default_article = {
         "title": "",
