@@ -9,7 +9,7 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--dir", default="data/muc34", type=str)
     parser.add_argument(
-        "--cache-file", default="data/muc34/TASK/muc4_loaded_cache.pkl")
+        "--cache-file", default="data/muc34/outputs/muc4_loaded_cache.pkl")
     parser.add_argument("--overwrite", action="store_true")
     args = parser.parse_args()
     return args

@@ -7,7 +7,7 @@ import copy
 
 def LM_prompt(text, tokenizer, maskedLM, model_name, top_k=7):
     text = f" {text} "
-    custom_masks = ['_', '*', "-", '[mask]']
+    custom_masks = ['_', '[mask]']
     for custom_mask in custom_masks:
         while f" {custom_mask} " in text:
             text = text.replace(
@@ -31,12 +31,12 @@ def LM_prompt(text, tokenizer, maskedLM, model_name, top_k=7):
     predicted_tokens = []
     sample_output = copy.copy(ids)
     for item in mask_pos:
-        top_k = torch.topk(predictions[item[0], item[1]], k=top_k)[1]
+        top_k_preds = torch.topk(predictions[item[0], item[1]], k=top_k)[1]
         predicted_tokens.append([
             tokenizer.convert_ids_to_tokens(idx.item())
-            for idx in top_k
+            for idx in top_k_preds
         ])
-        sample_output[item[0], item[1]] = top_k[0]
+        sample_output[item[0], item[1]] = top_k_preds[0]
 
     sample_output = tokenizer.decode(sample_output[0])
     return predicted_tokens, sample_output, "success"

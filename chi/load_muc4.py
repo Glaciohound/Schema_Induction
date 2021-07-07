@@ -216,7 +216,7 @@ def recognize_proper_nouns(lines, default_type=None):
 
 def load_muc4(
     muc4_dir="data/muc34",
-    cache_file="data/muc34/TASK/muc4_loaded_cache.pkl",
+    cache_file="data/muc34/outputs/muc4_loaded_cache.pkl",
     overwrite=False
 ):
     if cache_file is not None and os.path.exists(cache_file) and not overwrite:
