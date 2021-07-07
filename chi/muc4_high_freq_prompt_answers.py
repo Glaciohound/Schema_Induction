@@ -16,6 +16,7 @@ def get_args():
     parser.add_argument("--model-name", type=str, default="roberta-large")
     parser.add_argument("--top-k", type=int, default=30)
     parser.add_argument("--num-samples", type=int, default=300)
+    parser.add_argument("--batch-size", type=int, default=64)
     parser.add_argument("--output-file", default="high-frequency-names.json")
     args = parser.parse_args()
     return args
@@ -52,16 +53,20 @@ def prompt_all_sentences(tokenizer, maskedLM,
 
 
 def prompt_relevant_sentences(tokenizer, maskedLM, corpora, events, args):
+    sentences = []
+    filtered_events = []
     for _event in np.random.choice(events, args.num_samples):
         sentence = extract_relevant_sentences(
             _event, corpora[_event["MESSAGE: ID"]])
-        if sentence is not None:
-            prompt_list = LM_prompt(
-                sentence+" "+prompt_sentences[0],
-                tokenizer, maskedLM,
-                args.model_name, args.top_k
-            )
-            print(_event["INCIDENT: TYPE"], prompt_list)
+        if _event["INCIDENT: TYPE"] not in ["ATTACK"] and sentence is not None:
+            sentences.append(sentence+" "+prompt_sentences[0])
+            filtered_events.append(_event["INCIDENT: TYPE"])
+    prompt_answers = LM_prompt(
+        sentences,
+        tokenizer, maskedLM,
+        args.model_name, args.top_k, args.batch_size
+    )
+    print(list(zip(filtered_events, prompt_answers)))
 
 
 def main(args):
@@ -71,7 +76,6 @@ def main(args):
 
     tokenizer, maskedLM = get_LM(args.model_name)
     prompt_all_sentences(tokenizer, maskedLM, dev_corpora, args)
-    tokenizer, maskedLM = None, None
     prompt_relevant_sentences(
         tokenizer, maskedLM,
         dev_corpora_dict, dev_events, args
