@@ -10,7 +10,7 @@ def get_args():
     parser.add_argument("--interactive", action="store_true")
     parser.add_argument("--input-file", type=str, default="input.txt")
     parser.add_argument("--output-file", type=str, default="output.txt")
-    parser.add_argument("--model-name", type=str, default="bert-large-cased")
+    parser.add_argument("--model-name", type=str, default="roberta-large")
     parser.add_argument("--top-k", type=int, default=30)
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args()
