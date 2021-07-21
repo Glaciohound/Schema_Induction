@@ -31,9 +31,10 @@ def main(args):
 
     if args.interactive:
         accumulated = ""
+        accumulating = False
         while True:
             try:
-                if accumulated == "":
+                if not accumulating:
                     print()
                     print("[[ Input your prompt line ]]")
                     print("----------------------------")
@@ -42,6 +43,7 @@ def main(args):
                     break
                 elif input_line == "clear":
                     accumulated = ""
+                    accumulating = True
                     continue
                 else:
                     if not (accumulated.endswith(' ') or
@@ -59,11 +61,12 @@ def main(args):
                     if accumulated != "":
                         readline.add_history(accumulated + input_line)
                         accumulated = ""
+                    accumulating = False
                 else:
                     accumulated = sample_output
+                    accumulating = True
             except KeyboardInterrupt:
-                print("\nTo exit the program, type \"exit\" "
-                      "(without the quotation mark).")
+                accumulating = True
 
     else:
         assert os.path.exists(args.input_file)

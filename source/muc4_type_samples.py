@@ -1,8 +1,9 @@
 import argparse
 import json
 
-from load_muc4 import load_muc4
-from tools.muc4_tools import extract_relevant_sentences, corpora_to_dict
+from components.load_muc4 import load_muc4
+from components.muc4_tools import \
+    extract_relevant_sentences, corpora_to_dict, all_types
 
 
 def get_args():
@@ -18,7 +19,6 @@ def main(args):
     dev_corpora, dev_events, tst_corpora, tst_events, proper_nouns = \
         load_muc4()
     dev_corpora_dict = corpora_to_dict(dev_corpora)
-    all_types = ["ATTACK", "BOMBING", "KIDNAPPING", "ARSON", "ROBBERY"]
     dev_grouped = {
         _type: list(filter(
             lambda x: x["INCIDENT: TYPE"][0] == _type,
@@ -37,7 +37,7 @@ def main(args):
                     extract_relevant_sentences(
                         _sample, dev_corpora_dict[_sample["MESSAGE: ID"]]),
                     indent=4
-                ))
+                )[0])
                 f.write("\n")
                 f.write("-" * 30)
                 f.write("\n")

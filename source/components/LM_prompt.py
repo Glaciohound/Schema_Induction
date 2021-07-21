@@ -7,9 +7,14 @@ from transformers import \
     BertTokenizer, BertForMaskedLM, \
     RobertaTokenizer, RobertaForMaskedLM
 
+from components.constants import characters_to_strip
 
-def LM_prompt(texts, tokenizer, maskedLM, model_name, top_k=7, batch_size=64):
+
+def LM_prompt(texts, tokenizer, maskedLM,
+              model_name=None, strip=False, top_k=7, batch_size=64):
     is_list = True
+    if model_name is None:
+        model_name = maskedLM.name_or_path
     if isinstance(texts, str):
         texts = [texts]
         is_list = False
@@ -42,10 +47,16 @@ def LM_prompt(texts, tokenizer, maskedLM, model_name, top_k=7, batch_size=64):
         sample_output = copy.copy(ids)
         for item in mask_pos:
             top_k_preds = torch.topk(predictions[item[0], item[1]], k=top_k)[1]
-            predicted_tokens[item[0]].append([
+            this_predicted_tokens = [
                 tokenizer.convert_ids_to_tokens(idx.item())
                 for idx in top_k_preds
-            ])
+            ]
+            if strip:
+                this_predicted_tokens = list(map(
+                    lambda x: x.strip(characters_to_strip),
+                    this_predicted_tokens
+                ))
+            predicted_tokens[item[0]].append(this_predicted_tokens)
             sample_output[item[0], item[1]] = top_k_preds[0]
         sample_output = map(
             lambda x: tokenizer.decode(x).replace(tokenizer.pad_token, ""),

@@ -1,7 +1,8 @@
 import os
 import re
 import copy
-import pickle
+# import pickle
+import json
 import string
 import itertools
 from glob import glob
@@ -16,8 +17,7 @@ def readlines(filename, strip=True):
     return all_lines
 
 
-def read_muc_article(filename, proper_nouns):
-    all_lines = readlines(filename)
+def read_muc_article(all_lines, proper_nouns):
     output = []
     punc = f"[ {string.punctuation}]"
     proper_nouns_list = list(proper_nouns.keys())
@@ -34,16 +34,17 @@ def read_muc_article(filename, proper_nouns):
         article["content-cased-split"] = []
         for _paragraph in article["content"]:
             _paragraph = _paragraph.lower()
-            _paragraph = re.sub(
-                r"{}".format(proper_nouns_pattern),
-                lambda x: x.group(0)[0] +
-                proper_nouns.get(
-                    x.group(0)[1:-1].upper(),
-                    {"cased": x.group(0)[1:-1]}
-                )["cased"] +
-                x.group(0)[-1],
-                _paragraph,
-            )
+            for _ in range(2):
+                _paragraph = re.sub(
+                    r"{}".format(proper_nouns_pattern),
+                    lambda x: x.group(0)[0] +
+                    proper_nouns.get(
+                        x.group(0)[1:-1].upper(),
+                        {"cased": x.group(0)[1:-1]}
+                    )["cased"] +
+                    x.group(0)[-1],
+                    _paragraph,
+                )
             _paragraph = re.sub(
                 r"([^A-Z][\.\]]\"* +\"*|\[|^ *)[a-z]",
                 lambda x: x.group(0)[:-1] + x.group(0)[-1].upper(),
@@ -52,13 +53,23 @@ def read_muc_article(filename, proper_nouns):
             _paragraph_split = []
             last_split_pos = 0
             for _match in re.finditer(
-                r"[^A-Z]\.[\" ]*([A-Z]|$)",
+                r"([^A-Z\.]\.[\" ]*([A-Z\[\(]|$)|$)",
                 _paragraph
             ):
+                start = _match.start()
+                if _paragraph[start-1:start+1] in ("Mr", "Dr") or \
+                        _paragraph_split[start-2:start+1] in ("Mrs",):
+                    continue
                 split_pos = _match.end() - 1
-                while _paragraph[split_pos] not in ". " and \
-                        split_pos > last_split_pos:
-                    split_pos -= 1
+
+                def not_contains_alpha(x):
+                    return x.lower() == x.upper()
+                if not_contains_alpha(_paragraph[last_split_pos: split_pos]):
+                    continue
+                if split_pos != len(_paragraph) - 1:
+                    while _paragraph[split_pos] not in ". " and \
+                            split_pos > last_split_pos:
+                        split_pos -= 1
                 assert split_pos != last_split_pos, _paragraph
                 split_pos += 1
                 _paragraph_split.append(_paragraph[last_split_pos:split_pos])
@@ -72,7 +83,7 @@ def read_muc_article(filename, proper_nouns):
     }
     article = copy.deepcopy(default_article)
 
-    for _line in all_lines:
+    for _line in tqdm(all_lines):
         _line = _line.strip()
         if _line == "" and article["title"] == "":
             continue
@@ -207,7 +218,7 @@ def recognize_proper_noun(_line, default_type):
 def recognize_proper_nouns(lines, default_type=None):
     output = dict()
     for _line in lines:
-        if "+ name" in _line or _line == "":
+        if "+ name" in _line or _line == "" or _line.startswith("#"):
             continue
         name, content = recognize_proper_noun(_line, default_type)
         output[name] = content
@@ -216,12 +227,12 @@ def recognize_proper_nouns(lines, default_type=None):
 
 def load_muc4(
     muc4_dir="data/muc34",
-    cache_file="data/muc34/outputs/muc4_loaded_cache.pkl",
+    cache_file="data/muc34/outputs/muc4_loaded_cache.json",
     overwrite=False
 ):
     if cache_file is not None and os.path.exists(cache_file) and not overwrite:
-        with open(cache_file, 'rb') as f:
-            all_data = pickle.load(f)
+        with open(cache_file, 'r') as f:
+            all_data = json.load(f)
         return all_data
 
     loc_lines, loc_syn_lines, bld_lines, int_lines, str_lines, \
@@ -260,24 +271,31 @@ def load_muc4(
     ))
     tst_events_files = list(filter(lambda x: "key-tst" in x, filelist))
     dev_corpora_files.sort()
+    dev_corpora_lines = list(itertools.chain(
+        *list(map(readlines, dev_corpora_files))
+    ))
     dev_events_files.sort()
     tst_corpora_files.sort()
+    tst_corpora_lines = list(itertools.chain(
+        *list(map(readlines, tst_corpora_files))
+    ))
     tst_events_files.sort()
-    dev_corpora = list(itertools.chain(
-        *[read_muc_article(_filename, proper_nouns)
-          for _filename in tqdm(dev_corpora_files)]))
+    dev_corpora = read_muc_article(dev_corpora_lines, proper_nouns)
     dev_events = list(itertools.chain(
         *[read_muc_event(_filename)
           for _filename in dev_events_files]))
-    tst_corpora = list(itertools.chain(
-        *[read_muc_article(_filename, proper_nouns)
-          for _filename in tqdm(tst_corpora_files)]))
+    for i, _event in enumerate(dev_events):
+        _event["event-ID"] = f"DEV-EVENTS-{i}"
+    tst_corpora = read_muc_article(tst_corpora_lines, proper_nouns)
     tst_events = list(itertools.chain(
         *[read_muc_event(_filename)
           for _filename in tst_events_files]))
+    for i, _event in enumerate(tst_events):
+        _event["event-ID"] = f"TST-EVENTS-{i}"
     all_data = dev_corpora, dev_events, tst_corpora, tst_events, proper_nouns
 
-    if cache_file is not None and not os.path.exists(cache_file):
-        with open(cache_file, 'wb') as f:
-            pickle.dump(all_data, f)
+    if overwrite or \
+            (cache_file is not None and not os.path.exists(cache_file)):
+        with open(cache_file, 'w') as f:
+            json.dump(all_data, f, indent=2)
     return all_data
