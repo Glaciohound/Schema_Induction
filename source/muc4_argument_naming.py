@@ -3,6 +3,7 @@ import json
 import argparse
 from tqdm import tqdm
 from nltk.stem import WordNetLemmatizer
+from collections import defaultdict, Counter
 
 from components.muc4_tools import \
     corpora_to_dict, group_events_by_type, \
@@ -78,8 +79,8 @@ def prompt_argument_naming(args, arguments_by_type):
                 for _sentence in _sentences:
                     _sentence["gt-argument-naming"] = {}
                     # _sentence.pop("extracted-noun-phrases")
-                    # for _noun_phrase in _sentence["arguments"]:
-                    for _noun_phrase in _sentence["extracted-noun-phrases"]:
+                    # for _noun_phrase in _sentence["extracted-noun-phrases"]:
+                    for _noun_phrase in _sentence["arguments"]:
                         if lemmatizer.lemmatize(_noun_phrase) == _noun_phrase:
                             copula = "is"
                         else:
@@ -176,6 +177,29 @@ def argument_filtering(args, argument_naming):
     return ranked_all_namings
 
 
+def evaluate_gt_accuracy(argument_naming, selected_arguments):
+    result = defaultdict(lambda: Counter())
+    selected_arguments_index = {
+        _syn: _name
+        for _name, _group in selected_arguments.items()
+        for _syn in _group["synonyms"]
+    }
+
+    for _type, _sentences in argument_naming.items():
+        for _sentence in _sentences:
+            for _argument, _naming in _sentence["gt-argument-naming"].items():
+                _naming = list(filter(lambda x: x in selected_arguments_index,
+                                      _naming[0]))
+                _naming = _naming[0] if len(_naming) > 0 else None
+                gt_cat = _sentence["arguments"][_argument]
+                result[f"{gt_cat}"].update([
+                    _naming == all_arguments[gt_cat][0]
+                ])
+
+    for _category, _counter in result.items():
+        print(_category, _counter.items())
+
+
 def main(args):
     dev_corpora, dev_events, _, _, _ = load_muc4()
     dev_corpora = corpora_to_dict(dev_corpora)
@@ -185,9 +209,9 @@ def main(args):
 
     argument_naming = prompt_argument_naming(args, arguments_by_type)
     ranked_all_namings = argument_filtering(args, argument_naming)
-    print(ranked_all_namings.keys())
+    # print(ranked_all_namings.keys())
 
-    # print(argument_naming["ATTACK"][0])
+    evaluate_gt_accuracy(argument_naming, ranked_all_namings)
 
 
 if __name__ == "__main__":

@@ -41,7 +41,7 @@ all_types = {
 interested_categories = (
     "INCIDENT: DATE", "INCIDENT: LOCATION", "INCIDENT: INSTRUMENT ID",
     "PERP: INDIVIDUAL ID", "PERP: ORGANIZATION ID",
-    "PHYS TGT: ID", "HUM TGT: ID",
+    "PHYS TGT: ID", "HUM TGT: NAME",
 )
 
 all_arguments = {
@@ -50,6 +50,6 @@ all_arguments = {
     "INCIDENT: INSTRUMENT ID": ["weapon"],
     "PERP: INDIVIDUAL ID": ["suspect"],
     "PERP: ORGANIZATION ID": ["suspect"],
-    "HUM TGT: ID": ["victim"],
+    "HUM TGT: NAME": ["victim"],
     "PHYS TGT: ID": ["target"],
 }
