@@ -11,6 +11,10 @@ from components.load_muc4 import load_muc4
 from components.np_extractors import SpacyNPExtractor
 from components.constants import \
     argument_name_prompt_sentences, all_types, all_arguments
+from components.wordnet_tools import \
+    all_attr_of_synsets, are_synonyms, synsets
+from components.logic_tools import \
+    intersect, merge_ranked_list, sort_rank
 
 
 def parse_args():
@@ -19,8 +23,14 @@ def parse_args():
     parser.add_argument("--all-noun-phrases", type=str,
                         default="data/muc34/outputs/all-arguments.json")
     parser.add_argument("--argument-prompts", type=str,
-                        default="data/muc34/outputs/argument-naming.json")
+                        default="data/muc34/outputs/gt-argument-naming.json")
+    parser.add_argument("--selected-arguments", type=str,
+                        default="data/muc34/outputs/selected-arguments.json")
     parser.add_argument("--overwrite-arguments", action="store_true")
+    parser.add_argument("--overwrite-argument-naming", action="store_true")
+    parser.add_argument("--overwrite-argument-filtering", action="store_true")
+    parser.add_argument("--num-selected-names", type=int, default=20)
+    parser.add_argument("--only-tackling-top", type=int, default=50)
     args = parser.parse_args()
     return args
 
@@ -56,6 +66,116 @@ def get_arguments_by_type(args, events, corpora):
     return sentences_by_type, num_sentences
 
 
+def prompt_argument_naming(args, arguments_by_type):
+    if args.overwrite_argument_naming or \
+            not os.path.exists(args.argument_prompts):
+        from components.LM_prompt import LM_prompt, get_LM
+        tokenizer, maskedLM = get_LM(args.model_name)
+        lemmatizer = WordNetLemmatizer()
+
+        def get_all_gt_naming_prompts():
+            for _type, _sentences in arguments_by_type.items():
+                for _sentence in _sentences:
+                    _sentence["gt-argument-naming"] = {}
+                    # _sentence.pop("extracted-noun-phrases")
+                    # for _noun_phrase in _sentence["arguments"]:
+                    for _noun_phrase in _sentence["extracted-noun-phrases"]:
+                        if lemmatizer.lemmatize(_noun_phrase) == _noun_phrase:
+                            copula = "is"
+                        else:
+                            copula = "are"
+                        if _noun_phrase[0].islower():
+                            _noun_phrase = "The " + _noun_phrase
+                        prompt = _sentence["sentence"] + " " + \
+                            argument_name_prompt_sentences[0].format(
+                                _noun_phrase, copula, all_types[_type][0]
+                            )
+                        yield prompt
+
+        all_gt_naming_prompts = list(get_all_gt_naming_prompts())
+        prompted_result = LM_prompt(
+            all_gt_naming_prompts, tokenizer, maskedLM, strip=True
+        )
+
+        yield_prompt = iter(prompted_result)
+
+        for _type, _sentences in arguments_by_type.items():
+            for _sentence in _sentences:
+                for _noun_phrase, _category in _sentence["arguments"].items():
+                    naming = list(map(
+                        lemmatizer.lemmatize,
+                        next(yield_prompt)[0][:5],
+                    ))
+                    _sentence["gt-argument-naming"][_noun_phrase] = (
+                        naming,
+                        naming[0] == all_arguments[_category][0]
+                    )
+
+        with open(args.argument_prompts, "w") as f:
+            json.dump(arguments_by_type, f, indent=2)
+
+    else:
+        with open(args.argument_prompts, "r") as f:
+            arguments_by_type = json.load(f)
+
+    return arguments_by_type
+
+
+def filter_namings(ranked_all_namings, num_selected_names):
+    output = {}
+    for naming, weight in tqdm(
+            list(ranked_all_namings.items())[:args.only_tackling_top]
+    ):
+        output = sort_rank(output, key=lambda x: x[1]["weight"])
+        if len(synsets(naming)) == 0 or not naming.islower():
+            continue
+        if intersect(all_attr_of_synsets(naming, "pos"), {"a"}):
+            continue
+        found_synonym = None
+        for _existed, _group in output.items():
+            for _lemma in _group["synonyms"]:
+                if are_synonyms(_lemma, naming, "v", True):
+                    if found_synonym is None:
+                        print(f"found synonym: {naming} -> {_existed}")
+                        output[_existed]["weight"] += weight
+                        output[_existed]["synonyms"].append(naming)
+                        found_synonym = _existed
+                        break
+        if found_synonym is not None:
+            continue
+        output[naming] = {
+            "weight": weight,
+            "synonyms": [naming],
+        }
+    output = dict(list(sort_rank(
+        output, key=lambda x: x[1]["weight"]
+    ).items())[:num_selected_names])
+    for i, (_, _group) in enumerate(output.items()):
+        _group["rank"] = i
+    return output
+
+
+def argument_filtering(args, argument_naming):
+    if args.overwrite_argument_filtering or not os.path.exists(
+            args.selected_arguments):
+        all_namings = [
+            _naming[0] for _sentences in argument_naming.values()
+            for _sentence in _sentences
+            for _naming in _sentence["gt-argument-naming"].values()
+        ]
+        ranked_all_namings = merge_ranked_list(all_namings)
+        ranked_all_namings = filter_namings(
+            ranked_all_namings, args.num_selected_names)
+
+        with open(args.selected_arguments, 'w') as f:
+            json.dump(ranked_all_namings, f, indent=4)
+    else:
+        with open(args.selected_arguments, 'r') as f:
+            ranked_all_namings = json.load(f)
+
+    return ranked_all_namings
+
+
 def main(args):
     dev_corpora, dev_events, _, _, _ = load_muc4()
     dev_corpora = corpora_to_dict(dev_corpora)
@@ -63,46 +183,11 @@ def main(args):
     arguments_by_type, num_sentences = get_arguments_by_type(
         args, dev_events, dev_corpora)
 
-    from components.LM_prompt import LM_prompt, get_LM
-    tokenizer, maskedLM = get_LM(args.model_name)
-    lemmatizer = WordNetLemmatizer()
+    argument_naming = prompt_argument_naming(args, arguments_by_type)
+    ranked_all_namings = argument_filtering(args, argument_naming)
+    print(ranked_all_namings.keys())
 
-    def get_all_gt_naming_prompts():
-        for _type, _sentences in arguments_by_type.items():
-            for _sentence in _sentences:
-                _sentence["gt-argument-naming"] = {}
-                _sentence.pop("extracted-noun-phrases")
-                for _noun_phrase in _sentence["arguments"]:
-                    if lemmatizer.lemmatize(_noun_phrase) == _noun_phrase:
-                        copula = "is"
-                    else:
-                        copula = "are"
-                    if _noun_phrase[0].islower():
-                        _noun_phrase = "The " + _noun_phrase
-                    prompt = _sentence["sentence"] + " " + \
-                        argument_name_prompt_sentences[0].format(
-                            _noun_phrase, copula, all_types[_type][0]
-                        )
-                    yield prompt
-
-    all_gt_naming_prompts = list(get_all_gt_naming_prompts())
-    prompted_result = LM_prompt(
-        all_gt_naming_prompts[:10], tokenizer, maskedLM, strip=True
-    )
-
-    yield_prompt = iter(prompted_result)
-
-    for _type, _sentences in arguments_by_type.items():
-        for _sentence in _sentences:
-            for _noun_phrase, _category in _sentence["arguments"].items():
-                naming = lemmatizer.lemmatize(next(yield_prompt)[0][0])
-                _sentence["gt-argument-naming"][_noun_phrase] = (
-                    naming,
-                    naming == all_arguments[_category][0]
-                )
-
-    with open(args.argument_prompts, "w") as f:
-        json.dump(arguments_by_type, f, indent=2)
+    # print(argument_naming["ATTACK"][0])
 
 
 if __name__ == "__main__":

@@ -2,7 +2,8 @@ import argparse
 import readline
 import os
 import atexit
-from LM_prompt import get_LM, LM_prompt
+
+from components.LM_prompt import get_LM, LM_prompt
 
 
 def get_args():

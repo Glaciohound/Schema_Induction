@@ -6,7 +6,8 @@ import math
 import numpy as np
 
 from components.constants import \
-    characters_to_strip, all_types, months, interested_categories
+    all_types, months, interested_categories
+from components.logic_tools import sort_rank
 
 
 def get_all_sentences(corpora):
@@ -43,7 +44,7 @@ def get_event_keywords(event):
     typed_keywords = {}
     punctuation = " !\"#$%&\'*+,-./:;<=>?@\\^_`{|}~"
     null_arguments = ["", "-", "*"]
-    for _type, _list in reversed(event.items()):
+    for _type, _list in event.items():
         if _type not in interested_categories:
             continue
         for _piece in _list:
@@ -137,19 +138,6 @@ def corpora_to_dict(corpora):
         _article["title"]: _article
         for _article in corpora
     }
-
-
-def sort_rank(rank):
-    return dict(sorted(rank.items(), key=lambda x: x[1], reverse=True))
-
-
-def merge_ranked_list(lists):
-    full_ranking = defaultdict(lambda: 0)
-    for single_list in lists:
-        for _i, _word in enumerate(single_list):
-            full_ranking[_word.strip(characters_to_strip)] += 1 / (_i+1)
-    full_ranked_list = sort_rank(full_ranking)
-    return full_ranked_list
 
 
 def rebalance_by_weight(rank, selected_names, all_names_index):

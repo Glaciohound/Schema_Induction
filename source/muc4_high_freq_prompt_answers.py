@@ -6,15 +6,17 @@ import json
 from collections import defaultdict
 from tqdm import tqdm
 
-import nltk
-from nltk.stem import PorterStemmer, LancasterStemmer, WordNetLemmatizer
 from nltk.corpus import wordnet
 
 from components.load_muc4 import load_muc4
 from components.muc4_tools import \
     get_all_sentences, corpora_to_dict, merge_ranked_list, \
     characters_to_strip, get_all_type_sentences
+from components.wordnet_tools import \
+    all_attr_of_synsets, are_synonyms, stemming,\
+    lemmatizer
 from components.constants import event_prompt_sentences
+from components.logic_tools import intersect
 
 
 def get_args():
@@ -53,7 +55,7 @@ def prompt_all_sentences(corpora, args):
         all_prompts = [
             _sentence+" "+prompt_sentence
             for _sentence in all_sentences
-            for prompt_sentence in prompt_sentences
+            for prompt_sentence in event_prompt_sentences
         ]
         all_prompt_answers = LM_prompt(
             all_prompts,
@@ -67,38 +69,6 @@ def prompt_all_sentences(corpora, args):
     full_ranking = merge_ranked_list(prompted_lists)
     selected_names = dict()
     all_selected_names = set()
-    try:
-        nltk.data.find("corpora/wordnet.zip")
-    except LookupError:
-        nltk.download("wordnet")
-    lemmatizer = WordNetLemmatizer()
-    porter = PorterStemmer()
-    lancaster = LancasterStemmer()
-
-    def intersect(set1, set2):
-        return len(set(set1).intersection(set(set2))) != 0
-
-    def all_attr_of_synsets(_query, attr_name, filter_pos=None):
-        output = list(map(
-            lambda _syn: getattr(_syn, attr_name, "")(),
-            filter(
-                lambda _syn: True if filter_pos is None else
-                _syn.pos() == filter_pos,
-                wordnet.synsets(_query)
-            )
-        ))
-        return output
-
-    def stemming(word):
-        stemmed = [word]
-        for stemmer in (porter, lancaster):
-            _stemmed = stemmer.stem(word)
-            if _stemmed.lower() != word.lower() and \
-                    _stemmed.lower()+"e" != word.lower():
-                for _suffix in ["", "e"]:
-                    if len(wordnet.synsets(_stemmed+_suffix)) != 0:
-                        stemmed.append(_stemmed + _suffix)
-        return stemmed
 
     def is_verb_deviant(name):
         if (
@@ -117,33 +87,6 @@ def prompt_all_sentences(corpora, args):
             for _stemmed in stemmed:
                 if "v" in all_attr_of_synsets(_stemmed, "pos"):
                     return True
-        return False
-
-    def are_synonyms(word1, word2=None):
-        if word2 is None:
-            assert isinstance(word1, tuple)
-            word1, word2 = word1
-        # return intersect(stemming(word1), synset_by_LM(word2)) or \
-        #     intersect(stemming(word2), synset_by_LM(word1))
-        for _word1, _word2 in ((word1, word2), (word2, word1)):
-            if _word1 in (
-                [_word2] + stemming(_word2) +
-                list(itertools.chain(
-                    *all_attr_of_synsets(_word2, "lemma_names", "n")[:2]
-                )) +
-                list(itertools.chain(
-                    *all_attr_of_synsets(_word2, "lemma_names", "v")
-                ))
-            ):
-                return True
-            # or _word1 in ". ".join(
-            #     all_attr_of_synsets(_word2, "definition")
-            # ):
-            # if _word1 in list(map(
-            #     lambda x: x[0],
-            #     all_attr_of_synsets(_word2, "lemma_names", "v")
-            # )):
-            #     return True
         return False
 
     def find_synonyms(word, group):
