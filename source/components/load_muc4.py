@@ -7,6 +7,10 @@ import itertools
 from glob import glob
 from collections import defaultdict
 from tqdm import tqdm
+from components.logging import getLogger
+
+
+logger = getLogger("load-muc4")
 
 
 def readlines(filename, strip=True):
@@ -232,8 +236,10 @@ def load_muc4(
     if cache_file is not None and os.path.exists(cache_file) and not overwrite:
         with open(cache_file, 'r') as f:
             all_data = json.load(f)
+        logger.info("loading MUC-4 from existing file: " + cache_file)
         return all_data
 
+    logger.info("loading MUC-4 from scratch")
     loc_lines, loc_syn_lines, bld_lines, int_lines, str_lines, \
         nation_lines, other_lines \
         = tuple(map(lambda x: readlines(

@@ -2,6 +2,7 @@ import numpy as np
 
 from collections import defaultdict
 from components.constants import characters_to_strip
+from components.logging import getLogger
 
 
 def intersect(set1, set2):
@@ -36,6 +37,10 @@ def merge_ranked_list(lists, distribution="power"):
 
 
 def random_choice(candidates, num):
+    logger = getLogger("random-choice")
     if num <= 0 or num >= len(candidates):
+        logger.info(f"num={num}, defaulting to original list "
+                    f"of length {len(candidates)}")
         return np.array(candidates)
+    logger.info(f"selecting {num} randomly")
     return np.random.choice(candidates, min(len(candidates), num), False)

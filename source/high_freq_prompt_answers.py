@@ -17,19 +17,27 @@ from components.logic_tools import intersect
 from components.prompt_all import \
     prompt_all_with_cache, get_all_sentence_prompts, get_all_paragraph_prompts
 from components.get_args import get_args
+from components.logging import getLogger
+
+
+logger = getLogger("high-freq-events")
 
 
 def high_freq_in_all_sentences(corpora, args):
     if args.select_names_from == "sentence":
+        logger.info("prompt from sentences")
         prompted_lists = prompt_all_with_cache(
             args, corpora, get_all_sentence_prompts,
             args.prompt_all_sentences_results
         )
+        logger.info(f"len = {len(prompted_lists)}")
     elif args.select_names_from == "paragraph":
+        logger.info("prompt from paragraphs")
         prompted_lists = prompt_all_with_cache(
             args, corpora, get_all_paragraph_prompts,
             args.prompt_all_paragraphs_results
         )
+        logger.info(f"len = {len(prompted_lists)}")
     else:
         raise NotImplementedError()
 

@@ -6,6 +6,10 @@ from components.muc4_tools import \
     get_all_sentences, get_all_paragraphs
 from components.logic_tools import random_choice
 from components.constants import event_prompt_sentences
+from components.logging import getLogger
+
+
+logger = getLogger("prompt-all")
 
 
 def prompt_all_with_cache(args, corpora,
@@ -13,13 +17,15 @@ def prompt_all_with_cache(args, corpora,
     if os.path.exists(cache_file):
         with open(cache_file, 'r') as f:
             prompted_lists = json.load(f)
+        logger.info("loading prompting results from existing file "+cache_file)
     else:
-        all_prompt_sentences = all_prompt_sentences_getter(corpora)
+        logger.info("prompt from scratch")
+        all_prompt_sentences = all_prompt_sentences_getter(args, corpora)
         all_prompt_sentences_expand = list(
             itertools.chain(*all_prompt_sentences)
         )
 
-        from LM_prompt import get_LM, LM_prompt
+        from components.LM_prompt import get_LM, LM_prompt
         tokenizer, maskedLM = get_LM(args.model_name)
         all_prompt_answers = LM_prompt(
             all_prompt_sentences_expand,
@@ -38,6 +44,7 @@ def prompt_all_with_cache(args, corpora,
 
 
 def get_all_sentence_prompts(args, corpora):
+    logger.info("get all sentence prompts")
     all_sentences = random_choice(
         get_all_sentences(corpora), args.num_samples)
     all_prompts = [
@@ -49,6 +56,7 @@ def get_all_sentence_prompts(args, corpora):
 
 
 def get_all_paragraph_prompts(args, corpora):
+    logger.info("get all paragraph prompts")
     all_paragraphs = random_choice(
         get_all_paragraphs(corpora), args.num_samples)
     all_prompts = [

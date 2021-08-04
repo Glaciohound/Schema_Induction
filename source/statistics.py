@@ -4,10 +4,14 @@ from collections import Counter, defaultdict
 from components.load_muc4 import load_muc4
 from components.muc4_tools import get_all_sentences
 from components.get_args import get_args
+from components.logging import getLogger
+
+
+main_logger = getLogger("statistics")
 
 
 def dual_output(line, f):
-    print(line)
+    main_logger.info(line)
     f.write(str(line) + "\n")
 
 
