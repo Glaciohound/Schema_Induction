@@ -33,3 +33,9 @@ def merge_ranked_list(lists, distribution="power"):
             full_ranking[_word.strip(characters_to_strip)] += to_add
     full_ranked_list = sort_rank(full_ranking)
     return full_ranked_list
+
+
+def random_choice(candidates, num):
+    if num <= 0 or num >= len(candidates):
+        return np.array(candidates)
+    return np.random.choice(candidates, min(len(candidates), num), False)

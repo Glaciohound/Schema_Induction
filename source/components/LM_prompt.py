@@ -11,7 +11,8 @@ from components.constants import characters_to_strip
 
 
 def LM_prompt(texts, tokenizer, maskedLM,
-              model_name=None, strip=False, top_k=7, batch_size=64):
+              model_name=None, strip=False, top_k=7, batch_size=64,
+              tokens_only=False):
     is_list = True
     if model_name is None:
         model_name = maskedLM.name_or_path
@@ -85,12 +86,14 @@ def LM_prompt(texts, tokenizer, maskedLM,
     output = []
     for _text in texts:
         if _text[1] == "accumulating":
-            output.append(([], _text[0], _text[1]))
+            this_output = [], _text[0], _text[1]
         else:
             this_pred = valid_predictions.pop(0)
-            output.append(
-                (this_pred[0][0], this_pred[1], "success")
-            )
+            this_output = this_pred[0][0], this_pred[1], "success"
+        if tokens_only:
+            output.append(this_output[0])
+        else:
+            output.append(this_output)
 
     if is_list:
         return output

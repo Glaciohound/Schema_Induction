@@ -1,0 +1,65 @@
+[
+    {
+        "ATTACK": [
+            "attack",
+            "shooting",
+            "murder",
+            "massacre",
+            "action",
+            "meeting",
+            "explosion",
+            "exchange",
+            "situation",
+            "bombing"
+        ],
+        "BOMBING": [
+            "attack",
+            "explosion",
+            "bombing",
+            "shooting",
+            "destruction",
+            "action",
+            "massacre",
+            "situation",
+            "raid",
+            "arrest"
+        ],
+        "ARSON": [
+            "attack",
+            "shooting",
+            "massacre",
+            "fire",
+            "explosion",
+            "action",
+            "raid",
+            "destruction",
+            "battle",
+            "robbery"
+        ],
+        "KIDNAPPING": [
+            "kidnapping",
+            "attack",
+            "shooting",
+            "exchange",
+            "arrest",
+            "situation",
+            "murder",
+            "action",
+            "meeting",
+            "raid"
+        ],
+        "ROBBERY": [
+            "attack",
+            "shooting",
+            "raid",
+            "massacre",
+            "action",
+            "robbery",
+            "murder",
+            "situation",
+            "battle",
+            "statement"
+        ]
+    },
+    {}
+]

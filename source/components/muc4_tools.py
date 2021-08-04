@@ -13,14 +13,23 @@ from components.logic_tools import sort_rank
 def get_all_sentences(corpora):
     if isinstance(corpora, dict):
         corpora = corpora.values()
-    output = list(itertools.chain(
-        *list(itertools.chain(
-            *list(
-                itertools.chain(_paragraph_split)
-                for _paragraph_split in _article["content-cased-split"]
-            )
-        ) for _article in corpora)
-    ))
+    output = [
+        _sentence
+        for _article in corpora
+        for _paragraph_split in _article["content-cased-split"]
+        for _sentence in _paragraph_split
+    ]
+    return output
+
+
+def get_all_paragraphs(corpora):
+    if isinstance(corpora, dict):
+        corpora = corpora.values()
+    output = [
+        "".join(_paragraph_split)
+        for _article in corpora
+        for _paragraph_split in _article["content-cased-split"]
+    ]
     return output
 
 
@@ -79,18 +88,18 @@ def get_event_keywords(event):
     return typed_keywords
 
 
-def extract_relevant_sentences(event, article):
+def extract_relevant_sentences(event, article,
+                               content_arg="content-cased-split"):
     all_sentences = list(
         itertools.chain(*[
             _paragraph_split
-            for _paragraph_split in article["content-cased-split"]
+            for _paragraph_split in article[content_arg]
         ]))
     keywords = get_event_keywords(event)
     counter = defaultdict(lambda: {"count": 0, "arguments": {}})
     missing_counter = [True] * len(keywords)
     for i, sentence in enumerate(all_sentences):
         sentence_upper = sentence.upper()
-        # for keyword, _category in keywords.items():
         for j, (keyword, _category) in enumerate(keywords.items()):
             if isinstance(keyword, tuple):
                 sub_pattern = "(" + "|".join(map(re.escape, keyword)) + ")"
@@ -109,16 +118,18 @@ def extract_relevant_sentences(event, article):
                 counter[i]["index"] = i
                 counter[i]["sentence"] = all_sentences[i]
                 counter[i]["article"] = event["MESSAGE: ID"]
-    counter = list(counter.values())
+    counter = sorted(list(counter.values()), key=lambda x: x["count"],
+                     reverse=True)
     missing_counter = dict(zip(keywords, missing_counter))
     return counter, missing_counter
 
 
-def extract_relevant_sentences_from_events(events, corpora):
+def extract_relevant_sentences_from_events(events, corpora, content_arg):
     if isinstance(corpora, list):
         corpora = corpora_to_dict(corpora)
     all_results = [
-        extract_relevant_sentences(_event, corpora[_event["MESSAGE: ID"]])
+        extract_relevant_sentences(_event, corpora[_event["MESSAGE: ID"]],
+                                   content_arg)
         for _event in events
     ]
     output = [_sentence for _event in all_results for _sentence in _event[0]]
@@ -138,6 +149,15 @@ def corpora_to_dict(corpora):
         _article["title"]: _article
         for _article in corpora
     }
+
+
+def merge_sentences_to_paragraph(corpora):
+    iterable = corpora if isinstance(corpora, list) else corpora.values()
+    for article in iterable:
+        article["content-split"] = [
+            "".join(_paragraph)
+            for _paragraph in article["content-split-cased"]
+        ]
 
 
 def rebalance_by_weight(rank, selected_names, all_names_index):
@@ -173,14 +193,14 @@ def group_events_by_type(all_events):
     return groupby_type
 
 
-def get_all_type_sentences(all_events, corpora):
+def get_all_type_sentences(all_events, corpora, content_arg):
     if isinstance(corpora, list):
         corpora = corpora_to_dict(corpora)
     groupby_type = group_events_by_type(all_events)
     type_sentences = {
         _type: [
             extract_relevant_sentences(
-                _event, corpora[_event["MESSAGE: ID"]]
+                _event, corpora[_event["MESSAGE: ID"]], content_arg
             )[0]
             for _event in _group
         ]
@@ -210,10 +230,6 @@ def calculate_precision_recall(pred_list, gt_list):
         "F1": total_hit / (total_pred + total_gt) * 2,
     }
     return precision_recall
-
-
-def random_choice(candidates, num):
-    return np.random.choice(candidates, min(len(candidates), num), False)
 
 
 def load_selected_names(selected_names_file, all_types):

@@ -1,4 +1,8 @@
-data/
+data/ACE2005_English/
+data/muc34/TASK/
+data/muc34/TEST/
+data/muc34/tar/
+data/muc34/MUC-dir*
 **/__pycache__/
 *.log
 *.txt
