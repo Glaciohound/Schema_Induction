@@ -83,3 +83,32 @@
 21-08-05 15:28:57 | INFO | top-events | len = 18720
 21-08-05 15:29:21 | INFO | top-events | got selected names: dict_keys(['attack', 'shooting', 'exchange', 'police', 'meeting', 'battle', 'massacre', 'bombing', 'explosion', 'traffic', 'kidnapping', 'process', 'murder', 'training', 'war', 'conversation', 'terror', 'arrest', 'interview', 'security', 'situation', 'speech', 'protest', 'vote', 'election', 'announcement', 'crash', 'fire', 'corruption', 'raid', 'statement', 'trial', 'drug', 'border', 'seizure', 'rebel', 'smuggling', 'debate', 'government', 'talk', 'cartel', 'destruction', 'looting', 'truth', 'discussion', 'signing', 'response', 'court', 'demonstration', 'aviation', 'flight', 'case', 'strike', 'extradition', 'banking', 'torture', 'decision', 'letter', 'abduction', 'proposal'])
 21-08-05 15:29:21 | INFO | top-events | dump selected names to data/muc34/outputs/top-names-sentences.json
+21-08-05 15:47:06 | INFO | initial | 
+21-08-05 15:47:06 | INFO | initial | ============================================================
+21-08-05 15:47:06 | INFO | initial | Root Command: source/prompt_top_event_names.py
+21-08-05 15:47:09 | INFO | get-args | Parsing Args
+21-08-05 15:47:09 | INFO | get-args | {'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'list_len': 10,
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'model_name': 'roberta-large',
+ 'num_samples': -1,
+ 'num_selected_names': 60,
+ 'overwrite_loading': False,
+ 'overwrite_prompting_all': False,
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'select_names_from': 'paragraph',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names-paragraphs.json'}
+21-08-05 15:47:09 | INFO | load-muc4 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+21-08-05 15:47:09 | INFO | top-events | Prompt from paragraphs
+21-08-05 15:47:09 | INFO | prompt-all | prompt from scratch
+21-08-05 15:47:09 | INFO | prompt-all | get all paragraph prompts
+21-08-05 15:47:09 | INFO | random-choice | num=-1, defaulting to original list of length 9320
+21-08-05 15:47:10 | INFO | LM-prompt | get logger roberta-large
+21-08-05 15:47:26 | INFO | LM-prompt | tokenizer: PreTrainedTokenizer(name_or_path='roberta-large', vocab_size=50265, model_max_len=512, is_fast=False, padding_side='right', special_tokens={'bos_token': AddedToken("<s>", rstrip=False, lstrip=False, single_word=False, normalized=True), 'eos_token': AddedToken("</s>", rstrip=False, lstrip=False, single_word=False, normalized=True), 'unk_token': AddedToken("<unk>", rstrip=False, lstrip=False, single_word=False, normalized=True), 'sep_token': AddedToken("</s>", rstrip=False, lstrip=False, single_word=False, normalized=True), 'pad_token': AddedToken("<pad>", rstrip=False, lstrip=False, single_word=False, normalized=True), 'cls_token': AddedToken("<s>", rstrip=False, lstrip=False, single_word=False, normalized=True), 'mask_token': AddedToken("<mask>", rstrip=False, lstrip=True, single_word=False, normalized=True)}), masked-LM: roberta-large
+21-08-05 15:47:26 | INFO | LM-prompt | Masked-LM prompting texts of length 18640

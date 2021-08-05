@@ -1,11 +1,13 @@
+import os
+import json
 import torch
-from torch.nn.utils.rnn import pad_sequence
 import copy
 import itertools
 from tqdm import tqdm
 from transformers import \
     BertTokenizer, BertForMaskedLM, \
     RobertaTokenizer, RobertaForMaskedLM
+from torch.nn.utils.rnn import pad_sequence
 
 from components.constants import characters_to_strip
 from components.logging import getLogger
@@ -16,6 +18,7 @@ logger = getLogger("LM-prompt")
 def LM_prompt(texts, tokenizer, maskedLM,
               model_name=None, strip=False, top_k=7, batch_size=64,
               tokens_only=False):
+    debug_cache_file = "LM-prompt.cache"
     is_list = True
     if model_name is None:
         model_name = maskedLM.name_or_path
@@ -81,13 +84,27 @@ def LM_prompt(texts, tokenizer, maskedLM,
         valid_sentences[i*batch_size: (i+1)*batch_size]
         for i in range((len(valid_sentences)-1)//batch_size+1)
     ]
-    valid_predictions = list(itertools.chain(
-        *list(map(
-            predict_batch,
-            tqdm(valid_sentences) if len(valid_sentences) >= 10
-            else valid_sentences
+
+    valid_predictions = None
+    if os.path.exists(debug_cache_file):
+        with open(debug_cache_file, 'r') as f:
+            debug_cache = json.load(f)
+        if debug_cache[0] == valid_sentences:
+            valid_predictions = debug_cache[1]
+            logger.info(f"loaded LM-prompt cache from {debug_cache_file}")
+    if valid_predictions is None:
+        logger.info("prompting sentences from scratch")
+        valid_predictions = list(itertools.chain(
+            *list(map(
+                predict_batch,
+                tqdm(valid_sentences) if len(valid_sentences) >= 10
+                else valid_sentences
+            ))
         ))
-    ))
+        with open(debug_cache_file, 'w') as f:
+            json.dump((valid_sentences, valid_predictions))
+            logger.info(f"dumping prompt results to {debug_cache_file}")
+
     output = []
     for _text in texts:
         if _text[1] == "accumulating":
@@ -107,7 +124,7 @@ def LM_prompt(texts, tokenizer, maskedLM,
 
 
 def get_LM(model_name):
-    logger.info(f"get logger {model_name}")
+    logger.info(f"Get tokenizer and model {model_name}")
     if model_name.startswith("bert"):
         tokenizer = BertTokenizer.from_pretrained(
             model_name, do_lower_case=False)
@@ -123,5 +140,4 @@ def get_LM(model_name):
     else:
         device = torch.device("cpu:0")
     maskedLM.to(device)
-    logger.info(f"tokenizer: {tokenizer}, masked-LM: {maskedLM.name_or_path}")
     return tokenizer, maskedLM

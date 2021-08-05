@@ -7,3 +7,4 @@ data/stanford*
 **/__pycache__/
 *.txt
 .pyhist
+*.cache
