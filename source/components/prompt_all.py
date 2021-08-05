@@ -30,7 +30,8 @@ def prompt_all_with_cache(args, corpora,
         all_prompt_answers = LM_prompt(
             all_prompt_sentences_expand,
             tokenizer, maskedLM,
-            args.model_name, args.top_k, tokens_only=True
+            args.model_name, args.top_k, args.max_token_length,
+            tokens_only=True
         )
         all_prompt_answers = iter(all_prompt_answers)
         prompted_lists = [

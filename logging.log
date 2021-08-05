@@ -112,3 +112,90 @@
 21-08-05 15:47:10 | INFO | LM-prompt | get logger roberta-large
 21-08-05 15:47:26 | INFO | LM-prompt | tokenizer: PreTrainedTokenizer(name_or_path='roberta-large', vocab_size=50265, model_max_len=512, is_fast=False, padding_side='right', special_tokens={'bos_token': AddedToken("<s>", rstrip=False, lstrip=False, single_word=False, normalized=True), 'eos_token': AddedToken("</s>", rstrip=False, lstrip=False, single_word=False, normalized=True), 'unk_token': AddedToken("<unk>", rstrip=False, lstrip=False, single_word=False, normalized=True), 'sep_token': AddedToken("</s>", rstrip=False, lstrip=False, single_word=False, normalized=True), 'pad_token': AddedToken("<pad>", rstrip=False, lstrip=False, single_word=False, normalized=True), 'cls_token': AddedToken("<s>", rstrip=False, lstrip=False, single_word=False, normalized=True), 'mask_token': AddedToken("<mask>", rstrip=False, lstrip=True, single_word=False, normalized=True)}), masked-LM: roberta-large
 21-08-05 15:47:26 | INFO | LM-prompt | Masked-LM prompting texts of length 18640
+21-08-05 17:48:27 | INFO | initial | 
+21-08-05 17:48:27 | INFO | initial | ============================================================
+21-08-05 17:48:27 | INFO | initial | Root Command: source/prompt_top_event_names.py
+21-08-05 17:48:32 | INFO | get-args | Parsing Args
+21-08-05 17:48:32 | INFO | get-args | {'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'list_len': 10,
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'model_name': 'roberta-large',
+ 'num_samples': -1,
+ 'num_selected_names': 60,
+ 'overwrite_loading': False,
+ 'overwrite_prompting_all': False,
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'select_names_from': 'paragraph',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names-paragraphs.json'}
+21-08-05 17:48:32 | INFO | load-muc4 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+21-08-05 17:48:32 | INFO | top-events | Prompt from paragraphs
+21-08-05 17:48:32 | INFO | prompt-all | prompt from scratch
+21-08-05 17:48:32 | INFO | prompt-all | get all paragraph prompts
+21-08-05 17:48:32 | INFO | random-choice | num=-1, defaulting to original list of length 9320
+21-08-05 17:48:32 | INFO | LM-prompt | Get tokenizer and model roberta-large
+21-08-05 17:48:50 | INFO | initial | 
+21-08-05 17:48:50 | INFO | initial | ============================================================
+21-08-05 17:48:50 | INFO | initial | Root Command: source/prompt_top_event_names.py
+21-08-05 17:48:53 | INFO | get-args | Parsing Args
+21-08-05 17:48:53 | INFO | get-args | {'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'list_len': 10,
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'model_name': 'roberta-large',
+ 'num_samples': -1,
+ 'num_selected_names': 60,
+ 'overwrite_loading': False,
+ 'overwrite_prompting_all': False,
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'select_names_from': 'paragraph',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names-paragraphs.json'}
+21-08-05 17:48:53 | INFO | load-muc4 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+21-08-05 17:48:53 | INFO | top-events | Prompt from paragraphs
+21-08-05 17:48:53 | INFO | prompt-all | prompt from scratch
+21-08-05 17:48:53 | INFO | prompt-all | get all paragraph prompts
+21-08-05 17:48:53 | INFO | random-choice | num=-1, defaulting to original list of length 9320
+21-08-05 17:48:53 | INFO | LM-prompt | Get tokenizer and model roberta-large
+21-08-05 17:49:08 | INFO | LM-prompt | Masked-LM prompting texts of length 18640
+21-08-05 17:49:10 | INFO | initial | 
+21-08-05 17:49:10 | INFO | initial | ============================================================
+21-08-05 17:49:10 | INFO | initial | Root Command: source/prompt_top_event_names.py
+21-08-05 17:49:15 | INFO | get-args | Parsing Args
+21-08-05 17:49:15 | INFO | get-args | {'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'list_len': 10,
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'model_name': 'roberta-large',
+ 'num_samples': -1,
+ 'num_selected_names': 60,
+ 'overwrite_loading': False,
+ 'overwrite_prompting_all': False,
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'select_names_from': 'paragraph',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names-paragraphs.json'}
+21-08-05 17:49:15 | INFO | load-muc4 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+21-08-05 17:49:15 | INFO | top-events | Prompt from paragraphs
+21-08-05 17:49:15 | INFO | prompt-all | prompt from scratch
+21-08-05 17:49:15 | INFO | prompt-all | get all paragraph prompts
+21-08-05 17:49:15 | INFO | random-choice | num=-1, defaulting to original list of length 9320
+21-08-05 17:49:16 | INFO | LM-prompt | Get tokenizer and model roberta-large
+21-08-05 17:49:28 | INFO | LM-prompt | Masked-LM prompting texts of length 18640
+21-08-05 17:55:21 | INFO | LM-prompt | prompting sentences from scratch
+
+================================================================================
+21-08-05 17:57:25 | INFO | initial | Root Command: source/command.py echo hi

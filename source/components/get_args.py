@@ -9,6 +9,7 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-dir", default="data/muc34", type=str)
     parser.add_argument("--model-name", type=str, default="roberta-large")
+    parser.add_argument("--max-token-length", type=int, default=1024)
     parser.add_argument("--top-k", type=int, default=30)
     parser.add_argument("--loading-cache-file",
                         default="data/muc34/outputs/muc4_loaded_cache.json")
