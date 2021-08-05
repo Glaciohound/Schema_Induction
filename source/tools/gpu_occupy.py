@@ -6,7 +6,7 @@ n_cuda = torch.cuda.device_count()
 assert n_cuda > 0
 
 tensors = [
-    torch.randn(3000, 3000).to(torch.device(f'cuda:{i}'))
+    torch.randn(2000, 2000).to(torch.device(f'cuda:{i}'))
     for i in range(n_cuda)
 ]
 

@@ -17,7 +17,7 @@ logger = getLogger("LM-prompt")
 
 def LM_prompt(texts, tokenizer, maskedLM,
               model_name=None, strip=False, top_k=7, batch_size=64,
-              max_token_length=1024, tokens_only=False):
+              max_token_length=512, tokens_only=False):
     debug_cache_file = "LM-prompt.cache"
     is_list = True
     if model_name is None:
@@ -75,9 +75,8 @@ def LM_prompt(texts, tokenizer, maskedLM,
 
     texts = list(map(preprocess_text, texts))
     valid_sentences = list(map(
-        lambda x: torch.tensor(tokenizer.encode(
-            x[0], truncation=True, max_length=max_token_length
-        )).long(),
+        lambda x: torch.tensor(tokenizer.encode(x[0]))
+        .long()[-max_token_length:],
         filter(lambda x: x[1] == "success", texts)
     ))
     valid_sentences = [
