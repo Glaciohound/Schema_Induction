@@ -1,0 +1,85 @@
+21-08-04 17:46:18 | INFO | initial | Python Command: source/high_freq_prompt_answers.py --num-samples 10
+21-08-04 17:47:15 | INFO | initial | 
+21-08-04 17:47:15 | INFO | initial | ====================
+21-08-04 17:47:15 | INFO | initial | Python Command: source/high_freq_prompt_answers.py --num-samples 10
+21-08-04 17:47:28 | INFO | initial | 
+21-08-04 17:47:28 | INFO | initial | ============================================================
+21-08-04 17:47:28 | INFO | initial | Python Command: source/high_freq_prompt_answers.py --num-samples 10
+21-08-05 15:18:49 | INFO | initial | 
+21-08-05 15:18:49 | INFO | initial | ============================================================
+21-08-05 15:18:49 | INFO | initial | Root Command: source/command.py mv data/muc34/outputs/top-names-by-sentences.json data/muc34/outputs/top-names-sentences.json
+21-08-05 15:19:12 | INFO | initial | 
+21-08-05 15:19:12 | INFO | initial | ============================================================
+21-08-05 15:19:12 | INFO | initial | Root Command: source/command.py mv data/muc34/outputs/top-names-by-sentences.json data/muc34/outputs/top-names-sentences.json
+21-08-05 15:19:18 | INFO | initial | 
+21-08-05 15:19:18 | INFO | initial | ============================================================
+21-08-05 15:19:18 | INFO | initial | Root Command: source/command.py mv data/muc34/outputs/top-names-by-sentences.json data/muc34/outputs/top-names-sentences.json
+21-08-05 15:19:51 | INFO | initial | 
+21-08-05 15:19:51 | INFO | initial | ============================================================
+21-08-05 15:19:51 | INFO | initial | Root Command: source/command.py mv data/muc34/outputs/top-names-sentences.json data/muc34/outputs/top-names-from-sentences.json
+21-08-05 15:20:03 | INFO | initial | 
+21-08-05 15:20:03 | INFO | initial | ============================================================
+21-08-05 15:20:03 | INFO | initial | Root Command: source/command.py mv data/muc34/outputs/top-names-sentences.json data/muc34/outputs/top-names-sentences.json
+21-08-05 15:20:07 | INFO | initial | 
+21-08-05 15:20:07 | INFO | initial | ============================================================
+21-08-05 15:20:07 | INFO | initial | Root Command: source/command.py mv data/muc34/outputs/top-names-from-sentences.json data/muc34/outputs/top-names-sentences.json
+21-08-05 15:28:08 | INFO | initial | 
+21-08-05 15:28:08 | INFO | initial | ============================================================
+21-08-05 15:28:08 | INFO | initial | Root Command: source/prompt_top_event_names.py --top-names-file data/muc34/outputs/top-names-sentences.json
+21-08-05 15:28:12 | INFO | get-args | Parsing Args
+21-08-05 15:28:12 | INFO | get-args | {'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'list_len': 10,
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'model_name': 'roberta-large',
+ 'num_samples': -1,
+ 'num_selected_names': 60,
+ 'overwrite_loading': False,
+ 'overwrite_prompting_all': False,
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'select_names_from': 'paragraph',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names-sentences.json'}
+21-08-05 15:28:13 | INFO | load-muc4 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+21-08-05 15:28:13 | INFO | top-events | prompt from paragraphs
+21-08-05 15:28:13 | INFO | prompt-all | prompt from scratch
+21-08-05 15:28:13 | INFO | prompt-all | get all paragraph prompts
+21-08-05 15:28:13 | INFO | random-choice | num=-1, defaulting to original list of length 9320
+21-08-05 15:28:13 | INFO | LM-prompt | get logger roberta-large
+21-08-05 15:28:35 | INFO | initial | 
+21-08-05 15:28:35 | INFO | initial | ============================================================
+21-08-05 15:28:35 | INFO | initial | Root Command: source/prompt_top_event_names.py --top-names-file data/muc34/outputs/top-names-sentences.json --select-names-from sentences
+21-08-05 15:28:45 | INFO | initial | 
+21-08-05 15:28:45 | INFO | initial | ============================================================
+21-08-05 15:28:45 | INFO | initial | Root Command: source/prompt_top_event_names.py --top-names-file data/muc34/outputs/top-names-sentences.json --select-names-from sentences
+21-08-05 15:28:53 | INFO | initial | 
+21-08-05 15:28:53 | INFO | initial | ============================================================
+21-08-05 15:28:53 | INFO | initial | Root Command: source/prompt_top_event_names.py --top-names-file data/muc34/outputs/top-names-sentences.json --select-names-from sentence
+21-08-05 15:28:57 | INFO | get-args | Parsing Args
+21-08-05 15:28:57 | INFO | get-args | {'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'list_len': 10,
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'model_name': 'roberta-large',
+ 'num_samples': -1,
+ 'num_selected_names': 60,
+ 'overwrite_loading': False,
+ 'overwrite_prompting_all': False,
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'select_names_from': 'sentence',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names-sentences.json'}
+21-08-05 15:28:57 | INFO | load-muc4 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+21-08-05 15:28:57 | INFO | top-events | prompt from sentences
+21-08-05 15:28:57 | INFO | prompt-all | loading prompting results from existing file data/muc34/outputs/all-sentences-prompt-results.json
+21-08-05 15:28:57 | INFO | top-events | len = 18720
+21-08-05 15:29:21 | INFO | top-events | got selected names: dict_keys(['attack', 'shooting', 'exchange', 'police', 'meeting', 'battle', 'massacre', 'bombing', 'explosion', 'traffic', 'kidnapping', 'process', 'murder', 'training', 'war', 'conversation', 'terror', 'arrest', 'interview', 'security', 'situation', 'speech', 'protest', 'vote', 'election', 'announcement', 'crash', 'fire', 'corruption', 'raid', 'statement', 'trial', 'drug', 'border', 'seizure', 'rebel', 'smuggling', 'debate', 'government', 'talk', 'cartel', 'destruction', 'looting', 'truth', 'discussion', 'signing', 'response', 'court', 'demonstration', 'aviation', 'flight', 'case', 'strike', 'extradition', 'banking', 'torture', 'decision', 'letter', 'abduction', 'proposal'])
+21-08-05 15:29:21 | INFO | top-events | dump selected names to data/muc34/outputs/top-names-sentences.json

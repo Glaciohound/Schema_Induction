@@ -35,7 +35,7 @@ def get_args():
         default="data/muc34/outputs/all-paragraphs-prompt-results.json")
 
     parser.add_argument("--top-names-file",
-                        default="data/muc34/outputs/top-names.json")
+                        default="data/muc34/outputs/top-names-paragraphs.json")
     parser.add_argument("--top-names-by-type-file", type=str,
                         default="data/muc34/diagnosis/top-names-by-type.json")
 

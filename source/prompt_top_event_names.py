@@ -25,14 +25,14 @@ logger = getLogger("top-events")
 
 def high_freq_in_all_sentences(corpora, args):
     if args.select_names_from == "sentence":
-        logger.info("prompt from sentences")
+        logger.info("Prompt from sentences")
         prompted_lists = prompt_all_with_cache(
             args, corpora, get_all_sentence_prompts,
             args.prompt_all_sentences_results
         )
         logger.info(f"len = {len(prompted_lists)}")
     elif args.select_names_from == "paragraph":
-        logger.info("prompt from paragraphs")
+        logger.info("Prompt from paragraphs")
         prompted_lists = prompt_all_with_cache(
             args, corpora, get_all_paragraph_prompts,
             args.prompt_all_paragraphs_results
@@ -41,6 +41,7 @@ def high_freq_in_all_sentences(corpora, args):
     else:
         raise NotImplementedError()
 
+    logger.info("Prompting names")
     prompted_lists = list(itertools.chain(*prompted_lists))
     full_ranking = merge_ranked_list(prompted_lists)
     selected_names = dict()
@@ -93,11 +94,11 @@ def high_freq_in_all_sentences(corpora, args):
     selected_names = dict(sorted(
         selected_names.items(), key=lambda x: x[1]["weight"], reverse=True
     ))
-    logger.info(f"got selected names: {selected_names.keys()}")
+    logger.info(f"Got selected names: {selected_names.keys()}")
 
     with open(args.top_names_file, 'w') as f:
         json.dump(selected_names, f, indent=4)
-        logger.info(f"dump selected names to {args.top_names_file}")
+        logger.info(f"Dump selected names to {args.top_names_file}")
 
 
 def prompt_relevant_sentences(corpora, events, args):

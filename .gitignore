@@ -3,7 +3,7 @@ data/muc34/TASK/
 data/muc34/TEST/
 data/muc34/tar/
 data/muc34/MUC-dir*
+data/stanford*
 **/__pycache__/
-*.log
 *.txt
 .pyhist
