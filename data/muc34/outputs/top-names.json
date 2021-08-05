@@ -1,0 +1,115 @@
+{
+    "election": {
+        "lemma_names": [
+            "elect",
+            "election"
+        ],
+        "weight": 1.5
+    },
+    "vote": {
+        "lemma_names": [
+            "vote",
+            "voting"
+        ],
+        "weight": 1.5
+    },
+    "training": {
+        "lemma_names": [
+            "train",
+            "training"
+        ],
+        "weight": 1.0
+    },
+    "information": {
+        "lemma_names": [
+            "inform",
+            "information"
+        ],
+        "weight": 1.0
+    },
+    "advertisement": {
+        "lemma_names": [
+            "advert",
+            "advertisement",
+            "advertise"
+        ],
+        "weight": 0.7023809523809523
+    },
+    "result": {
+        "lemma_names": [
+            "result"
+        ],
+        "weight": 0.6666666666666666
+    },
+    "truth": {
+        "lemma_names": [
+            "truth",
+            "true"
+        ],
+        "weight": 0.5833333333333333
+    },
+    "situation": {
+        "lemma_names": [
+            "situation",
+            "situate"
+        ],
+        "weight": 0.5
+    },
+    "head": {
+        "lemma_names": [
+            "head"
+        ],
+        "weight": 0.3333333333333333
+    },
+    "team": {
+        "lemma_names": [
+            "team"
+        ],
+        "weight": 0.30952380952380953
+    },
+    "battle": {
+        "lemma_names": [
+            "battle"
+        ],
+        "weight": 0.25
+    },
+    "attack": {
+        "lemma_names": [
+            "attack"
+        ],
+        "weight": 0.2
+    },
+    "player": {
+        "lemma_names": [
+            "play",
+            "player"
+        ],
+        "weight": 0.2
+    },
+    "work": {
+        "lemma_names": [
+            "work"
+        ],
+        "weight": 0.16666666666666666
+    },
+    "action": {
+        "lemma_names": [
+            "action",
+            "act"
+        ],
+        "weight": 0.16666666666666666
+    },
+    "mission": {
+        "lemma_names": [
+            "mission",
+            "miss"
+        ],
+        "weight": 0.14285714285714285
+    },
+    "time": {
+        "lemma_names": [
+            "time"
+        ],
+        "weight": 0.14285714285714285
+    }
+}

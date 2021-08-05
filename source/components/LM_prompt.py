@@ -8,6 +8,9 @@ from transformers import \
     RobertaTokenizer, RobertaForMaskedLM
 
 from components.constants import characters_to_strip
+from components.logging import getLogger
+
+logger = getLogger("LM-prompt")
 
 
 def LM_prompt(texts, tokenizer, maskedLM,
@@ -19,6 +22,8 @@ def LM_prompt(texts, tokenizer, maskedLM,
     if isinstance(texts, str):
         texts = [texts]
         is_list = False
+
+    logger.info(f"Masked-LM prompting texts of length {len(texts)}")
 
     def preprocess_text(_text):
         _text = f" {_text} "
@@ -89,7 +94,7 @@ def LM_prompt(texts, tokenizer, maskedLM,
             this_output = [], _text[0], _text[1]
         else:
             this_pred = valid_predictions.pop(0)
-            this_output = this_pred[0][0], this_pred[1], "success"
+            this_output = (this_pred[0][0], this_pred[1], "success")
         if tokens_only:
             output.append(this_output[0])
         else:
@@ -102,6 +107,7 @@ def LM_prompt(texts, tokenizer, maskedLM,
 
 
 def get_LM(model_name):
+    logger.info(f"get logger {model_name}")
     if model_name.startswith("bert"):
         tokenizer = BertTokenizer.from_pretrained(
             model_name, do_lower_case=False)
@@ -117,4 +123,5 @@ def get_LM(model_name):
     else:
         device = torch.device("cpu:0")
     maskedLM.to(device)
+    logger.info(f"tokenizer: {tokenizer}, masked-LM: {maskedLM.name_or_path}")
     return tokenizer, maskedLM

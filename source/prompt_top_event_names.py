@@ -20,7 +20,7 @@ from components.get_args import get_args
 from components.logging import getLogger
 
 
-logger = getLogger("high-freq-events")
+logger = getLogger("top-events")
 
 
 def high_freq_in_all_sentences(corpora, args):
@@ -41,6 +41,7 @@ def high_freq_in_all_sentences(corpora, args):
     else:
         raise NotImplementedError()
 
+    prompted_lists = list(itertools.chain(*prompted_lists))
     full_ranking = merge_ranked_list(prompted_lists)
     selected_names = dict()
     all_selected_names = set()
@@ -92,10 +93,11 @@ def high_freq_in_all_sentences(corpora, args):
     selected_names = dict(sorted(
         selected_names.items(), key=lambda x: x[1]["weight"], reverse=True
     ))
+    logger.info(f"got selected names: {selected_names.keys()}")
 
-    with open(args.selected_names_file, 'w') as f:
-        print(selected_names.keys())
+    with open(args.top_names_file, 'w') as f:
         json.dump(selected_names, f, indent=4)
+        logger.info(f"dump selected names to {args.top_names_file}")
 
 
 def prompt_relevant_sentences(corpora, events, args):

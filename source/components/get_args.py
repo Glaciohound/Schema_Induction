@@ -1,4 +1,8 @@
 import argparse
+from components.logging import getLogger
+from pprint import pformat
+
+logger = getLogger("get-args")
 
 
 def get_args():
@@ -16,6 +20,7 @@ def get_args():
     parser.add_argument("--num-selected-names", type=int, default=60)
     parser.add_argument("--select-names-from", type=str, default="paragraph",
                         choices=["sentence", "paragraph"])
+    parser.add_argument("--overwrite-prompting-all", action="store_true")
     # parser.add_argument("--top-num-synset-LM", type=int, default=10)
 
     parser.add_argument("--all-sentences-file", type=str,
@@ -35,4 +40,6 @@ def get_args():
                         default="data/muc34/diagnosis/top-names-by-type.json")
 
     args = parser.parse_args()
+    logger.info("Parsing Args")
+    logger.info(pformat(args.__dict__))
     return args

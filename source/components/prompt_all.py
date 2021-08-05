@@ -14,7 +14,7 @@ logger = getLogger("prompt-all")
 
 def prompt_all_with_cache(args, corpora,
                           all_prompt_sentences_getter, cache_file):
-    if os.path.exists(cache_file):
+    if not args.overwrite_prompting_all and os.path.exists(cache_file):
         with open(cache_file, 'r') as f:
             prompted_lists = json.load(f)
         logger.info("loading prompting results from existing file "+cache_file)
@@ -34,11 +34,12 @@ def prompt_all_with_cache(args, corpora,
         )
         all_prompt_answers = iter(all_prompt_answers)
         prompted_lists = [
-            [next(all_prompt_answers) for _ in len(_group)]
+            [next(all_prompt_answers) for _ in range(len(_group))]
             for _group in all_prompt_sentences
         ]
         with open(cache_file, 'w') as f:
             json.dump(prompted_lists, f)
+        logger.info(f"dumping to {cache_file}")
 
     return prompted_lists
 
