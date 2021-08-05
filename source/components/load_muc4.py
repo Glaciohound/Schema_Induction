@@ -231,8 +231,15 @@ def recognize_proper_nouns(lines, default_type=None):
 def load_muc4(
     muc4_dir="data/muc34",
     cache_file="data/muc34/outputs/muc4_loaded_cache.json",
-    overwrite=False
+    overwrite=False,
+    args=None,
 ):
+    if args is not None:
+        logger.info("Overwrite MUC-4 Loading from args")
+        muc4_dir = args.data_dir
+        cache_file = args.loading_cache_file
+        overwrite = args.overwrite_loading
+
     if cache_file is not None and os.path.exists(cache_file) and not overwrite:
         with open(cache_file, 'r') as f:
             all_data = json.load(f)

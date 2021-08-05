@@ -1,36 +1,79 @@
 import re
 import json
-import itertools
 from collections import defaultdict
 import math
-import numpy as np
 
 from components.constants import \
-    all_types, months, interested_categories
+    all_event_types, months, interested_categories
 from components.logic_tools import sort_rank
 
 
-def get_all_sentences(corpora):
-    if isinstance(corpora, dict):
-        corpora = corpora.values()
-    output = [
-        _sentence
-        for _article in corpora
-        for _paragraph_split in _article["content-cased-split"]
-        for _sentence in _paragraph_split
-    ]
+def get_all_sentences(corpora, write_in=False):
+    if isinstance(corpora, list):
+        corpora = corpora_to_dict(corpora)
+    output = {
+        (_title, (_i, _j)): sentence
+        for _title, _article in corpora.items()
+        for _i, _paragraph_split in enumerate(_article["content-cased-split"])
+        for _j, _sentence in enumerate(_paragraph_split)
+    }
+    if write_in:
+        write_all_elements_to_corpora(
+            output, corpora
+        )
     return output
 
 
-def get_all_paragraphs(corpora):
-    if isinstance(corpora, dict):
-        corpora = corpora.values()
-    output = [
-        "".join(_paragraph_split)
-        for _article in corpora
-        for _paragraph_split in _article["content-cased-split"]
-    ]
+def get_all_paragraphs(corpora, write_in=False):
+    if isinstance(corpora, list):
+        corpora = corpora_to_dict(corpora)
+    output = {
+        (_title, _i): "".join(_paragraph_split)
+        for _title, _article in corpora.items()
+        for _i, _paragraph_split in enumerate(_article["content-cased-split"])
+    }
+    if write_in:
+        write_all_elements_to_corpora(
+            output, corpora
+        )
     return output
+
+
+def write_all_elements_to_corpora(content, corpora):
+    for title, element in content.items():
+        title = title[0]
+        article = corpora[title]
+        if "elements" not in article:
+            article["elements"] = []
+        article["elements"].append(element)
+
+
+def get_all_type_contents(
+        all_events, corpora, content_type,
+        to_element=False, num_contents_each_event=1
+):
+    if isinstance(corpora, list):
+        corpora = corpora_to_dict(corpora)
+    groupby_type = group_events_by_type(all_events)
+    type_sentences = {
+        _type: [
+            extract_relevant_sentences(
+                _event, corpora[_event["MESSAGE: ID"]], content_type
+            )[0]
+            for _event in _group
+        ]
+        for _type, _group in groupby_type.items()
+    }
+    if to_element:
+        type_sentences = {
+            _type: [
+                _sentence
+                for _sentences in _group
+                for _sentence in _sentences[:num_contents_each_event]
+            ]
+            for _type, _group in type_sentences.items()
+        }
+    return type_sentences
 
 
 def convert_date(date):
@@ -88,13 +131,18 @@ def get_event_keywords(event):
     return typed_keywords
 
 
-def extract_relevant_sentences(event, article,
-                               content_arg="content-cased-split"):
-    all_sentences = list(
-        itertools.chain(*[
-            _paragraph_split
-            for _paragraph_split in article[content_arg]
-        ]))
+def extract_relevant_sentences(event, article, content_type="sentence"):
+    if content_type == "sentence":
+        all_sentences = [
+            _sentence
+            for _paragraph_split in article["content-cased-split"]
+            for _sentence in _paragraph_split
+        ]
+    elif content_type == "paragraph":
+        all_sentences = [
+            "".join(_paragraph_split)
+            for _paragraph_split in article["content-cased-split"]
+        ]
     keywords = get_event_keywords(event)
     counter = defaultdict(lambda: {"count": 0, "arguments": {}})
     missing_counter = [True] * len(keywords)
@@ -124,12 +172,12 @@ def extract_relevant_sentences(event, article,
     return counter, missing_counter
 
 
-def extract_relevant_sentences_from_events(events, corpora, content_arg):
+def extract_relevant_sentences_from_events(events, corpora, content_type):
     if isinstance(corpora, list):
         corpora = corpora_to_dict(corpora)
     all_results = [
-        extract_relevant_sentences(_event, corpora[_event["MESSAGE: ID"]],
-                                   content_arg)
+        extract_relevant_sentences(
+            _event, corpora[_event["MESSAGE: ID"]], content_type)
         for _event in events
     ]
     output = [_sentence for _event in all_results for _sentence in _event[0]]
@@ -149,15 +197,6 @@ def corpora_to_dict(corpora):
         _article["title"]: _article
         for _article in corpora
     }
-
-
-def merge_sentences_to_paragraph(corpora):
-    iterable = corpora if isinstance(corpora, list) else corpora.values()
-    for article in iterable:
-        article["content-split"] = [
-            "".join(_paragraph)
-            for _paragraph in article["content-split-cased"]
-        ]
 
 
 def rebalance_by_weight(rank, selected_names, all_names_index):
@@ -188,54 +227,15 @@ def group_events_by_type(all_events):
             lambda x: x[type_category][0] == _type,
             all_events
         ))
-        for _type in all_types
+        for _type in all_event_types
     }
     return groupby_type
 
 
-def get_all_type_sentences(all_events, corpora, content_arg):
-    if isinstance(corpora, list):
-        corpora = corpora_to_dict(corpora)
-    groupby_type = group_events_by_type(all_events)
-    type_sentences = {
-        _type: [
-            extract_relevant_sentences(
-                _event, corpora[_event["MESSAGE: ID"]], content_arg
-            )[0]
-            for _event in _group
-        ]
-        for _type, _group in groupby_type.items()
-    }
-    return type_sentences
-
-
-def calculate_precision_recall(pred_list, gt_list):
-    precision_recall = {}
-    total_hit = 0
-    for _type in all_types:
-        retrieved = pred_list[_type]
-        gt = gt_list[_type]
-        hit = np.intersect1d(retrieved, gt)
-        total_hit += hit.shape[0]
-        precision_recall[_type] = {
-            "precision": hit.shape[0] / retrieved.shape[0],
-            "recall": hit.shape[0] / gt.shape[0],
-            "F1": hit.shape[0] / (gt.shape[0] + retrieved.shape[0]) * 2
-        }
-    total_pred = sum(map(len, pred_list.values()))
-    total_gt = sum(map(len, gt_list.values()))
-    precision_recall["total"] = {
-        "precision": total_hit / total_pred,
-        "recall": total_hit / total_gt,
-        "F1": total_hit / (total_pred + total_gt) * 2,
-    }
-    return precision_recall
-
-
-def load_selected_names(selected_names_file, all_types):
+def load_selected_names(selected_names_file, all_event_types):
     manual_synonym = {
         _keywords[0]: _keywords[1:]
-        for _keywords in all_types.values()
+        for _keywords in all_event_types.values()
         if len(_keywords) > 1
     }
     with open(selected_names_file, 'r') as f:
@@ -248,4 +248,17 @@ def load_selected_names(selected_names_file, all_types):
                     _synonym_content["lemma_names"]
                 )
                 selected_names[seed]["weight"] += _synonym_content["weight"]
-    return selected_names
+    all_selected_names_index = {
+        _fine_grained: _name
+        for _name, _group in selected_names.items()
+        for _fine_grained in _group["lemma_names"]
+    }
+    return selected_names, all_selected_names_index
+
+
+def get_element_from_index(article, index):
+    if isinstance(index, tuple):
+        content = article["content-cased-split"][int(index[0])][int(index[1])]
+    else:
+        content = "".join(article["content-cased-split"][int(index)])
+    return content

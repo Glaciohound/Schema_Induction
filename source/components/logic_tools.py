@@ -1,7 +1,7 @@
 import numpy as np
 
 from collections import defaultdict
-from components.constants import characters_to_strip
+from components.constants import characters_to_strip, all_event_types
 from components.logging import getLogger
 
 
@@ -44,3 +44,27 @@ def random_choice(candidates, num):
         return np.array(candidates)
     logger.info(f"selecting {num} randomly")
     return np.random.choice(candidates, min(len(candidates), num), False)
+
+
+def calculate_precision_recall(pred_list, gt_list):
+    precision_recall = {}
+    total_hit = 0
+    for _type in all_event_types:
+        retrieved = pred_list[_type]
+        gt = gt_list[_type]
+        hit = np.intersect1d(retrieved, gt)
+        total_hit += hit.shape[0]
+        precision_recall[_type] = {
+            "precision": hit.shape[0] / retrieved.shape[0] if
+            retrieved.shape[0] != 0 else np.inf,
+            "recall": hit.shape[0] / gt.shape[0],
+            "F1": hit.shape[0] / (gt.shape[0] + retrieved.shape[0]) * 2
+        }
+    total_pred = sum(map(len, pred_list.values()))
+    total_gt = sum(map(len, gt_list.values()))
+    precision_recall["total"] = {
+        "precision": total_hit / total_pred,
+        "recall": total_hit / total_gt,
+        "F1": total_hit / (total_pred + total_gt) * 2,
+    }
+    return precision_recall

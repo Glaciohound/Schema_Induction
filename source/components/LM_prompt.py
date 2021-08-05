@@ -1,5 +1,5 @@
 import os
-import json
+import pickle
 import torch
 import copy
 import itertools
@@ -86,8 +86,8 @@ def LM_prompt(texts, tokenizer, maskedLM,
 
     valid_predictions = None
     if os.path.exists(debug_cache_file):
-        with open(debug_cache_file, 'r') as f:
-            debug_cache = json.load(f)
+        with open(debug_cache_file, 'rb') as f:
+            debug_cache = pickle.load(f)
         if debug_cache[0] == valid_sentences:
             valid_predictions = debug_cache[1]
             logger.info(f"loaded LM-prompt cache from {debug_cache_file}")
@@ -100,8 +100,8 @@ def LM_prompt(texts, tokenizer, maskedLM,
                 else valid_sentences
             ))
         ))
-        with open(debug_cache_file, 'w') as f:
-            json.dump((valid_sentences, valid_predictions), f)
+        with open(debug_cache_file, 'wb') as f:
+            pickle.dump((valid_sentences, valid_predictions), f)
             logger.info(f"dumping prompt results to {debug_cache_file}")
 
     output = []

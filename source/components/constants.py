@@ -30,9 +30,9 @@ argument_name_prompt_sentences = (
 #     "KIDNAPPING": ["kidnapping"],
 #     "ROBBERY": ["robbery"],
 # }
-all_types = {
+all_event_types = {
     "ATTACK": ["attack"],
-    "BOMBING": ["bombing"],
+    "BOMBING": ["explosion"],
     "ARSON": ["fire"],
     "KIDNAPPING": ["kidnapping"],
     "ROBBERY": ["robbery"],
@@ -44,7 +44,7 @@ interested_categories = (
     "PHYS TGT: ID", "HUM TGT: NAME",
 )
 
-all_arguments = {
+all_arguments_types = {
     "INCIDENT: DATE": ["date"],
     "INCIDENT: LOCATION": ["location"],
     "INCIDENT: INSTRUMENT ID": ["weapon"],

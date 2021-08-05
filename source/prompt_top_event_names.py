@@ -1,15 +1,16 @@
+import os
 import itertools
 import json
-from collections import defaultdict
+from collections import defaultdict, Counter
 from tqdm import tqdm
 
 from nltk.corpus import wordnet
 
 from components.load_muc4 import load_muc4
 from components.muc4_tools import \
-    get_all_sentences, corpora_to_dict, get_all_type_sentences
+    get_all_sentences, get_all_paragraphs, \
+    corpora_to_dict, get_all_type_contents, load_selected_names
 from components.logic_tools import merge_ranked_list
-from components.constants import characters_to_strip
 from components.wordnet_tools import \
     all_attr_of_synsets, are_synonyms, stemming,\
     lemmatizer
@@ -18,32 +19,38 @@ from components.prompt_all import \
     prompt_all_with_cache, get_all_sentence_prompts, get_all_paragraph_prompts
 from components.get_args import get_args
 from components.logging import getLogger
+from components.constants import all_types
 
 
 logger = getLogger("top-events")
 
 
 def high_freq_in_all_sentences(corpora, args):
-    if args.select_names_from == "sentence":
+    if args.event_element == "sentence":
         logger.info("Prompt from sentences")
         prompted_lists = prompt_all_with_cache(
             args, corpora, get_all_sentence_prompts,
             args.prompt_all_sentences_results
         )
         logger.info(f"len = {len(prompted_lists)}")
-    elif args.select_names_from == "paragraph":
+    elif args.event_element == "paragraph":
         logger.info("Prompt from paragraphs")
         prompted_lists = prompt_all_with_cache(
             args, corpora, get_all_paragraph_prompts,
             args.prompt_all_paragraphs_results
         )
         logger.info(f"len = {len(prompted_lists)}")
-    else:
-        raise NotImplementedError()
+
+    if not args.overwrite_top_events and os.path.exists(args.top_names_file):
+        with open(args.top_names_file, 'r') as f:
+            selected_names = json.load(f)
+        logger.info(str(dict(enumerate(selected_names.keys()))))
+        return
 
     logger.info("Prompting names")
     prompted_lists = list(itertools.chain(*prompted_lists))
     full_ranking = merge_ranked_list(prompted_lists)
+    logger.info(f"shrinking from list of length {len(full_ranking)}")
     selected_names = dict()
     all_selected_names = set()
 
@@ -94,7 +101,8 @@ def high_freq_in_all_sentences(corpora, args):
     selected_names = dict(sorted(
         selected_names.items(), key=lambda x: x[1]["weight"], reverse=True
     ))
-    logger.info(f"Got selected names: {selected_names.keys()}")
+    logger.info("Got selected names:")
+    logger.info(str(dict(enumerate(selected_names.keys()))))
 
     with open(args.top_names_file, 'w') as f:
         json.dump(selected_names, f, indent=4)
@@ -102,58 +110,56 @@ def high_freq_in_all_sentences(corpora, args):
 
 
 def prompt_relevant_sentences(corpora, events, args):
-    with open(args.selected_names_file, 'r') as f:
-        selected_names = json.load(f)
-    all_selected_names_index = {
-        _fine_grained: _name
-        for _name, _group in selected_names.items()
-        for _fine_grained in _group
-    }
-    all_sentences = get_all_sentences(corpora)
-    type_sentences = get_all_type_sentences(events, corpora)
-    with open(args.all_prompt_results, 'r') as f:
+    selected_names, all_selected_names_index = load_selected_names(
+        args.top_names_file, all_types)
+
+    if args.event_element == "sentence":
+        all_sentences = get_all_sentences(corpora).values()
+        all_prompt_results_file = args.prompt_all_sentences_results
+    elif args.event_element == "paragraph":
+        all_sentences = get_all_paragraphs(corpora).values()
+        all_prompt_results_file = args.prompt_all_paragraphs_results
+    type_sentences = get_all_type_contents(
+        events, corpora, args.event_element)
+    with open(all_prompt_results_file, 'r') as f:
         prompted_lists = json.load(f)
+
     type_prompts = {
         _type: [
             merge_ranked_list(
-                prompted_lists[all_sentences.index(_sentence[0]) * 2]
+                prompted_lists[all_sentences.index(_sentence["sentence"])]
             )
             for _sentences in _group
-            for _sentence in _sentences[:2]
+            for _sentence in _sentences[:args.num_contents_each_event]
         ]
         for _type, _group in type_sentences.items()
     }
-
-    type_ranked_list = {
-        _type: list(filter(
-            lambda x: x in selected_names,
-            merge_ranked_list(_prompts).keys()
-        ))[:args.list_len]
-        for _type, _prompts in type_prompts.items()
-    }
     type_ranks_by_name = defaultdict(
-        lambda: defaultdict(lambda: {_i: 0 for _i in range(30)})
+        lambda: dict(enumerate([Counter() for _ in range(args.top_k)]))
     )
     for _type, _prompts in type_prompts.items():
-        for _prompt in _prompts:
-            for _i, _name in enumerate(_prompt[0]):
-                _name = _name.strip(characters_to_strip)
+        for _prompt_list in _prompts:
+            for _i, _name in enumerate(_prompt_list.keys()):
                 if _name in all_selected_names_index:
-                    type_ranks_by_name[_type][
-                        all_selected_names_index[_name]
-                    ][_i] += 1
-    with open(args.by_type_output, "w") as f:
-        json.dump((type_ranked_list, type_ranks_by_name), f, indent=4)
+                    type_ranks_by_name[_type][_i].update(
+                        [all_selected_names_index[_name]])
+    type_ranks_by_name = {
+        _type: {
+            _i: dict(_counter.most_common())
+            for _i, _counter in _group.items()
+        }
+        for _type, _group in type_ranks_by_name.items()
+    }
+    with open(args.top_names_by_type_file, "w") as f:
+        json.dump(type_ranks_by_name, f, indent=4)
 
 
 def main(args):
     dev_corpora, dev_events, tst_corpora, tst_events, proper_nouns = \
-        load_muc4(args.data_dir, args.loading_cache_file,
-                  args.overwrite_loading)
+        load_muc4(args=args)
     dev_corpora_dict = corpora_to_dict(dev_corpora)
 
-    high_freq_in_all_sentences(dev_corpora, args)
-    exit()
+    # high_freq_in_all_sentences(dev_corpora, args)
     prompt_relevant_sentences(
         dev_corpora_dict, dev_events, args
     )

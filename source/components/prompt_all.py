@@ -30,7 +30,9 @@ def prompt_all_with_cache(args, corpora,
         all_prompt_answers = LM_prompt(
             all_prompt_sentences_expand,
             tokenizer, maskedLM,
-            args.model_name, args.top_k, args.max_token_length,
+            args.model_name,
+            strip=True, top_k=args.top_k,
+            max_token_length=args.max_token_length,
             tokens_only=True
         )
         all_prompt_answers = iter(all_prompt_answers)
@@ -60,7 +62,7 @@ def get_all_sentence_prompts(args, corpora):
 def get_all_paragraph_prompts(args, corpora):
     logger.info("get all paragraph prompts")
     all_paragraphs = random_choice(
-        get_all_paragraphs(corpora), args.num_samples)
+        get_all_paragraphs(corpora).keys(), args.num_samples)
     all_prompts = [
         [_sentence+" "+prompt_sentence
          for prompt_sentence in event_prompt_sentences]

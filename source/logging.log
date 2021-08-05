@@ -2,3 +2,8 @@
 ================================================================================
 21-08-05 18:25:41 | INFO | initial | Root Command: /Users/admin/anaconda3/envs/tensorflow/bin/ipython3
 21-08-05 18:26:09 | INFO | LM-prompt | Get tokenizer and model roberta-large
+
+================================================================================
+21-08-05 20:19:24 | INFO | initial | Root Command: /Users/admin/anaconda3/envs/tensorflow/bin/ipython
+21-08-05 20:19:40 | INFO | load-muc4 | loading MUC-4 from scratch
+21-08-05 20:21:17 | INFO | load-muc4 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
