@@ -1,0 +1,966 @@
+[
+  {
+    "KIDNAPPING|date": {
+      "prec": 0.23809523809523808,
+      "recall": 0.08196721311475409,
+      "F1": 0.12195121951219512
+    },
+    "total": {
+      "prec": 0.026619433198380567,
+      "recall": 0.07645348837209302,
+      "F1": 0.039489489489489486
+    },
+    "KIDNAPPING|location": {
+      "prec": NaN,
+      "recall": 0.0,
+      "F1": 0.0
+    },
+    "KIDNAPPING|suspect": {
+      "prec": 0.1079136690647482,
+      "recall": 0.22727272727272727,
+      "F1": 0.14634146341463414
+    },
+    "KIDNAPPING|victim": {
+      "prec": 0.059233449477351915,
+      "recall": 0.20238095238095238,
+      "F1": 0.09164420485175202
+    },
+    "KIDNAPPING|key": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "KIDNAPPING|culprit": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "KIDNAPPING|accused": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "KIDNAPPING|target": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "KIDNAPPING|issue": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "KIDNAPPING|motive": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|location": {
+      "prec": NaN,
+      "recall": 0.0,
+      "F1": 0.0
+    },
+    "ATTACK|weapon": {
+      "prec": NaN,
+      "recall": 0.0,
+      "F1": 0.0
+    },
+    "ATTACK|suspect": {
+      "prec": 0.0392156862745098,
+      "recall": 0.05384615384615385,
+      "F1": 0.04538087520259319
+    },
+    "ATTACK|target": {
+      "prec": 0.015347885402455661,
+      "recall": 0.3125,
+      "F1": 0.029258777633289986
+    },
+    "ATTACK|date": {
+      "prec": 0.054945054945054944,
+      "recall": 0.013513513513513514,
+      "F1": 0.021691973969631236
+    },
+    "ATTACK|key": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|leader": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|issue": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|culprit": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|motive": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "BOMBING|date": {
+      "prec": 0.037037037037037035,
+      "recall": 0.006060606060606061,
+      "F1": 0.010416666666666666
+    },
+    "BOMBING|suspect": {
+      "prec": 0.06132075471698113,
+      "recall": 0.06701030927835051,
+      "F1": 0.06403940886699508
+    },
+    "BOMBING|victim": {
+      "prec": 0.029143897996357013,
+      "recall": 0.2857142857142857,
+      "F1": 0.05289256198347107
+    },
+    "ATTACK|victim": {
+      "prec": 0.024167210973220117,
+      "recall": 0.1178343949044586,
+      "F1": 0.04010840108401084
+    },
+    "BOMBING|target": {
+      "prec": 0.10662358642972536,
+      "recall": 0.24719101123595505,
+      "F1": 0.1489841986455982
+    },
+    "BOMBING|culprit": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|casualty": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|enemy": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|hero": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "BOMBING|location": {
+      "prec": NaN,
+      "recall": 0.0,
+      "F1": 0.0
+    },
+    "BOMBING|weapon": {
+      "prec": NaN,
+      "recall": 0.0,
+      "F1": 0.0
+    },
+    "BOMBING|issue": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ROBBERY|date": {
+      "prec": NaN,
+      "recall": 0.0,
+      "F1": 0.0
+    },
+    "ROBBERY|location": {
+      "prec": NaN,
+      "recall": 0.0,
+      "F1": 0.0
+    },
+    "ROBBERY|suspect": {
+      "prec": NaN,
+      "recall": 0.0,
+      "F1": 0.0
+    },
+    "ROBBERY|victim": {
+      "prec": NaN,
+      "recall": 0.0,
+      "F1": 0.0
+    },
+    "ATTACK|priority": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "KIDNAPPING|mastermind": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|mastermind": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ARSON|date": {
+      "prec": NaN,
+      "recall": 0.0,
+      "F1": 0.0
+    },
+    "ARSON|location": {
+      "prec": NaN,
+      "recall": 0.0,
+      "F1": 0.0
+    },
+    "ARSON|suspect": {
+      "prec": 0.0,
+      "recall": 0.0,
+      "F1": 0.0
+    },
+    "KIDNAPPING|leader": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "BOMBING|casualty": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|beginning": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|third": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ARSON|target": {
+      "prec": 0.0,
+      "recall": 0.0,
+      "F1": 0.0
+    },
+    "ATTACK|capital": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|accused": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ROBBERY|weapon": {
+      "prec": NaN,
+      "recall": 0.0,
+      "F1": 0.0
+    },
+    "ROBBERY|target": {
+      "prec": NaN,
+      "recall": 0.0,
+      "F1": 0.0
+    },
+    "BOMBING|loser": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|loser": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|focus": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "KIDNAPPING|third": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "KIDNAPPING|priority": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|truth": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "BOMBING|judge": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|complainant": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|prosecutor": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|protagonist": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|villain": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|problem": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "BOMBING|beginning": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|case": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "BOMBING|hero": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "BOMBING|motive": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "BOMBING|third": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "BOMBING|priority": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "KIDNAPPING|capital": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "KIDNAPPING|truth": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "BOMBING|leader": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "BOMBING|truth": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "KIDNAPPING|prosecutor": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|judge": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "BOMBING|key": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "BOMBING|exception": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "BOMBING|case": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ARSON|victim": {
+      "prec": 0.0,
+      "recall": 0.0,
+      "F1": 0.0
+    },
+    "KIDNAPPING|focus": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "KIDNAPPING|case": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "BOMBING|capital": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "BOMBING|mastermind": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "KIDNAPPING|complainant": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "BOMBING|villain": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "BOMBING|problem": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ARSON|culprit": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ARSON|casualty": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|winner": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "KIDNAPPING|beginning": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "ATTACK|exception": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "KIDNAPPING|hero": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "KIDNAPPING|protagonist": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "KIDNAPPING|villain": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    },
+    "BOMBING|focus": {
+      "prec": 0.0,
+      "recall": NaN,
+      "F1": 0.0
+    }
+  },
+  {
+    "KIDNAPPING|date": {
+      "gt": 61.0,
+      "pred": 21.0,
+      "hit": 5.0
+    },
+    "total": {
+      "gt": 3440.0,
+      "pred": 9880.0,
+      "hit": 263.0
+    },
+    "KIDNAPPING|location": {
+      "gt": 77.0,
+      "pred": 0.0,
+      "hit": 0.0
+    },
+    "KIDNAPPING|suspect": {
+      "gt": 132.0,
+      "pred": 278.0,
+      "hit": 30.0
+    },
+    "KIDNAPPING|victim": {
+      "gt": 84.0,
+      "pred": 287.0,
+      "hit": 17.0
+    },
+    "KIDNAPPING|key": {
+      "gt": 0.0,
+      "pred": 21.0,
+      "hit": 0.0
+    },
+    "KIDNAPPING|culprit": {
+      "gt": 0.0,
+      "pred": 11.0,
+      "hit": 0.0
+    },
+    "KIDNAPPING|accused": {
+      "gt": 0.0,
+      "pred": 10.0,
+      "hit": 0.0
+    },
+    "KIDNAPPING|target": {
+      "gt": 0.0,
+      "pred": 73.0,
+      "hit": 0.0
+    },
+    "KIDNAPPING|issue": {
+      "gt": 0.0,
+      "pred": 7.0,
+      "hit": 0.0
+    },
+    "KIDNAPPING|motive": {
+      "gt": 0.0,
+      "pred": 54.0,
+      "hit": 0.0
+    },
+    "ATTACK|location": {
+      "gt": 398.0,
+      "pred": 0.0,
+      "hit": 0.0
+    },
+    "ATTACK|weapon": {
+      "gt": 53.0,
+      "pred": 0.0,
+      "hit": 0.0
+    },
+    "ATTACK|suspect": {
+      "gt": 520.0,
+      "pred": 714.0,
+      "hit": 28.0
+    },
+    "ATTACK|target": {
+      "gt": 144.0,
+      "pred": 2932.0,
+      "hit": 45.0
+    },
+    "ATTACK|date": {
+      "gt": 370.0,
+      "pred": 91.0,
+      "hit": 5.0
+    },
+    "ATTACK|key": {
+      "gt": 0.0,
+      "pred": 307.0,
+      "hit": 0.0
+    },
+    "ATTACK|leader": {
+      "gt": 0.0,
+      "pred": 252.0,
+      "hit": 0.0
+    },
+    "ATTACK|issue": {
+      "gt": 0.0,
+      "pred": 172.0,
+      "hit": 0.0
+    },
+    "ATTACK|culprit": {
+      "gt": 0.0,
+      "pred": 376.0,
+      "hit": 0.0
+    },
+    "ATTACK|motive": {
+      "gt": 0.0,
+      "pred": 112.0,
+      "hit": 0.0
+    },
+    "BOMBING|date": {
+      "gt": 165.0,
+      "pred": 27.0,
+      "hit": 1.0
+    },
+    "BOMBING|suspect": {
+      "gt": 194.0,
+      "pred": 212.0,
+      "hit": 13.0
+    },
+    "BOMBING|victim": {
+      "gt": 56.0,
+      "pred": 549.0,
+      "hit": 16.0
+    },
+    "ATTACK|victim": {
+      "gt": 314.0,
+      "pred": 1531.0,
+      "hit": 37.0
+    },
+    "BOMBING|target": {
+      "gt": 267.0,
+      "pred": 619.0,
+      "hit": 66.0
+    },
+    "BOMBING|culprit": {
+      "gt": 0.0,
+      "pred": 244.0,
+      "hit": 0.0
+    },
+    "ATTACK|casualty": {
+      "gt": 0.0,
+      "pred": 55.0,
+      "hit": 0.0
+    },
+    "ATTACK|enemy": {
+      "gt": 0.0,
+      "pred": 104.0,
+      "hit": 0.0
+    },
+    "ATTACK|hero": {
+      "gt": 0.0,
+      "pred": 50.0,
+      "hit": 0.0
+    },
+    "BOMBING|location": {
+      "gt": 242.0,
+      "pred": 0.0,
+      "hit": 0.0
+    },
+    "BOMBING|weapon": {
+      "gt": 172.0,
+      "pred": 0.0,
+      "hit": 0.0
+    },
+    "BOMBING|issue": {
+      "gt": 0.0,
+      "pred": 96.0,
+      "hit": 0.0
+    },
+    "ROBBERY|date": {
+      "gt": 7.0,
+      "pred": 0.0,
+      "hit": 0.0
+    },
+    "ROBBERY|location": {
+      "gt": 11.0,
+      "pred": 0.0,
+      "hit": 0.0
+    },
+    "ROBBERY|suspect": {
+      "gt": 10.0,
+      "pred": 0.0,
+      "hit": 0.0
+    },
+    "ROBBERY|victim": {
+      "gt": 3.0,
+      "pred": 0.0,
+      "hit": 0.0
+    },
+    "ATTACK|priority": {
+      "gt": 0.0,
+      "pred": 87.0,
+      "hit": 0.0
+    },
+    "KIDNAPPING|mastermind": {
+      "gt": 0.0,
+      "pred": 15.0,
+      "hit": 0.0
+    },
+    "ATTACK|mastermind": {
+      "gt": 0.0,
+      "pred": 83.0,
+      "hit": 0.0
+    },
+    "ARSON|date": {
+      "gt": 14.0,
+      "pred": 0.0,
+      "hit": 0.0
+    },
+    "ARSON|location": {
+      "gt": 33.0,
+      "pred": 0.0,
+      "hit": 0.0
+    },
+    "ARSON|suspect": {
+      "gt": 48.0,
+      "pred": 1.0,
+      "hit": 0.0
+    },
+    "KIDNAPPING|leader": {
+      "gt": 0.0,
+      "pred": 14.0,
+      "hit": 0.0
+    },
+    "BOMBING|casualty": {
+      "gt": 0.0,
+      "pred": 26.0,
+      "hit": 0.0
+    },
+    "ATTACK|beginning": {
+      "gt": 0.0,
+      "pred": 33.0,
+      "hit": 0.0
+    },
+    "ATTACK|third": {
+      "gt": 0.0,
+      "pred": 36.0,
+      "hit": 0.0
+    },
+    "ARSON|target": {
+      "gt": 39.0,
+      "pred": 4.0,
+      "hit": 0.0
+    },
+    "ATTACK|capital": {
+      "gt": 0.0,
+      "pred": 21.0,
+      "hit": 0.0
+    },
+    "ATTACK|accused": {
+      "gt": 0.0,
+      "pred": 56.0,
+      "hit": 0.0
+    },
+    "ROBBERY|weapon": {
+      "gt": 17.0,
+      "pred": 0.0,
+      "hit": 0.0
+    },
+    "ROBBERY|target": {
+      "gt": 8.0,
+      "pred": 0.0,
+      "hit": 0.0
+    },
+    "BOMBING|loser": {
+      "gt": 0.0,
+      "pred": 1.0,
+      "hit": 0.0
+    },
+    "ATTACK|loser": {
+      "gt": 0.0,
+      "pred": 23.0,
+      "hit": 0.0
+    },
+    "ATTACK|focus": {
+      "gt": 0.0,
+      "pred": 19.0,
+      "hit": 0.0
+    },
+    "KIDNAPPING|third": {
+      "gt": 0.0,
+      "pred": 3.0,
+      "hit": 0.0
+    },
+    "KIDNAPPING|priority": {
+      "gt": 0.0,
+      "pred": 6.0,
+      "hit": 0.0
+    },
+    "ATTACK|truth": {
+      "gt": 0.0,
+      "pred": 87.0,
+      "hit": 0.0
+    },
+    "BOMBING|judge": {
+      "gt": 0.0,
+      "pred": 2.0,
+      "hit": 0.0
+    },
+    "ATTACK|complainant": {
+      "gt": 0.0,
+      "pred": 3.0,
+      "hit": 0.0
+    },
+    "ATTACK|prosecutor": {
+      "gt": 0.0,
+      "pred": 6.0,
+      "hit": 0.0
+    },
+    "ATTACK|protagonist": {
+      "gt": 0.0,
+      "pred": 4.0,
+      "hit": 0.0
+    },
+    "ATTACK|villain": {
+      "gt": 0.0,
+      "pred": 3.0,
+      "hit": 0.0
+    },
+    "ATTACK|problem": {
+      "gt": 0.0,
+      "pred": 8.0,
+      "hit": 0.0
+    },
+    "BOMBING|beginning": {
+      "gt": 0.0,
+      "pred": 8.0,
+      "hit": 0.0
+    },
+    "ATTACK|case": {
+      "gt": 0.0,
+      "pred": 8.0,
+      "hit": 0.0
+    },
+    "BOMBING|hero": {
+      "gt": 0.0,
+      "pred": 4.0,
+      "hit": 0.0
+    },
+    "BOMBING|motive": {
+      "gt": 0.0,
+      "pred": 14.0,
+      "hit": 0.0
+    },
+    "BOMBING|third": {
+      "gt": 0.0,
+      "pred": 5.0,
+      "hit": 0.0
+    },
+    "BOMBING|priority": {
+      "gt": 0.0,
+      "pred": 3.0,
+      "hit": 0.0
+    },
+    "KIDNAPPING|capital": {
+      "gt": 0.0,
+      "pred": 6.0,
+      "hit": 0.0
+    },
+    "KIDNAPPING|truth": {
+      "gt": 0.0,
+      "pred": 2.0,
+      "hit": 0.0
+    },
+    "BOMBING|leader": {
+      "gt": 0.0,
+      "pred": 2.0,
+      "hit": 0.0
+    },
+    "BOMBING|truth": {
+      "gt": 0.0,
+      "pred": 15.0,
+      "hit": 0.0
+    },
+    "KIDNAPPING|prosecutor": {
+      "gt": 0.0,
+      "pred": 3.0,
+      "hit": 0.0
+    },
+    "ATTACK|judge": {
+      "gt": 0.0,
+      "pred": 2.0,
+      "hit": 0.0
+    },
+    "BOMBING|key": {
+      "gt": 0.0,
+      "pred": 12.0,
+      "hit": 0.0
+    },
+    "BOMBING|exception": {
+      "gt": 0.0,
+      "pred": 1.0,
+      "hit": 0.0
+    },
+    "BOMBING|case": {
+      "gt": 0.0,
+      "pred": 4.0,
+      "hit": 0.0
+    },
+    "ARSON|victim": {
+      "gt": 1.0,
+      "pred": 5.0,
+      "hit": 0.0
+    },
+    "KIDNAPPING|focus": {
+      "gt": 0.0,
+      "pred": 2.0,
+      "hit": 0.0
+    },
+    "KIDNAPPING|case": {
+      "gt": 0.0,
+      "pred": 2.0,
+      "hit": 0.0
+    },
+    "BOMBING|capital": {
+      "gt": 0.0,
+      "pred": 2.0,
+      "hit": 0.0
+    },
+    "BOMBING|mastermind": {
+      "gt": 0.0,
+      "pred": 1.0,
+      "hit": 0.0
+    },
+    "KIDNAPPING|complainant": {
+      "gt": 0.0,
+      "pred": 2.0,
+      "hit": 0.0
+    },
+    "BOMBING|villain": {
+      "gt": 0.0,
+      "pred": 1.0,
+      "hit": 0.0
+    },
+    "BOMBING|problem": {
+      "gt": 0.0,
+      "pred": 3.0,
+      "hit": 0.0
+    },
+    "ARSON|culprit": {
+      "gt": 0.0,
+      "pred": 1.0,
+      "hit": 0.0
+    },
+    "ARSON|casualty": {
+      "gt": 0.0,
+      "pred": 3.0,
+      "hit": 0.0
+    },
+    "ATTACK|winner": {
+      "gt": 0.0,
+      "pred": 13.0,
+      "hit": 0.0
+    },
+    "KIDNAPPING|beginning": {
+      "gt": 0.0,
+      "pred": 3.0,
+      "hit": 0.0
+    },
+    "ATTACK|exception": {
+      "gt": 0.0,
+      "pred": 2.0,
+      "hit": 0.0
+    },
+    "KIDNAPPING|hero": {
+      "gt": 0.0,
+      "pred": 1.0,
+      "hit": 0.0
+    },
+    "KIDNAPPING|protagonist": {
+      "gt": 0.0,
+      "pred": 1.0,
+      "hit": 0.0
+    },
+    "KIDNAPPING|villain": {
+      "gt": 0.0,
+      "pred": 1.0,
+      "hit": 0.0
+    },
+    "BOMBING|focus": {
+      "gt": 0.0,
+      "pred": 2.0,
+      "hit": 0.0
+    }
+  }
+]

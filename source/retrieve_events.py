@@ -6,7 +6,7 @@ from components.load_muc4 import load_muc4
 from components.muc4_tools import \
     get_all_sentences, get_all_paragraphs, get_all_type_contents, \
     load_selected_names
-from components.constants import all_types
+from components.constants import all_event_types
 from components.logic_tools import \
     merge_ranked_list, random_choice, calculate_precision_recall
 from components.get_args import get_args
@@ -17,7 +17,7 @@ logger = getLogger("retrieve-events")
 
 def retrieve_by_type(events, corpora, args):
     selected_names, all_selected_names_index = load_selected_names(
-        args.top_names_file, all_types)
+        args.top_names_file, all_event_types)
 
     if args.event_element == "sentence":
         all_sentences = np.array(list(get_all_sentences(corpora).values()))

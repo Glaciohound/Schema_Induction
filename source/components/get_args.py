@@ -63,6 +63,8 @@ def get_args():
     parser.add_argument("--top-arguments", type=str,
                         default="data/muc34/outputs/top-arguments.json")
     parser.add_argument("--num-selected-arguments", type=int, default=30)
+    parser.add_argument("--extraction-results", type=str,
+                        default="data/muc34/outputs/full-extraction.json")
     parser.add_argument("--argument-list-len", type=int, default=5)
     parser.add_argument("--overwrite-ner", action="store_true")
     parser.add_argument("--overwrite-argument-naming", action="store_true")

@@ -5,14 +5,14 @@ import math
 
 from components.constants import \
     all_event_types, months, interested_categories
-from components.logic_tools import sort_rank
+from components.logic_tools import sort_rank, reverse_dict
 
 
 def get_all_sentences(corpora, write_in=False):
     if isinstance(corpora, list):
         corpora = corpora_to_dict(corpora)
     output = {
-        (_title, (_i, _j)): sentence
+        (_title, (_i, _j)): _sentence
         for _title, _article in corpora.items()
         for _i, _paragraph_split in enumerate(_article["content-cased-split"])
         for _j, _sentence in enumerate(_paragraph_split)
@@ -232,10 +232,10 @@ def group_events_by_type(all_events):
     return groupby_type
 
 
-def load_selected_names(selected_names_file, all_event_types):
+def load_selected_names(selected_names_file, manual_synonym):
     manual_synonym = {
         _keywords[0]: _keywords[1:]
-        for _keywords in all_event_types.values()
+        for _keywords in manual_synonym.values()
         if len(_keywords) > 1
     }
     with open(selected_names_file, 'r') as f:
@@ -248,11 +248,8 @@ def load_selected_names(selected_names_file, all_event_types):
                     _synonym_content["lemma_names"]
                 )
                 selected_names[seed]["weight"] += _synonym_content["weight"]
-    all_selected_names_index = {
-        _fine_grained: _name
-        for _name, _group in selected_names.items()
-        for _fine_grained in _group["lemma_names"]
-    }
+    all_selected_names_index = reverse_dict(
+        selected_names, inner_key="lemma_names")
     return selected_names, all_selected_names_index
 
 

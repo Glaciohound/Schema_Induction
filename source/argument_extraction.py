@@ -1,213 +1,82 @@
-import os
+import numpy as np
 import json
-from tqdm import tqdm
-from nltk.stem import WordNetLemmatizer
-from collections import defaultdict, Counter
-import itertools
+from collections import defaultdict
 
 from components.muc4_tools import \
-    corpora_to_dict, group_events_by_type, \
-    extract_relevant_sentences_from_events
+    corpora_to_dict, load_selected_names
+from components.logic_tools import get_head_word
 from components.load_muc4 import load_muc4
-from components.np_extractors import SpacyNPExtractor
-from components.constants import \
-    argument_name_prompt_sentences, all_types, all_arguments
-from components.wordnet_tools import \
-    all_attr_of_synsets, are_synonyms, synsets
-from components.logic_tools import \
-    intersect, merge_ranked_list, sort_rank
 from components.get_args import get_args
+from components.constants import all_arguments_types
+from components.logging import getLogger
 
 
-def get_arguments_by_type(args, events, corpora):
-    if args.overwrite_arguments or not os.path.exists(args.all_noun_phrases):
-        parser = SpacyNPExtractor()
+logger = getLogger("extraction")
 
-        events_by_type = group_events_by_type(events)
-        sentences_by_type = {
-            _type: extract_relevant_sentences_from_events(
-                _events, corpora)
-            for _type, _events in events_by_type.items()
+
+def evaluate_extraction(all_arguments, selected_arguments):
+    counter = defaultdict(lambda: dict(zip(
+        ("gt", "pred", "hit"), np.zeros(3)
+    )))
+
+    for _article in all_arguments.values():
+        for _element in _article["elements"].values():
+            gt_arguments = list(map(
+                lambda x: (x[0], all_arguments_types.get(x[2], None)[0],
+                           get_head_word(x[1]).lower()),
+                _element["gt-arguments"]))
+            if "argument-naming" not in _element or\
+                    "pred-event-type" not in _element:
+                pred_arguments = []
+            else:
+                pred_arguments = [
+                    (_element["pred-event-type"],
+                     # reverse_arguments.get(_naming[0], None),
+                     selected_arguments.get(_naming[0], None),
+                     get_head_word(_ner).lower())
+                    for _ner, _naming in _element["argument-naming"].items()
+                ]
+
+            # pred_dict = {_item[2]: _item for _item in pred_arguments}
+            # if not (pred_arguments == [] and gt_arguments == []):
+            #     for _arg in gt_arguments:
+            #         print(_arg, pred_dict.get(_arg[2], "missing!"))
+            #     input()
+            for _argument in gt_arguments:
+                counter["|".join(_argument[:2])]["gt"] += 1
+                counter["|".join(_argument[:2])]["hit"] += \
+                    _argument in pred_arguments
+                counter["total"]["gt"] += 1
+                counter["total"]["hit"] += _argument in pred_arguments
+            for _argument in pred_arguments:
+                if _argument[1] is not None:
+                    counter["|".join(_argument[:2])]["pred"] += 1
+                    counter["total"]["pred"] += 1
+
+    prec_recall = {
+        _type: {
+            "prec": _values["hit"] / _values["pred"],
+            "recall": _values["hit"] / _values["gt"],
+            "F1": _values["hit"] / (_values["gt"] + _values["pred"]) * 2,
         }
-
-        num_sentences = sum(map(len, sentences_by_type.values()))
-        pbar = tqdm(total=num_sentences)
-        for _type, _sentences in sentences_by_type.items():
-            for _sentence in _sentences:
-                pbar.update()
-                _sentence["extracted-noun-phrases"] = list(map(
-                    lambda x: x.text,
-                    parser.extract(_sentence["sentence"])
-                ))
-
-        with open(args.all_noun_phrases, 'w') as f:
-            json.dump(sentences_by_type, f, indent=2)
-    else:
-        with open(args.all_noun_phrases, 'r') as f:
-            sentences_by_type = json.load(f)
-        num_sentences = sum(map(len, sentences_by_type.values()))
-
-    return sentences_by_type, num_sentences
-
-
-def prompt_argument_naming(args, arguments_by_type):
-    if args.overwrite_argument_naming or \
-            not os.path.exists(args.argument_prompts):
-        from components.LM_prompt import LM_prompt, get_LM
-        tokenizer, maskedLM = get_LM(args.model_name)
-        lemmatizer = WordNetLemmatizer()
-
-        def get_all_naming_prompts():
-            for _type, _sentences in arguments_by_type.items():
-                for _sentence in _sentences:
-                    _sentence["argument-naming"] = {}
-                    # _sentence.pop("extracted-noun-phrases")
-                    # for _noun_phrase in :
-                    for _noun_phrase in list(_sentence["arguments"]) + \
-                            _sentence["extracted-noun-phrases"]:
-                        if lemmatizer.lemmatize(_noun_phrase) == _noun_phrase:
-                            copula = "is"
-                        else:
-                            copula = "are"
-                        if _noun_phrase[0].islower():
-                            _noun_phrase = "The " + _noun_phrase
-                        prompt = _sentence["sentence"] + " " + \
-                            argument_name_prompt_sentences[0].format(
-                                _noun_phrase, copula, all_types[_type][0]
-                            )
-                        yield prompt
-
-        all_naming_prompts = list(get_all_naming_prompts())
-        prompted_result = LM_prompt(
-            all_naming_prompts, tokenizer, maskedLM, strip=True
-        )
-        yield_prompt = iter(prompted_result)
-
-        for _type, _sentences in arguments_by_type.items():
-            for _sentence in _sentences:
-                for _noun_phrase in list(_sentence["arguments"]) +\
-                        _sentence["extracted-noun-phrases"]:
-                    naming = list(map(
-                        lemmatizer.lemmatize,
-                        next(yield_prompt)[0][:5],
-                    ))
-                    _category = _sentence["arguments"].get(_noun_phrase, None)
-                    _sentence["argument-naming"][_noun_phrase] = (
-                        naming,
-                        naming[0] == all_arguments[_category][0]
-                        if _category is not None else None
-                    )
-
-        with open(args.argument_prompts, "w") as f:
-            json.dump(arguments_by_type, f, indent=2)
-
-    else:
-        with open(args.argument_prompts, "r") as f:
-            arguments_by_type = json.load(f)
-
-    return arguments_by_type
-
-
-def filter_namings(ranked_all_namings, num_selected_names):
-    output = {}
-    for naming, weight in tqdm(
-            list(ranked_all_namings.items())[:args.only_tackling_top]
-    ):
-        output = sort_rank(output, key=lambda x: x[1]["weight"])
-        if len(synsets(naming)) == 0 or not naming.islower():
-            continue
-        if intersect(all_attr_of_synsets(naming, "pos"), {"a"}) or \
-                not intersect(all_attr_of_synsets(naming, "pos"), {"n"}):
-            continue
-        found_synonym = None
-        for _existed, _group in output.items():
-            for _lemma in _group["synonyms"]:
-                if are_synonyms(_lemma, naming, "v", True):
-                    if found_synonym is None:
-                        print(f"found synonym: {naming} -> {_existed}")
-                        output[_existed]["weight"] += weight
-                        output[_existed]["synonyms"].append(naming)
-                        found_synonym = _existed
-                        break
-        if found_synonym is not None:
-            continue
-        output[naming] = {
-            "weight": weight,
-            "synonyms": [naming],
-        }
-    output = dict(list(sort_rank(
-        output, key=lambda x: x[1]["weight"]
-    ).items())[:num_selected_names])
-    for i, (_, _group) in enumerate(output.items()):
-        _group["rank"] = i
-    return output
-
-
-def argument_filtering(args, argument_naming):
-    if args.overwrite_argument_filtering or not os.path.exists(
-            args.selected_arguments):
-        all_namings = [
-            _naming[0] for _sentences in argument_naming.values()
-            for _sentence in _sentences
-            for _noun, _naming in _sentence["argument-naming"].items()
-            if _noun in _sentence["extracted-noun-phrases"]
-        ]
-        ranked_all_namings = merge_ranked_list(all_namings)
-        ranked_all_namings = filter_namings(
-            ranked_all_namings, args.num_selected_names)
-
-        with open(args.selected_arguments, 'w') as f:
-            json.dump(ranked_all_namings, f, indent=4)
-    else:
-        with open(args.selected_arguments, 'r') as f:
-            ranked_all_namings = json.load(f)
-
-    return ranked_all_namings
-
-
-def evaluate_gt_accuracy(argument_naming, selected_arguments):
-    result = defaultdict(lambda: Counter())
-    selected_arguments_index = {
-        _syn: _name
-        for _name, _group in selected_arguments.items()
-        for _syn in _group["synonyms"]
+        for _type, _values in counter.items()
     }
-    all_gt_argument_names = list(itertools.chain(
-        *list(all_arguments.values())))
-
-    for _type, _sentences in argument_naming.items():
-        for _sentence in _sentences:
-            for _argument, _naming in _sentence["gt-argument-naming"].items():
-                _naming = list(filter(lambda x: x in selected_arguments_index,
-                                      _naming[0]))
-                _naming = _naming[0] if len(_naming) > 0 else None
-                gt_cat = all_arguments[_sentence["arguments"][_argument]][0]
-                if _naming == gt_cat:
-                    result[f"{gt_cat}"].update(["hit"])
-                result[f"{gt_cat}"].update(["gt"])
-                if _naming in all_gt_argument_names:
-                    result[f"{_naming}"].update(["pred"])
-
-    for _category, _counter in result.items():
-        print(_category,
-              "precision:", _counter["hit"] / _counter["pred"],
-              "recall:", _counter["hit"] / _counter["gt"],
-              "F1:", _counter["hit"] / (_counter["pred"] + _counter["gt"]) * 2
-              )
+    logger.info(prec_recall)
+    with open(args.extraction_results, 'w') as f:
+        json.dump((prec_recall, counter), f, indent=2)
 
 
 def main(args):
-    dev_corpora, dev_events, _, _, _ = load_muc4()
+    dev_corpora, dev_events, _, _, _ = load_muc4(args=args)
     dev_corpora = corpora_to_dict(dev_corpora)
 
-    arguments_by_type, num_sentences = get_arguments_by_type(
-        args, dev_events, dev_corpora)
+    with open(args.argument_prompts, 'r') as f:
+        all_arguments = json.load(f)
+    selected_arguments, selected_arguments_index = load_selected_names(
+        args.top_arguments, all_arguments_types
+    )
 
-    argument_naming = prompt_argument_naming(args, arguments_by_type)
-    ranked_all_namings = argument_filtering(args, argument_naming)
-    print(ranked_all_namings.keys())
-
-    # evaluate_gt_accuracy(argument_naming, ranked_all_namings)
+    evaluate_extraction(all_arguments, selected_arguments_index)
 
 
 if __name__ == "__main__":

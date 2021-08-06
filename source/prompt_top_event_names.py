@@ -19,7 +19,7 @@ from components.prompt_all import \
     prompt_all_with_cache, get_all_sentence_prompts, get_all_paragraph_prompts
 from components.get_args import get_args
 from components.logging import getLogger
-from components.constants import all_types
+from components.constants import all_event_types
 
 
 logger = getLogger("top-events")
@@ -111,7 +111,7 @@ def high_freq_in_all_sentences(corpora, args):
 
 def prompt_relevant_sentences(corpora, events, args):
     selected_names, all_selected_names_index = load_selected_names(
-        args.top_names_file, all_types)
+        args.top_names_file, all_event_types)
 
     if args.event_element == "sentence":
         all_sentences = get_all_sentences(corpora).values()

@@ -68,3 +68,19 @@ def calculate_precision_recall(pred_list, gt_list):
         "F1": total_hit / (total_pred + total_gt) * 2,
     }
     return precision_recall
+
+
+def reverse_dict(original, inner_key=None):
+    all_selected_names_index = {
+        _fine_grained: _name
+        for _name, _group in original.items()
+        for _fine_grained in (
+            _group[inner_key] if inner_key is not None
+            else _group
+        )
+    }
+    return all_selected_names_index
+
+
+def get_head_word(phrase):
+    return phrase.split(" of ")[0].split(" ")[-1]

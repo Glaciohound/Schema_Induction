@@ -1,0 +1,243 @@
+{
+    "victim": {
+        "weight": 36381.53333333223,
+        "lemma_names": [
+            "victim"
+        ],
+        "rank": 0
+    },
+    "target": {
+        "weight": 14941.650000001935,
+        "lemma_names": [
+            "target",
+            "point",
+            "end",
+            "deadline",
+            "climax"
+        ],
+        "rank": 1
+    },
+    "key": {
+        "weight": 14505.616666668147,
+        "lemma_names": [
+            "key"
+        ],
+        "rank": 2
+    },
+    "suspect": {
+        "weight": 12638.20000000062,
+        "lemma_names": [
+            "suspect",
+            "defendant"
+        ],
+        "rank": 3
+    },
+    "issue": {
+        "weight": 9709.983333333363,
+        "lemma_names": [
+            "issue",
+            "result",
+            "solution",
+            "answer",
+            "question",
+            "number",
+            "one",
+            "response",
+            "topic",
+            "figure",
+            "outcome",
+            "theme",
+            "army"
+        ],
+        "rank": 4
+    },
+    "culprit": {
+        "weight": 9178.89999999927,
+        "lemma_names": [
+            "culprit",
+            "perpetrator"
+        ],
+        "rank": 5
+    },
+    "priority": {
+        "weight": 5022.783333333127,
+        "lemma_names": [
+            "priority"
+        ],
+        "rank": 6
+    },
+    "truth": {
+        "weight": 4811.04999999989,
+        "lemma_names": [
+            "truth",
+            "fact"
+        ],
+        "rank": 7
+    },
+    "leader": {
+        "weight": 4714.1666666666715,
+        "lemma_names": [
+            "leader",
+            "lead"
+        ],
+        "rank": 8
+    },
+    "problem": {
+        "weight": 4639.61666666651,
+        "lemma_names": [
+            "problem"
+        ],
+        "rank": 9
+    },
+    "protagonist": {
+        "weight": 3776.9499999999607,
+        "lemma_names": [
+            "protagonist"
+        ],
+        "rank": 10
+    },
+    "focus": {
+        "weight": 3203.716666666646,
+        "lemma_names": [
+            "focus"
+        ],
+        "rank": 11
+    },
+    "accused": {
+        "weight": 3091.233333333312,
+        "lemma_names": [
+            "accused"
+        ],
+        "rank": 12
+    },
+    "hero": {
+        "weight": 2875.0999999999967,
+        "lemma_names": [
+            "hero"
+        ],
+        "rank": 13
+    },
+    "loser": {
+        "weight": 2800.466666666655,
+        "lemma_names": [
+            "loser"
+        ],
+        "rank": 14
+    },
+    "case": {
+        "weight": 2527.5999999999935,
+        "lemma_names": [
+            "case"
+        ],
+        "rank": 15
+    },
+    "enemy": {
+        "weight": 2465.183333333331,
+        "lemma_names": [
+            "enemy",
+            "opposition"
+        ],
+        "rank": 16
+    },
+    "complainant": {
+        "weight": 2427.999999999993,
+        "lemma_names": [
+            "complainant",
+            "plaintiff"
+        ],
+        "rank": 17
+    },
+    "motive": {
+        "weight": 1862.3500000000245,
+        "lemma_names": [
+            "motive",
+            "reason"
+        ],
+        "rank": 18
+    },
+    "winner": {
+        "weight": 1804.6833333333368,
+        "lemma_names": [
+            "winner"
+        ],
+        "rank": 19
+    },
+    "prosecutor": {
+        "weight": 1801.616666666668,
+        "lemma_names": [
+            "prosecutor"
+        ],
+        "rank": 20
+    },
+    "third": {
+        "weight": 1701.6166666666695,
+        "lemma_names": [
+            "third"
+        ],
+        "rank": 21
+    },
+    "judge": {
+        "weight": 1692.1833333333525,
+        "lemma_names": [
+            "judge",
+            "authority",
+            "author",
+            "justice"
+        ],
+        "rank": 22
+    },
+    "date": {
+        "weight": 1655.0333333333322,
+        "lemma_names": [
+            "date",
+            "day",
+            "anniversary",
+            "participant"
+        ],
+        "rank": 23
+    },
+    "villain": {
+        "weight": 1592.1333333333473,
+        "lemma_names": [
+            "villain"
+        ],
+        "rank": 24
+    },
+    "casualty": {
+        "weight": 1559.7000000000228,
+        "lemma_names": [
+            "casualty"
+        ],
+        "rank": 25
+    },
+    "beginning": {
+        "weight": 1392.9833333333322,
+        "lemma_names": [
+            "beginning",
+            "source",
+            "time"
+        ],
+        "rank": 26
+    },
+    "capital": {
+        "weight": 1137.600000000014,
+        "lemma_names": [
+            "capital"
+        ],
+        "rank": 27
+    },
+    "exception": {
+        "weight": 1080.483333333351,
+        "lemma_names": [
+            "exception"
+        ],
+        "rank": 28
+    },
+    "mastermind": {
+        "weight": 988.8666666666863,
+        "lemma_names": [
+            "mastermind"
+        ],
+        "rank": 29
+    }
+}

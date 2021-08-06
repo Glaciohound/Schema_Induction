@@ -16,6 +16,9 @@ from components.wordnet_tools import \
 from components.logic_tools import \
     intersect, merge_ranked_list, sort_rank
 from components.get_args import get_args
+from components.logging import getLogger
+
+logger = getLogger("argument-naming")
 
 
 def get_all_arguments(args, events, corpora):
@@ -104,7 +107,7 @@ def prompt_argument_naming(args, all_arguments):
                             )
                         yield prompt
 
-        all_naming_prompts = list(get_all_naming_prompts())[:100]
+        all_naming_prompts = list(get_all_naming_prompts())
 
         from components.LM_prompt import LM_prompt, get_LM
         tokenizer, maskedLM = get_LM(args.model_name)
@@ -129,75 +132,68 @@ def prompt_argument_naming(args, all_arguments):
         with open(args.argument_prompts, "r") as f:
             all_arguments = json.load(f)
 
-    return all_arguments
+    all_namings = [
+        _naming for _article in all_arguments.values()
+        for _element in _article["elements"].values()
+        for _noun, _naming in _element["argument-naming"].items()
+    ]
+
+    return all_namings
 
 
-def filter_namings(ranked_all_namings, num_selected_names):
-    output = {}
-    for naming, weight in tqdm(
-            list(ranked_all_namings.items())
-    ):
-        output = sort_rank(output, key=lambda x: x[1]["weight"])
-        if len(synsets(naming)) == 0 or not naming.islower():
-            continue
-        if intersect(all_attr_of_synsets(naming, "pos"), {"a"}) or \
-                not intersect(all_attr_of_synsets(naming, "pos"), {"n"}):
-            continue
-        found_synonym = None
-        for _existed, _group in output.items():
-            for _lemma in _group["synonyms"]:
-                if are_synonyms(_lemma, naming, "v", True):
-                    if found_synonym is None:
-                        print(f"found synonym: {naming} -> {_existed}")
-                        output[_existed]["weight"] += weight
-                        output[_existed]["synonyms"].append(naming)
-                        found_synonym = _existed
-                        break
-        if found_synonym is not None:
-            continue
-        output[naming] = {
-            "weight": weight,
-            "synonyms": [naming],
-        }
-    output = dict(list(sort_rank(
-        output, key=lambda x: x[1]["weight"]
-    ).items())[:num_selected_names])
-    for i, (_, _group) in enumerate(output.items()):
-        _group["rank"] = i
-    return output
-
-
-def argument_filtering(args, argument_naming):
+def argument_filtering(args, all_namings):
     if args.overwrite_argument_filtering or not os.path.exists(
-            args.selected_arguments):
-        all_namings = [
-            _naming[0] for _sentences in argument_naming.values()
-            for _sentence in _sentences
-            for _noun, _naming in _sentence["argument-naming"].items()
-            if _noun in _sentence["extracted-noun-phrases"]
-        ]
+            args.top_arguments):
         ranked_all_namings = merge_ranked_list(all_namings)
-        ranked_all_namings = filter_namings(
-            ranked_all_namings, args.num_selected_names)
+        output = {}
+        for naming, weight in tqdm(
+            list(ranked_all_namings.items())[:200]
+        ):
+            output = sort_rank(output, key=lambda x: x[1]["weight"])
+            if len(synsets(naming)) == 0 or not naming.islower():
+                continue
+            if intersect(all_attr_of_synsets(naming, "pos"), {"a"}) or \
+                    not intersect(all_attr_of_synsets(naming, "pos"), {"n"}):
+                continue
+            found_synonym = None
+            for _existed, _group in output.items():
+                for _lemma in _group["lemma_names"]:
+                    if are_synonyms(_lemma, naming, "v", True):
+                        if found_synonym is None:
+                            logger.info(f"synonym: {naming} -> {_existed}")
+                            output[_existed]["weight"] += weight
+                            output[_existed]["lemma_names"].append(naming)
+                            found_synonym = _existed
+                            break
+            if found_synonym is not None:
+                continue
+            output[naming] = {
+                "weight": weight,
+                "lemma_names": [naming],
+            }
+        output = dict(list(sort_rank(
+            output, key=lambda x: x[1]["weight"]
+        ).items())[:args.num_selected_arguments])
+        for i, (_, _group) in enumerate(output.items()):
+            _group["rank"] = i
 
-        with open(args.selected_arguments, 'w') as f:
-            json.dump(ranked_all_namings, f, indent=4)
+        with open(args.top_arguments, 'w') as f:
+            json.dump(output, f, indent=4)
     else:
-        with open(args.selected_arguments, 'r') as f:
-            ranked_all_namings = json.load(f)
+        with open(args.top_arguments, 'r') as f:
+            output = json.load(f)
 
-    return ranked_all_namings
+    return output
 
 
 def main(args):
     dev_corpora, dev_events, _, _, _ = load_muc4(args=args)
     dev_corpora = corpora_to_dict(dev_corpora)
 
-    all_arguments = get_all_arguments(
-        args, dev_events, dev_corpora)
+    all_arguments = get_all_arguments(args, dev_events, dev_corpora)
     argument_naming = prompt_argument_naming(args, all_arguments)
-    exit()
     ranked_all_namings = argument_filtering(args, argument_naming)
+    logger.info(dict(enumerate(ranked_all_namings.keys())))
 
 
 if __name__ == "__main__":
