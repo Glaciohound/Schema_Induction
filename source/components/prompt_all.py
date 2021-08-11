@@ -90,5 +90,5 @@ def get_all_paragraph_split_prompts(args, corpora):
         ]
         for _paragraph_split in all_paragraphs
     ]
-    all_prompts = all_prompts[:3]
+    all_prompts = all_prompts
     return all_prompts
