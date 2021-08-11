@@ -10,7 +10,7 @@ from components.muc4_tools import \
 from components.load_muc4 import load_muc4
 from components.np_extractors import SpacyNPExtractor
 from components.constants import \
-    argument_name_prompt_sentences, all_event_types, all_arguments_types
+    argument_name_prompt_sentences, all_event_types
 from components.wordnet_tools import \
     all_attr_of_synsets, are_synonyms, synsets
 from components.logic_tools import \
@@ -30,6 +30,7 @@ def get_all_arguments(args, events, corpora):
         elif args.event_element == "paragraph":
             all_sentences_dict = get_all_paragraphs(corpora, write_in=True)
             retrieval_output = args.paragraph_retrieval_output
+        # TODO: event element
         all_sentences = np.array(list(all_sentences_dict.values()))
         all_indexes = np.array(list(all_sentences_dict.keys()))
         num_sentences = all_sentences.shape[0]

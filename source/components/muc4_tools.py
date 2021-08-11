@@ -24,11 +24,11 @@ def get_all_sentences(corpora, write_in=False):
     return output
 
 
-def get_all_paragraphs(corpora, write_in=False):
+def get_all_paragraphs(corpora, write_in=False, split=False):
     if isinstance(corpora, list):
         corpora = corpora_to_dict(corpora)
     output = {
-        (_title, _i): "".join(_paragraph_split)
+        (_title, _i): _paragraph_split if split else "".join(_paragraph_split)
         for _title, _article in corpora.items()
         for _i, _paragraph_split in enumerate(_article["content-cased-split"])
     }

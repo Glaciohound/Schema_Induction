@@ -16,13 +16,14 @@ def get_args():
     parser.add_argument("--loading-cache-file",
                         default="data/muc34/outputs/muc4_loaded_cache.json")
     parser.add_argument("--overwrite-loading", action="store_true")
+    parser.add_argument("--overwrite-prompt-cache", action="store_true")
 
     """ Basic Prompting """
     parser.add_argument("--num-samples", type=int, default=-1)
     parser.add_argument("--batch-size", type=int, default=64)
     parser.add_argument("--num-selected-events", type=int, default=60)
     parser.add_argument("--event-element", type=str, default="paragraph",
-                        choices=["sentence", "paragraph"])
+                        choices=["sentence", "paragraph", "paragraph-split"])
     parser.add_argument("--overwrite-prompting-all", action="store_true")
     parser.add_argument("--overwrite-top-events", action="store_true")
     parser.add_argument("--num-contents-each-event", type=int, default=1)
@@ -38,6 +39,9 @@ def get_args():
     parser.add_argument(
         "--prompt-all-paragraphs-results",
         default="data/muc34/outputs/all-paragraphs-prompt-results.json")
+    parser.add_argument(
+        "--prompt-all-paragraphs-split-results",
+        default="data/muc34/outputs/all-paragraphs-split-prompt-results.json")
 
     """ Top Events Types and Event Retrieval """
     parser.add_argument("--top-names-file",
@@ -53,6 +57,9 @@ def get_args():
     parser.add_argument(
         "--paragraph-retrieval-output", type=str,
         default="data/muc34/outputs/paragraph-retrieval.json")
+    parser.add_argument(
+        "--paragraph-split-retrieval-output", type=str,
+        default="data/muc34/outputs/paragraph-split-retrieval.json")
 
     """ Argument Naming and Extraction """
     parser.add_argument("--all-arguments", type=str,

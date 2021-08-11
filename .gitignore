@@ -8,3 +8,4 @@ data/stanford*
 *.txt
 .pyhist
 *.cache
+data/muc34/output/legacy/

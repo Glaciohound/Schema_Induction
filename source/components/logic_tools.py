@@ -1,7 +1,7 @@
 import numpy as np
 
 from collections import defaultdict
-from components.constants import characters_to_strip, all_event_types
+from components.constants import all_event_types
 from components.logging import getLogger
 
 
@@ -21,29 +21,38 @@ def sort_rank(rank, key=lambda x: x[1]):
     return dict(sorted(rank.items(), key=key, reverse=True))
 
 
-def merge_ranked_list(lists, distribution="power"):
+def merge_ranked_list(lists, merge_policy="power"):
     full_ranking = defaultdict(lambda: 0)
     for single_list in lists:
-        for _i, _word in enumerate(single_list):
-            if distribution == "power":
-                to_add = 1 / (_i + 1)
-            elif distribution == "constant":
-                to_add = 1
+        if isinstance(single_list, list) or isinstance(single_list, tuple):
+            single_list = dict(zip(single_list[0], single_list[1]))
+        for _i, (_word, _score) in enumerate(single_list.items()):
+            if merge_policy == "power":
+                full_ranking[_word] += _score / (_i+1)
+            elif merge_policy == "constant":
+                full_ranking[_word] += _score
+            elif merge_policy == "max":
+                full_ranking[_word] = max(
+                    full_ranking[_word], _score
+                )
             else:
                 raise NotImplementedError()
-            full_ranking[_word.strip(characters_to_strip)] += to_add
     full_ranked_list = sort_rank(full_ranking)
     return full_ranked_list
 
 
-def random_choice(candidates, num):
+def random_choice(candidates, num, as_array=True):
     logger = getLogger("random-choice")
     if num <= 0 or num >= len(candidates):
         logger.info(f"num={num}, defaulting to original list "
                     f"of length {len(candidates)}")
-        return np.array(candidates)
+        if as_array:
+            return np.array(candidates)
+        else:
+            return candidates
     logger.info(f"selecting {num} randomly")
-    return np.random.choice(candidates, min(len(candidates), num), False)
+    results = np.random.choice(candidates, min(len(candidates), num), False)
+    return results
 
 
 def calculate_precision_recall(pred_list, gt_list):

@@ -16,7 +16,8 @@ from components.wordnet_tools import \
     lemmatizer
 from components.logic_tools import intersect
 from components.prompt_all import \
-    prompt_all_with_cache, get_all_sentence_prompts, get_all_paragraph_prompts
+    prompt_all_with_cache, get_all_sentence_prompts, \
+    get_all_paragraph_prompts, get_all_paragraph_split_prompts
 from components.get_args import get_args
 from components.logging import getLogger
 from components.constants import all_event_types
@@ -30,14 +31,27 @@ def high_freq_in_all_sentences(corpora, args):
         logger.info("Prompt from sentences")
         prompted_lists = prompt_all_with_cache(
             args, corpora, get_all_sentence_prompts,
-            args.prompt_all_sentences_results
+            args.prompt_all_sentences_results,
+            tokens_only=True,
+            overwrite_prompt_cache=args.overwrite_prompt_cache,
         )
         logger.info(f"len = {len(prompted_lists)}")
     elif args.event_element == "paragraph":
         logger.info("Prompt from paragraphs")
         prompted_lists = prompt_all_with_cache(
             args, corpora, get_all_paragraph_prompts,
-            args.prompt_all_paragraphs_results
+            args.prompt_all_paragraphs_results,
+            tokens_only=True,
+            overwrite_prompt_cache=args.overwrite_prompt_cache,
+        )
+        logger.info(f"len = {len(prompted_lists)}")
+    elif args.event_element == "paragraph-split":
+        logger.info("Prompt from paragraph splits")
+        prompted_lists = prompt_all_with_cache(
+            args, corpora, get_all_paragraph_split_prompts,
+            args.prompt_all_paragraphs_split_results,
+            tokens_only=True,
+            overwrite_prompt_cache=args.overwrite_prompt_cache,
         )
         logger.info(f"len = {len(prompted_lists)}")
 
@@ -48,8 +62,10 @@ def high_freq_in_all_sentences(corpora, args):
         return
 
     logger.info("Prompting names")
-    prompted_lists = list(itertools.chain(*prompted_lists))
-    full_ranking = merge_ranked_list(prompted_lists)
+    full_ranking = merge_ranked_list(
+        [merge_ranked_list(_list, "max") for _list in prompted_lists],
+        "power"
+    )
     logger.info(f"shrinking from list of length {len(full_ranking)}")
     selected_names = dict()
     all_selected_names = set()
@@ -82,7 +98,7 @@ def high_freq_in_all_sentences(corpora, args):
             synset = find_synonyms(_lemmatized, selected_names) + \
                 find_synonyms(_name, selected_names)
             if len(synset) == 0:
-                if len(selected_names) >= args.num_selected_names:
+                if len(selected_names) >= args.num_selected_events:
                     continue
                 selected_names[_lemmatized] = {
                     "lemma_names":
@@ -101,6 +117,8 @@ def high_freq_in_all_sentences(corpora, args):
     selected_names = dict(sorted(
         selected_names.items(), key=lambda x: x[1]["weight"], reverse=True
     ))
+    for _i, _item in enumerate(selected_names.values()):
+        _item["rank"] = _i
     logger.info("Got selected names:")
     logger.info(str(dict(enumerate(selected_names.keys()))))
 
@@ -114,10 +132,10 @@ def prompt_relevant_sentences(corpora, events, args):
         args.top_names_file, all_event_types)
 
     if args.event_element == "sentence":
-        all_sentences = get_all_sentences(corpora).values()
+        all_sentences = list(get_all_sentences(corpora).values())
         all_prompt_results_file = args.prompt_all_sentences_results
     elif args.event_element == "paragraph":
-        all_sentences = get_all_paragraphs(corpora).values()
+        all_sentences = list(get_all_paragraphs(corpora).values())
         all_prompt_results_file = args.prompt_all_paragraphs_results
     type_sentences = get_all_type_contents(
         events, corpora, args.event_element)
@@ -159,7 +177,7 @@ def main(args):
         load_muc4(args=args)
     dev_corpora_dict = corpora_to_dict(dev_corpora)
 
-    # high_freq_in_all_sentences(dev_corpora, args)
+    high_freq_in_all_sentences(dev_corpora, args)
     prompt_relevant_sentences(
         dev_corpora_dict, dev_events, args
     )

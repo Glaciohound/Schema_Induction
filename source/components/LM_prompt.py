@@ -17,7 +17,8 @@ logger = getLogger("LM-prompt")
 
 def LM_prompt(texts, tokenizer, maskedLM,
               model_name=None, strip=False, top_k=7, batch_size=64,
-              max_token_length=512, tokens_only=False):
+              max_token_length=512, tokens_only=False, one_per_prompt=True,
+              overwrite_prompt_cache=False):
     debug_cache_file = "LM-prompt.cache"
     is_list = True
     if model_name is None:
@@ -55,7 +56,8 @@ def LM_prompt(texts, tokenizer, maskedLM,
         predicted_tokens = [[] for i in range(len(batch))]
         sample_output = copy.copy(ids)
         for item in mask_pos:
-            top_k_preds = torch.topk(predictions[item[0], item[1]], k=top_k)[1]
+            probs, top_k_preds = \
+                torch.topk(predictions[item[0], item[1]], k=top_k)
             this_predicted_tokens = [
                 tokenizer.convert_ids_to_tokens(idx.item())
                 for idx in top_k_preds
@@ -65,7 +67,12 @@ def LM_prompt(texts, tokenizer, maskedLM,
                     lambda x: x.strip(characters_to_strip),
                     this_predicted_tokens
                 ))
-            predicted_tokens[item[0]].append(this_predicted_tokens)
+            if one_per_prompt:
+                predicted_tokens[item[0]] = \
+                    (this_predicted_tokens, probs.numpy().tolist())
+            else:
+                predicted_tokens[item[0]].append(
+                    (this_predicted_tokens, probs.numpy().tolist()))
             sample_output[item[0], item[1]] = top_k_preds[0]
         sample_output = map(
             lambda x: tokenizer.decode(x).replace(tokenizer.pad_token, ""),
@@ -85,10 +92,10 @@ def LM_prompt(texts, tokenizer, maskedLM,
     ]
 
     valid_predictions = None
-    if os.path.exists(debug_cache_file):
+    if os.path.exists(debug_cache_file) and not overwrite_prompt_cache:
         with open(debug_cache_file, 'rb') as f:
             debug_cache = pickle.load(f)
-        if debug_cache[0] == valid_sentences:
+        if debug_cache[0] == texts:
             valid_predictions = debug_cache[1]
             logger.info(f"loaded LM-prompt cache from {debug_cache_file}")
     if valid_predictions is None:
@@ -101,7 +108,7 @@ def LM_prompt(texts, tokenizer, maskedLM,
             ))
         ))
         with open(debug_cache_file, 'wb') as f:
-            pickle.dump((valid_sentences, valid_predictions), f)
+            pickle.dump((texts, valid_predictions), f)
             logger.info(f"dumping prompt results to {debug_cache_file}")
 
     output = []
@@ -110,7 +117,7 @@ def LM_prompt(texts, tokenizer, maskedLM,
             this_output = [], _text[0], _text[1]
         else:
             this_pred = valid_predictions.pop(0)
-            this_output = (this_pred[0][0], this_pred[1], "success")
+            this_output = (this_pred[0], this_pred[1], "success")
         if tokens_only:
             output.append(this_output[0])
         else:

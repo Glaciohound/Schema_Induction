@@ -27,6 +27,11 @@ def retrieve_by_type(events, corpora, args):
         all_sentences = np.array(list(get_all_paragraphs(corpora).values()))
         all_prompt_results_file = args.prompt_all_paragraphs_results
         retrieval_output = args.paragraph_retrieval_output
+    elif args.event_element == "paragraph-split":
+        all_sentences = np.array(list(
+            get_all_paragraphs(corpora, split=True).values()))
+        all_prompt_results_file = args.prompt_all_paragraphs_split_results
+        retrieval_output = args.paragraph_split_retrieval_output
     with open(all_prompt_results_file, 'r') as f:
         prompted_lists = json.load(f)
 

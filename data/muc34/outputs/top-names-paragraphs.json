@@ -2,541 +2,413 @@
     "attack": {
         "lemma_names": [
             "attack",
-            "assault",
-            "attempt",
-            "onslaught",
-            "attacker",
-            "approach"
+            "assault"
         ],
-        "weight": 4277.519395408406
-    },
-    "meeting": {
-        "lemma_names": [
-            "meeting",
-            "meet",
-            "encounter",
-            "match",
-            "contact",
-            "play"
-        ],
-        "weight": 3032.123822996915
-    },
-    "exchange": {
-        "lemma_names": [
-            "exchange",
-            "change",
-            "switch",
-            "interchange",
-            "substitution"
-        ],
-        "weight": 1942.1761470464567
+        "weight": 78.35730047074576,
+        "rank": 0
     },
     "shooting": {
         "lemma_names": [
+            "shoot",
             "shooting",
-            "shoot",
-            "blast",
-            "charge",
-            "film",
-            "shoot",
-            "tear",
-            "tears",
-            "fool",
-            "photograph"
+            "blast"
         ],
-        "weight": 1755.8260849134533
-    },
-    "action": {
-        "lemma_names": [
-            "act",
-            "action",
-            "process",
-            "act",
-            "activity",
-            "processing"
-        ],
-        "weight": 1391.470997684467
-    },
-    "massacre": {
-        "lemma_names": [
-            "massacre",
-            "carnage",
-            "slaughter"
-        ],
-        "weight": 1195.3609675248592
-    },
-    "battle": {
-        "lemma_names": [
-            "battle",
-            "fight",
-            "conflict",
-            "struggle",
-            "combat",
-            "engagement"
-        ],
-        "weight": 996.1691168033665
-    },
-    "murder": {
-        "lemma_names": [
-            "murder",
-            "execution",
-            "slaying",
-            "murderer",
-            "dispatch"
-        ],
-        "weight": 985.862286563216
-    },
-    "explosion": {
-        "lemma_names": [
-            "explode",
-            "explosion",
-            "explode"
-        ],
-        "weight": 895.7826599833006
-    },
-    "situation": {
-        "lemma_names": [
-            "situate",
-            "situation",
-            "site"
-        ],
-        "weight": 884.6306343993352
-    },
-    "conversation": {
-        "lemma_names": [
-            "conversation",
-            "converse"
-        ],
-        "weight": 801.1437588829599
-    },
-    "interview": {
-        "lemma_names": [
-            "interview",
-            "question",
-            "consultation",
-            "interviewer"
-        ],
-        "weight": 765.8823340049285
-    },
-    "arrest": {
-        "lemma_names": [
-            "arrest",
-            "apprehension",
-            "check",
-            "stop",
-            "catch"
-        ],
-        "weight": 643.8470889798983
-    },
-    "bombing": {
-        "lemma_names": [
-            "bombing",
-            "bomb",
-            "bomb",
-            "bombardment",
-            "fail"
-        ],
-        "weight": 607.206316974444
-    },
-    "announcement": {
-        "lemma_names": [
-            "announcement",
-            "announce",
-            "declaration",
-            "proclamation"
-        ],
-        "weight": 606.6201800793885
-    },
-    "speech": {
-        "lemma_names": [
-            "speech",
-            "address"
-        ],
-        "weight": 593.9656688166068
-    },
-    "report": {
-        "lemma_names": [
-            "report",
-            "reporter",
-            "paper",
-            "study",
-            "reporting",
-            "account"
-        ],
-        "weight": 494.04479988599246
-    },
-    "statement": {
-        "lemma_names": [
-            "state",
-            "statement",
-            "state",
-            "assertion",
-            "affirmation"
-        ],
-        "weight": 455.3085096034289
-    },
-    "discussion": {
-        "lemma_names": [
-            "discuss",
-            "discussion",
-            "words",
-            "word",
-            "word",
-            "treatment",
-            "discourse"
-        ],
-        "weight": 444.94755444300637
-    },
-    "debate": {
-        "lemma_names": [
-            "debate",
-            "deb",
-            "argument",
-            "fencing"
-        ],
-        "weight": 412.6735889608314
-    },
-    "raid": {
-        "lemma_names": [
-            "raid"
-        ],
-        "weight": 405.1848612637301
-    },
-    "truth": {
-        "lemma_names": [
-            "truth",
-            "true",
-            "Truth"
-        ],
-        "weight": 354.04035803058594
-    },
-    "clash": {
-        "lemma_names": [
-            "clash",
-            "crash",
-            "friction"
-        ],
-        "weight": 343.94747245705685
-    },
-    "result": {
-        "lemma_names": [
-            "result",
-            "answer",
-            "outcome",
-            "effect",
-            "resolution",
-            "effects",
-            "effect",
-            "solution",
-            "leaving",
-            "leave"
-        ],
-        "weight": 298.52264604562447
+        "weight": 41.78079313579359,
+        "rank": 1
     },
     "kidnapping": {
         "lemma_names": [
             "kidnapping",
             "kidnap",
-            "kidnap",
-            "snatch"
+            "kidnap"
         ],
-        "weight": 287.93735769160077
+        "weight": 36.037649154663086,
+        "rank": 2
     },
-    "destruction": {
+    "report": {
         "lemma_names": [
-            "destruction",
-            "destruct",
-            "demolition"
+            "report",
+            "reporting"
         ],
-        "weight": 284.635483353856
+        "weight": 31.181289855519687,
+        "rank": 3
     },
-    "proceeding": {
+    "clash": {
         "lemma_names": [
-            "process",
-            "proceeding",
-            "proceed",
-            "proceeding"
+            "clash",
+            "encounter"
         ],
-        "weight": 282.4242198062124
+        "weight": 24.175650595583456,
+        "rank": 4
     },
-    "demonstration": {
+    "abduction": {
         "lemma_names": [
-            "demonstration",
-            "presentation",
-            "demo"
+            "abduction",
+            "abduct",
+            "abduce"
         ],
-        "weight": 279.72488217078836
+        "weight": 14.895652770996094,
+        "rank": 5
     },
-    "vote": {
+    "situation": {
         "lemma_names": [
-            "vote",
-            "voting",
-            "ballot"
+            "situation",
+            "situate"
         ],
-        "weight": 276.87874834652587
+        "weight": 12.368214133736139,
+        "rank": 6
     },
-    "talk": {
+    "action": {
         "lemma_names": [
-            "talk",
-            "talk",
-            "lecture",
-            "spill",
-            "mouth",
-            "talking",
-            "peach"
+            "action",
+            "act",
+            "act"
         ],
-        "weight": 272.42828397532264
+        "weight": 11.614465395742714,
+        "rank": 7
     },
-    "confrontation": {
+    "explosion": {
         "lemma_names": [
-            "confront",
-            "confrontation",
-            "showdown"
+            "explode",
+            "explosion"
         ],
-        "weight": 267.72802375332816
+        "weight": 8.317278180803571,
+        "rank": 8
     },
-    "strike": {
+    "massacre": {
         "lemma_names": [
-            "strike",
-            "move",
-            "fall",
-            "hit",
-            "falls",
-            "fall",
-            "discover",
-            "hitting"
+            "massacre",
+            "carnage"
         ],
-        "weight": 251.66346439274227
+        "weight": 6.814384044869579,
+        "rank": 9
     },
-    "response": {
+    "training": {
         "lemma_names": [
-            "response",
-            "reaction",
-            "reply",
-            "reception"
+            "train",
+            "training",
+            "school",
+            "education"
         ],
-        "weight": 248.33738592951633
+        "weight": 6.283752800498867,
+        "rank": 10
     },
-    "seizure": {
+    "conflict": {
         "lemma_names": [
-            "seizure",
-            "seize",
-            "capture",
-            "seize"
+            "conflict",
+            "battle",
+            "fight"
         ],
-        "weight": 245.04119460655485
-    },
-    "protest": {
-        "lemma_names": [
-            "protest",
-            "objection",
-            "dissent"
-        ],
-        "weight": 234.1326914037711
-    },
-    "evidence": {
-        "lemma_names": [
-            "evidence",
-            "show"
-        ],
-        "weight": 225.51711912946814
-    },
-    "signing": {
-        "lemma_names": [
-            "sign",
-            "signing",
-            "contract"
-        ],
-        "weight": 169.112588497053
-    },
-    "conference": {
-        "lemma_names": [
-            "confer",
-            "conference"
-        ],
-        "weight": 165.26293960480808
-    },
-    "letter": {
-        "lemma_names": [
-            "letter",
-            "let",
-            "letter",
-            "letters"
-        ],
-        "weight": 156.31577668602833
-    },
-    "decision": {
-        "lemma_names": [
-            "decide",
-            "decision",
-            "conclusion",
-            "determination"
-        ],
-        "weight": 153.9102975752148
-    },
-    "visit": {
-        "lemma_names": [
-            "visit",
-            "call",
-            "chat",
-            "visitor",
-            "calling"
-        ],
-        "weight": 153.06160472946166
-    },
-    "president": {
-        "lemma_names": [
-            "preside",
-            "president",
-            "President"
-        ],
-        "weight": 148.79195493617175
-    },
-    "article": {
-        "lemma_names": [
-            "article",
-            "clause"
-        ],
-        "weight": 146.30025477993547
-    },
-    "trial": {
-        "lemma_names": [
-            "trial",
-            "test",
-            "run",
-            "visitation"
-        ],
-        "weight": 143.93367096400218
-    },
-    "flight": {
-        "lemma_names": [
-            "flight",
-            "escape"
-        ],
-        "weight": 141.9382350098714
-    },
-    "war": {
-        "lemma_names": [
-            "war",
-            "warrant",
-            "warfare"
-        ],
-        "weight": 138.42423370192722
-    },
-    "fire": {
-        "lemma_names": [
-            "fire",
-            "firing",
-            "burn",
-            "discharge",
-            "sack"
-        ],
-        "weight": 131.566520509099
-    },
-    "investigation": {
-        "lemma_names": [
-            "investigation",
-            "probe",
-            "investigating"
-        ],
-        "weight": 126.79766292197232
-    },
-    "briefing": {
-        "lemma_names": [
-            "briefing",
-            "brief"
-        ],
-        "weight": 126.24853567016272
-    },
-    "interaction": {
-        "lemma_names": [
-            "interaction",
-            "interact"
-        ],
-        "weight": 124.45367353395912
-    },
-    "release": {
-        "lemma_names": [
-            "release",
-            "issue",
-            "exit",
-            "waiver",
-            "turn",
-            "freeing",
-            "resign"
-        ],
-        "weight": 123.683103264248
-    },
-    "damage": {
-        "lemma_names": [
-            "dam",
-            "damage",
-            "dame",
-            "price",
-            "damages",
-            "damage",
-            "harm"
-        ],
-        "weight": 111.18676026972969
+        "weight": 6.175970003091904,
+        "rank": 11
     },
     "case": {
         "lemma_names": [
             "case",
-            "suit",
-            "example"
+            "type"
         ],
-        "weight": 108.5380104245482
+        "weight": 5.782644154475285,
+        "rank": 12
     },
-    "ambush": {
+    "strike": {
         "lemma_names": [
-            "ambush",
-            "trap"
+            "strike",
+            "move"
         ],
-        "weight": 108.423653536237
+        "weight": 4.839338327383066,
+        "rank": 13
     },
-    "election": {
+    "trial": {
         "lemma_names": [
-            "election",
-            "elect"
+            "trial",
+            "test"
         ],
-        "weight": 104.34101136310095
+        "weight": 4.34206732222731,
+        "rank": 14
     },
-    "document": {
+    "bombing": {
         "lemma_names": [
-            "document",
-            "papers",
-            "paper",
-            "documentation"
+            "bomb",
+            "bombing"
         ],
-        "weight": 97.786391795251
+        "weight": 4.236759799610485,
+        "rank": 15
     },
-    "proposal": {
+    "terror": {
         "lemma_names": [
-            "proposal",
-            "propose"
+            "terror"
         ],
-        "weight": 96.06734339394127
+        "weight": 4.083568805197011,
+        "rank": 16
     },
-    "abduction": {
+    "raid": {
         "lemma_names": [
-            "abduce",
-            "abduction",
-            "abduct"
+            "raid"
         ],
-        "weight": 88.40893912321062
+        "weight": 4.005950857091833,
+        "rank": 17
     },
-    "summit": {
+    "investigation": {
         "lemma_names": [
-            "summit",
-            "crown"
+            "investigation"
         ],
-        "weight": 83.16381982157093
+        "weight": 3.808910506112235,
+        "rank": 18
     },
-    "revolution": {
+    "confrontation": {
         "lemma_names": [
-            "revolution",
-            "revolve"
+            "confront",
+            "confrontation"
         ],
-        "weight": 81.74978330584644
+        "weight": 3.6504404544830322,
+        "rank": 19
+    },
+    "police": {
+        "lemma_names": [
+            "police",
+            "pole",
+            "pol"
+        ],
+        "weight": 3.4052872728139203,
+        "rank": 20
+    },
+    "security": {
+        "lemma_names": [
+            "secure",
+            "sec",
+            "security"
+        ],
+        "weight": 3.3449182670290876,
+        "rank": 21
+    },
+    "exchange": {
+        "lemma_names": [
+            "exchange"
+        ],
+        "weight": 3.2379237280951605,
+        "rank": 22
+    },
+    "murder": {
+        "lemma_names": [
+            "murder"
+        ],
+        "weight": 2.279176025390625,
+        "rank": 23
+    },
+    "shelling": {
+        "lemma_names": [
+            "shelling",
+            "shell"
+        ],
+        "weight": 2.198002741887019,
+        "rank": 24
+    },
+    "standoff": {
+        "lemma_names": [
+            "standoff"
+        ],
+        "weight": 2.1410484313964844,
+        "rank": 25
+    },
+    "footage": {
+        "lemma_names": [
+            "foot",
+            "footage"
+        ],
+        "weight": 1.9635036073882004,
+        "rank": 26
+    },
+    "occurrence": {
+        "lemma_names": [
+            "occur",
+            "occurrence"
+        ],
+        "weight": 1.9597358703613281,
+        "rank": 27
+    },
+    "rescue": {
+        "lemma_names": [
+            "rescue"
+        ],
+        "weight": 1.6672422745648552,
+        "rank": 28
+    },
+    "man": {
+        "lemma_names": [
+            "man",
+            "men"
+        ],
+        "weight": 1.6183760793585527,
+        "rank": 29
+    },
+    "arrest": {
+        "lemma_names": [
+            "arrest"
+        ],
+        "weight": 1.5303496283453863,
+        "rank": 30
+    },
+    "fire": {
+        "lemma_names": [
+            "fire"
+        ],
+        "weight": 1.4842313410161616,
+        "rank": 31
+    },
+    "war": {
+        "lemma_names": [
+            "war"
+        ],
+        "weight": 1.3909876896784856,
+        "rank": 32
+    },
+    "student": {
+        "lemma_names": [
+            "stud",
+            "student"
+        ],
+        "weight": 1.3205088173470847,
+        "rank": 33
+    },
+    "looting": {
+        "lemma_names": [
+            "looting",
+            "loot"
+        ],
+        "weight": 1.2779965577010846,
+        "rank": 34
+    },
+    "meeting": {
+        "lemma_names": [
+            "meeting",
+            "meet"
+        ],
+        "weight": 1.2495940314398872,
+        "rank": 35
+    },
+    "interview": {
+        "lemma_names": [
+            "interview"
+        ],
+        "weight": 1.221909066905146,
+        "rank": 36
+    },
+    "response": {
+        "lemma_names": [
+            "response"
+        ],
+        "weight": 1.1857934205428413,
+        "rank": 37
+    },
+    "party": {
+        "lemma_names": [
+            "party"
+        ],
+        "weight": 1.0344273602520977,
+        "rank": 38
+    },
+    "surveillance": {
+        "lemma_names": [
+            "surveillance",
+            "surveil"
+        ],
+        "weight": 0.9245097478230794,
+        "rank": 39
+    },
+    "torture": {
+        "lemma_names": [
+            "torture",
+            "tort",
+            "torte"
+        ],
+        "weight": 0.9084915411276896,
+        "rank": 40
+    },
+    "border": {
+        "lemma_names": [
+            "border"
+        ],
+        "weight": 0.9005067825317383,
+        "rank": 41
+    },
+    "interrogation": {
+        "lemma_names": [
+            "interrogation"
+        ],
+        "weight": 0.8509358332707332,
+        "rank": 42
+    },
+    "gun": {
+        "lemma_names": [
+            "gun"
+        ],
+        "weight": 0.8423566818237305,
+        "rank": 43
+    },
+    "protest": {
+        "lemma_names": [
+            "protest"
+        ],
+        "weight": 0.8293799767127403,
+        "rank": 44
+    },
+    "press": {
+        "lemma_names": [
+            "press"
+        ],
+        "weight": 0.8154330976081617,
+        "rank": 45
+    },
+    "development": {
+        "lemma_names": [
+            "development",
+            "develop"
+        ],
+        "weight": 0.790062287274529,
+        "rank": 46
+    },
+    "escape": {
+        "lemma_names": [
+            "escape"
+        ],
+        "weight": 0.7342383829752605,
+        "rank": 47
+    },
+    "confession": {
+        "lemma_names": [
+            "confess",
+            "confession"
+        ],
+        "weight": 0.7054653656788361,
+        "rank": 48
+    },
+    "search": {
+        "lemma_names": [
+            "search"
+        ],
+        "weight": 0.6623502064900226,
+        "rank": 49
+    },
+    "extortion": {
+        "lemma_names": [
+            "extortion",
+            "extort"
+        ],
+        "weight": 0.6389392586641534,
+        "rank": 50
+    },
+    "email": {
+        "lemma_names": [
+            "email"
+        ],
+        "weight": 0.4842314063955884,
+        "rank": 51
+    },
+    "time": {
+        "lemma_names": [
+            "time"
+        ],
+        "weight": 0.4731869396862683,
+        "rank": 52
     }
 }
