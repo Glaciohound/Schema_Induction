@@ -33,9 +33,11 @@ argument_name_prompt_sentences = (
 all_event_types = {
     "ATTACK": ["attack"],
     "BOMBING": ["explosion"],
-    "ARSON": ["fire"],
+    # "ARSON": ["fire"],
+    "ARSON": ["massacre"],
     "KIDNAPPING": ["kidnapping"],
-    "ROBBERY": ["robbery"],
+    # "ROBBERY": ["robbery"],
+    "ROBBERY": ["raid"],
 }
 
 interested_categories = (

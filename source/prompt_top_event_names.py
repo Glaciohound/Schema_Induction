@@ -178,7 +178,8 @@ def prompt_relevant_sentences(corpora, events, args):
         for _type, _group in type_ranks_by_name.items()
     }
     with open(args.top_names_by_type_file, "w") as f:
-        logger.info(f"Dumping top names by type to {args.top_names_file}")
+        logger.info("Dumping top names by type to "
+                    f"{args.top_names_by_type_file}")
         json.dump(type_ranks_by_name, f, indent=4)
 
 
@@ -187,7 +188,7 @@ def main(args):
         load_muc4(args=args)
     dev_corpora_dict = corpora_to_dict(dev_corpora)
 
-    # high_freq_in_all_sentences(dev_corpora, args)
+    high_freq_in_all_sentences(dev_corpora, args)
     prompt_relevant_sentences(
         dev_corpora_dict, dev_events, args
     )

@@ -26,10 +26,11 @@ def retrieve_by_type(events, corpora, args):
         all_prompt_results_file = args.prompt_all_paragraphs_results
         retrieval_output = args.paragraph_retrieval_output
     elif args.event_element == "paragraph-split":
-        all_sentences = np.array(list(
-            get_all_paragraphs(corpora, split=True).values()))
+        all_sentences = np.array(list(get_all_paragraphs(corpora).values()))
         all_prompt_results_file = args.prompt_all_paragraphs_split_results
         retrieval_output = args.paragraph_split_retrieval_output
+    else:
+        raise NotImplementedError()
     with open(all_prompt_results_file, 'r') as f:
         prompted_lists = json.load(f)
 
@@ -45,7 +46,8 @@ def retrieve_by_type(events, corpora, args):
     }
 
     prompted_lists = list(map(
-            merge_ranked_list, prompted_lists
+        lambda x: merge_ranked_list(x, args.merge_single_policy),
+        prompted_lists
     ))
     prompted_top_names = np.array([
         all_selected_names_index.get(
@@ -54,7 +56,7 @@ def retrieve_by_type(events, corpora, args):
     ])
     retrieved_indexes = {
         _type: np.where(prompted_top_names == _keyword[0])[0]
-        for _type, _keyword in all_types.items()
+        for _type, _keyword in all_event_types.items()
     }
     precision_recall = calculate_precision_recall(
         retrieved_indexes, type_gt_indexes)
