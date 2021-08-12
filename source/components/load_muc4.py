@@ -7,10 +7,7 @@ import itertools
 from glob import glob
 from collections import defaultdict
 from tqdm import tqdm
-from components.logging import getLogger
-
-
-logger = getLogger("load-muc4")
+from components.logging import logger
 
 
 def readlines(filename, strip=True):

@@ -19,11 +19,8 @@ from components.prompt_all import \
     prompt_all_with_cache, get_all_sentence_prompts, \
     get_all_paragraph_prompts, get_all_paragraph_split_prompts
 from components.get_args import get_args
-from components.logging import getLogger
+from components.logging import logger
 from components.constants import all_event_types
-
-
-logger = getLogger("top-events")
 
 
 def high_freq_in_all_sentences(corpora, args):
@@ -137,6 +134,11 @@ def prompt_relevant_sentences(corpora, events, args):
     elif args.event_element == "paragraph":
         all_sentences = list(get_all_paragraphs(corpora).values())
         all_prompt_results_file = args.prompt_all_paragraphs_results
+    elif args.event_element == "paragraph-split":
+        all_sentences = list(get_all_paragraphs(corpora).values())
+        all_prompt_results_file = args.prompt_all_paragraphs_split_results
+    else:
+        raise NotImplementedError()
     type_sentences = get_all_type_contents(
         events, corpora, args.event_element)
     with open(all_prompt_results_file, 'r') as f:
@@ -145,10 +147,15 @@ def prompt_relevant_sentences(corpora, events, args):
     type_prompts = {
         _type: [
             merge_ranked_list(
-                prompted_lists[all_sentences.index(_sentence["sentence"])]
+                [
+                    _list
+                    for _sentence in _sentences[:args.num_contents_each_event]
+                    for _list in
+                    prompted_lists[all_sentences.index(_sentence["sentence"])]
+                ],
+                args.merge_single_policy
             )
             for _sentences in _group
-            for _sentence in _sentences[:args.num_contents_each_event]
         ]
         for _type, _group in type_sentences.items()
     }
@@ -158,6 +165,8 @@ def prompt_relevant_sentences(corpora, events, args):
     for _type, _prompts in type_prompts.items():
         for _prompt_list in _prompts:
             for _i, _name in enumerate(_prompt_list.keys()):
+                if _i >= args.top_k:
+                    break
                 if _name in all_selected_names_index:
                     type_ranks_by_name[_type][_i].update(
                         [all_selected_names_index[_name]])
@@ -169,6 +178,7 @@ def prompt_relevant_sentences(corpora, events, args):
         for _type, _group in type_ranks_by_name.items()
     }
     with open(args.top_names_by_type_file, "w") as f:
+        logger.info(f"Dumping top names by type to {args.top_names_file}")
         json.dump(type_ranks_by_name, f, indent=4)
 
 
@@ -177,7 +187,7 @@ def main(args):
         load_muc4(args=args)
     dev_corpora_dict = corpora_to_dict(dev_corpora)
 
-    high_freq_in_all_sentences(dev_corpora, args)
+    # high_freq_in_all_sentences(dev_corpora, args)
     prompt_relevant_sentences(
         dev_corpora_dict, dev_events, args
     )

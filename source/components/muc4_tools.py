@@ -138,7 +138,7 @@ def extract_relevant_sentences(event, article, content_type="sentence"):
             for _paragraph_split in article["content-cased-split"]
             for _sentence in _paragraph_split
         ]
-    elif content_type == "paragraph":
+    elif content_type == "paragraph" or content_type == "paragraph-split":
         all_sentences = [
             "".join(_paragraph_split)
             for _paragraph_split in article["content-cased-split"]

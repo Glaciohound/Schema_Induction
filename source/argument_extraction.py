@@ -8,10 +8,7 @@ from components.logic_tools import get_head_word
 from components.load_muc4 import load_muc4
 from components.get_args import get_args
 from components.constants import all_arguments_types
-from components.logging import getLogger
-
-
-logger = getLogger("extraction")
+from components.logging import logger
 
 
 def evaluate_extraction(all_arguments, selected_arguments):

@@ -1,8 +1,6 @@
 import argparse
-from components.logging import getLogger
+from components.logging import logger
 from pprint import pformat
-
-logger = getLogger("get-args")
 
 
 def get_args():
@@ -27,6 +25,8 @@ def get_args():
     parser.add_argument("--overwrite-prompting-all", action="store_true")
     parser.add_argument("--overwrite-top-events", action="store_true")
     parser.add_argument("--num-contents-each-event", type=int, default=1)
+    parser.add_argument("--merge-single-policy", type=str, default="max",
+                        choices=["max", "power", "constant"])
 
     """ Prompting Contents """
     parser.add_argument("--all-sentences-file", type=str,
@@ -45,7 +45,7 @@ def get_args():
 
     """ Top Events Types and Event Retrieval """
     parser.add_argument("--top-names-file",
-                        default="data/muc34/outputs/top-names-paragraphs.json")
+                        default="data/muc34/outputs/top-names.json")
     parser.add_argument("--top-names-by-type-file", type=str,
                         default="data/muc34/diagnosis/top-names-by-type.json")
     parser.add_argument(

@@ -6,10 +6,7 @@ from components.muc4_tools import \
     get_all_sentences, get_all_paragraphs
 from components.logic_tools import random_choice
 from components.constants import event_prompt_sentences
-from components.logging import getLogger
-
-
-logger = getLogger("prompt-all")
+from components.logging import logger
 
 
 def prompt_all_with_cache(

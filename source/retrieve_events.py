@@ -10,9 +10,7 @@ from components.constants import all_event_types
 from components.logic_tools import \
     merge_ranked_list, random_choice, calculate_precision_recall
 from components.get_args import get_args
-from components.logging import getLogger
-
-logger = getLogger("retrieve-events")
+from components.logging import logger
 
 
 def retrieve_by_type(events, corpora, args):

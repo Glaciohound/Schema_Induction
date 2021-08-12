@@ -16,9 +16,7 @@ from components.wordnet_tools import \
 from components.logic_tools import \
     intersect, merge_ranked_list, sort_rank
 from components.get_args import get_args
-from components.logging import getLogger
-
-logger = getLogger("argument-naming")
+from components.logging import logger
 
 
 def get_all_arguments(args, events, corpora):

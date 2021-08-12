@@ -4,14 +4,11 @@ from collections import Counter, defaultdict
 from components.load_muc4 import load_muc4
 from components.muc4_tools import get_all_sentences
 from components.get_args import get_args
-from components.logging import getLogger
-
-
-main_logger = getLogger("statistics")
+from components.logging import logger
 
 
 def dual_output(line, f):
-    main_logger.info(line)
+    logger.info(line, level_offset=1)
     f.write(str(line) + "\n")
 
 
@@ -21,9 +18,11 @@ def main(args):
                   args.overwrite_loading)
     dev_sentences = get_all_sentences(dev_corpora)
     tst_sentences = get_all_sentences(tst_corpora)
-    all_sentences = dev_sentences + tst_sentences
+    all_sentences = dict(
+        list(dev_sentences.items()) + list(tst_sentences.items()))
     with open(args.all_sentences_file, 'w') as f:
-        json.dump(all_sentences, f, indent=4)
+        json.dump(dict(zip(map(str, all_sentences.keys()),
+                           all_sentences.values())), f, indent=4)
 
     with open(args.statistics_file, "w") as f:
         for corpora, events, sentences, name in [

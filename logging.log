@@ -7642,3 +7642,1059 @@
 21-08-11 17:12:09 | INFO | top-events | Got selected names:
 21-08-11 17:12:09 | INFO | top-events | {0: 'attack', 1: 'shooting', 2: 'kidnapping', 3: 'report', 4: 'clash', 5: 'abduction', 6: 'situation', 7: 'action', 8: 'explosion', 9: 'massacre', 10: 'training', 11: 'conflict', 12: 'case', 13: 'strike', 14: 'trial', 15: 'bombing', 16: 'terror', 17: 'raid', 18: 'investigation', 19: 'confrontation', 20: 'police', 21: 'security', 22: 'exchange', 23: 'murder', 24: 'shelling', 25: 'standoff', 26: 'footage', 27: 'occurrence', 28: 'rescue', 29: 'man', 30: 'arrest', 31: 'fire', 32: 'war', 33: 'student', 34: 'looting', 35: 'meeting', 36: 'interview', 37: 'response', 38: 'party', 39: 'surveillance', 40: 'torture', 41: 'border', 42: 'interrogation', 43: 'gun', 44: 'protest', 45: 'press', 46: 'development', 47: 'escape', 48: 'confession', 49: 'search', 50: 'extortion', 51: 'email', 52: 'time'}
 21-08-11 17:12:09 | INFO | top-events | Dump selected names to data/muc34/outputs/top-names-paragraphs.json
+
+================================================================================
+21-08-11 17:35:03 | INFO | initial | Root Command: source/prompt_top_event_names.py --event-element paragraph-split
+21-08-11 17:35:07 | INFO | get-args | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph-split',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names-paragraphs.json'}
+21-08-11 17:35:07 | INFO | load-muc4 | Overwrite MUC-4 Loading from args
+21-08-11 17:35:07 | INFO | load-muc4 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+21-08-11 17:35:07 | INFO | top-events | Prompt from paragraph splits
+21-08-11 17:35:08 | INFO | prompt-all | loading prompting results from existing file data/muc34/outputs/all-paragraphs-split-prompt-results.json
+21-08-11 17:35:08 | INFO | top-events | len = 9320
+21-08-11 17:35:08 | INFO | top-events | {0: 'attack', 1: 'shooting', 2: 'kidnapping', 3: 'report', 4: 'clash', 5: 'abduction', 6: 'situation', 7: 'action', 8: 'explosion', 9: 'massacre', 10: 'training', 11: 'conflict', 12: 'case', 13: 'strike', 14: 'trial', 15: 'bombing', 16: 'terror', 17: 'raid', 18: 'investigation', 19: 'confrontation', 20: 'police', 21: 'security', 22: 'exchange', 23: 'murder', 24: 'shelling', 25: 'standoff', 26: 'footage', 27: 'occurrence', 28: 'rescue', 29: 'man', 30: 'arrest', 31: 'fire', 32: 'war', 33: 'student', 34: 'looting', 35: 'meeting', 36: 'interview', 37: 'response', 38: 'party', 39: 'surveillance', 40: 'torture', 41: 'border', 42: 'interrogation', 43: 'gun', 44: 'protest', 45: 'press', 46: 'development', 47: 'escape', 48: 'confession', 49: 'search', 50: 'extortion', 51: 'email', 52: 'time'}
+
+================================================================================
+
+================================================================================
+21-08-11 17:45:18 | logging:24 | Root Command: source/statistics.py
+
+================================================================================
+21-08-11 17:45:36 | logging:24 | Root Command: source/statistics.py
+
+================================================================================
+21-08-11 17:47:46 | logging:24 | Root Command: source/statistics.py
+21-08-11 17:47:46 | logging:24 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names-paragraphs.json'}
+21-08-11 17:47:46 | logging:24 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+
+================================================================================
+21-08-11 17:49:02 | logging:24 | Root Command: source/statistics.py
+21-08-11 17:49:02 | logging:24 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names-paragraphs.json'}
+21-08-11 17:49:02 | logging:24 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+
+================================================================================
+21-08-11 17:50:43 | logging:24 | Root Command: source/statistics.py
+21-08-11 17:50:43 | logging:24 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names-paragraphs.json'}
+21-08-11 17:50:43 | logging:24 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+21-08-11 17:50:44 | logging:24 | ======== In DEV set ==========
+21-08-11 17:50:44 | logging:24 | Number of docs: 1300, 
+21-08-11 17:50:44 | logging:24 | Number of events: 1717
+21-08-11 17:50:44 | logging:24 | Number of sentences: 18720
+21-08-11 17:50:44 | logging:24 | Counting events per document:
+21-08-11 17:50:44 | logging:24 | {1: 1064, 2: 147, 3: 53, 4: 14, 5: 8, 6: 5, 7: 5, 8: 2, 9: 1, 14: 1}
+21-08-11 17:50:44 | logging:24 | Counting incident types:Counter({'ATTACK': 636, '*': 603, 'BOMBING': 298, 'KIDNAPPING': 114, 'ARSON': 43, 'ROBBERY': 17, 'FORCED WORK STOPPAGE': 6})
+21-08-11 17:50:44 | logging:24 | 
+21-08-11 17:50:44 | logging:24 | ======== In TST set ==========
+21-08-11 17:50:44 | logging:24 | Number of docs: 100, 
+21-08-11 17:50:44 | logging:24 | Number of events: 558
+21-08-11 17:50:44 | logging:24 | Number of sentences: 21358
+21-08-11 17:50:44 | logging:24 | Counting events per document:
+21-08-11 17:50:44 | logging:24 | {1: 312, 2: 48, 3: 26, 4: 6, 5: 4, 6: 2, 7: 1, 9: 1}
+21-08-11 17:50:44 | logging:24 | Counting incident types:Counter({'ATTACK': 224, '*': 158, 'BOMBING': 105, 'KIDNAPPING': 45, 'ARSON': 11, 'FORCED WORK STOPPAGE': 5, 'ROBBERY': 4, 'ATTACK / BOMBING': 4, 'BOMBING / ATTACK': 2})
+21-08-11 17:50:44 | logging:24 | 
+
+================================================================================
+
+================================================================================
+
+================================================================================
+21-08-11 18:23:55 | logging:36 | Root Command: source/statistics.py
+21-08-11 18:23:56 | get_args:79 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names-paragraphs.json'}
+21-08-11 18:23:56 | load_muc4:243 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+21-08-11 18:23:56 | statistics:11 | ======== In DEV set ==========
+21-08-11 18:23:56 | statistics:11 | Number of docs: 1300, 
+21-08-11 18:23:56 | statistics:11 | Number of events: 1717
+21-08-11 18:23:56 | statistics:11 | Number of sentences: 18720
+21-08-11 18:23:56 | statistics:11 | Counting events per document:
+21-08-11 18:23:56 | statistics:11 | {1: 1064, 2: 147, 3: 53, 4: 14, 5: 8, 6: 5, 7: 5, 8: 2, 9: 1, 14: 1}
+21-08-11 18:23:56 | statistics:11 | Counting incident types:Counter({'ATTACK': 636, '*': 603, 'BOMBING': 298, 'KIDNAPPING': 114, 'ARSON': 43, 'ROBBERY': 17, 'FORCED WORK STOPPAGE': 6})
+21-08-11 18:23:56 | statistics:11 | 
+21-08-11 18:23:56 | statistics:11 | ======== In TST set ==========
+21-08-11 18:23:56 | statistics:11 | Number of docs: 100, 
+21-08-11 18:23:56 | statistics:11 | Number of events: 558
+21-08-11 18:23:56 | statistics:11 | Number of sentences: 21358
+21-08-11 18:23:56 | statistics:11 | Counting events per document:
+21-08-11 18:23:56 | statistics:11 | {1: 312, 2: 48, 3: 26, 4: 6, 5: 4, 6: 2, 7: 1, 9: 1}
+21-08-11 18:23:56 | statistics:11 | Counting incident types:Counter({'ATTACK': 224, '*': 158, 'BOMBING': 105, 'KIDNAPPING': 45, 'ARSON': 11, 'FORCED WORK STOPPAGE': 5, 'ROBBERY': 4, 'ATTACK / BOMBING': 4, 'BOMBING / ATTACK': 2})
+21-08-11 18:23:56 | statistics:11 | 
+
+================================================================================
+21-08-11 18:25:25 | logging:36 | Root Command: source/statistics.py
+21-08-11 18:25:25 | get_args:79 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names-paragraphs.json'}
+21-08-11 18:25:25 | load_muc4:243 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+21-08-11 18:25:25 | statistics:31 | ======== In DEV set ==========
+21-08-11 18:25:25 | statistics:32 | Number of docs: 1300, 
+21-08-11 18:25:25 | statistics:33 | Number of events: 1717
+21-08-11 18:25:25 | statistics:34 | Number of sentences: 18720
+21-08-11 18:25:25 | statistics:42 | Counting events per document:
+21-08-11 18:25:25 | statistics:43 | {1: 1064, 2: 147, 3: 53, 4: 14, 5: 8, 6: 5, 7: 5, 8: 2, 9: 1, 14: 1}
+21-08-11 18:25:25 | statistics:46 | Counting incident types:Counter({'ATTACK': 636, '*': 603, 'BOMBING': 298, 'KIDNAPPING': 114, 'ARSON': 43, 'ROBBERY': 17, 'FORCED WORK STOPPAGE': 6})
+21-08-11 18:25:25 | statistics:47 | 
+21-08-11 18:25:25 | statistics:31 | ======== In TST set ==========
+21-08-11 18:25:25 | statistics:32 | Number of docs: 100, 
+21-08-11 18:25:25 | statistics:33 | Number of events: 558
+21-08-11 18:25:25 | statistics:34 | Number of sentences: 21358
+21-08-11 18:25:25 | statistics:42 | Counting events per document:
+21-08-11 18:25:25 | statistics:43 | {1: 312, 2: 48, 3: 26, 4: 6, 5: 4, 6: 2, 7: 1, 9: 1}
+21-08-11 18:25:25 | statistics:46 | Counting incident types:Counter({'ATTACK': 224, '*': 158, 'BOMBING': 105, 'KIDNAPPING': 45, 'ARSON': 11, 'FORCED WORK STOPPAGE': 5, 'ROBBERY': 4, 'ATTACK / BOMBING': 4, 'BOMBING / ATTACK': 2})
+21-08-11 18:25:25 | statistics:47 | 
+
+================================================================================
+21-08-11 18:25:39 | logging:36 | Root Command: source/prompt_top_event_names.py
+21-08-11 18:25:44 | get_args:79 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names-paragraphs.json'}
+21-08-11 18:25:44 | load_muc4:235 | Overwrite MUC-4 Loading from args
+21-08-11 18:25:44 | load_muc4:243 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+21-08-11 18:25:44 | prompt_top_event_names:37 | Prompt from paragraphs
+21-08-11 18:25:44 | prompt_all:23 | prompt from scratch
+21-08-11 18:25:44 | prompt_all:66 | get all paragraph prompts
+21-08-11 18:25:44 | logic_tools:46 | num=-1, defaulting to original list of length 9320
+
+================================================================================
+21-08-11 18:27:11 | logging:36 | Root Command: source/prompt_top_event_names.py --event-element paragraph-split
+21-08-11 18:27:16 | get_args:79 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph-split',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names-paragraphs.json'}
+21-08-11 18:27:16 | load_muc4:235 | Overwrite MUC-4 Loading from args
+21-08-11 18:27:16 | load_muc4:243 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+21-08-11 18:27:16 | prompt_top_event_names:46 | Prompt from paragraph splits
+21-08-11 18:27:17 | prompt_all:21 | loading prompting results from existing file data/muc34/outputs/all-paragraphs-split-prompt-results.json
+21-08-11 18:27:17 | prompt_top_event_names:53 | len = 9320
+21-08-11 18:27:17 | prompt_top_event_names:58 | {0: 'attack', 1: 'shooting', 2: 'kidnapping', 3: 'report', 4: 'clash', 5: 'abduction', 6: 'situation', 7: 'action', 8: 'explosion', 9: 'massacre', 10: 'training', 11: 'conflict', 12: 'case', 13: 'strike', 14: 'trial', 15: 'bombing', 16: 'terror', 17: 'raid', 18: 'investigation', 19: 'confrontation', 20: 'police', 21: 'security', 22: 'exchange', 23: 'murder', 24: 'shelling', 25: 'standoff', 26: 'footage', 27: 'occurrence', 28: 'rescue', 29: 'man', 30: 'arrest', 31: 'fire', 32: 'war', 33: 'student', 34: 'looting', 35: 'meeting', 36: 'interview', 37: 'response', 38: 'party', 39: 'surveillance', 40: 'torture', 41: 'border', 42: 'interrogation', 43: 'gun', 44: 'protest', 45: 'press', 46: 'development', 47: 'escape', 48: 'confession', 49: 'search', 50: 'extortion', 51: 'email', 52: 'time'}
+
+================================================================================
+21-08-11 18:27:55 | logging:36 | Root Command: source/prompt_top_event_names.py --event-element paragraph-split
+21-08-11 18:27:58 | get_args:79 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph-split',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names-paragraphs.json'}
+21-08-11 18:27:58 | load_muc4:235 | Overwrite MUC-4 Loading from args
+21-08-11 18:27:58 | load_muc4:243 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+21-08-11 18:27:58 | prompt_top_event_names:46 | Prompt from paragraph splits
+21-08-11 18:27:59 | prompt_all:21 | loading prompting results from existing file data/muc34/outputs/all-paragraphs-split-prompt-results.json
+21-08-11 18:27:59 | prompt_top_event_names:53 | len = 9320
+21-08-11 18:27:59 | prompt_top_event_names:58 | {0: 'attack', 1: 'shooting', 2: 'kidnapping', 3: 'report', 4: 'clash', 5: 'abduction', 6: 'situation', 7: 'action', 8: 'explosion', 9: 'massacre', 10: 'training', 11: 'conflict', 12: 'case', 13: 'strike', 14: 'trial', 15: 'bombing', 16: 'terror', 17: 'raid', 18: 'investigation', 19: 'confrontation', 20: 'police', 21: 'security', 22: 'exchange', 23: 'murder', 24: 'shelling', 25: 'standoff', 26: 'footage', 27: 'occurrence', 28: 'rescue', 29: 'man', 30: 'arrest', 31: 'fire', 32: 'war', 33: 'student', 34: 'looting', 35: 'meeting', 36: 'interview', 37: 'response', 38: 'party', 39: 'surveillance', 40: 'torture', 41: 'border', 42: 'interrogation', 43: 'gun', 44: 'protest', 45: 'press', 46: 'development', 47: 'escape', 48: 'confession', 49: 'search', 50: 'extortion', 51: 'email', 52: 'time'}
+
+================================================================================
+21-08-11 18:28:51 | logging:36 | Root Command: source/prompt_top_event_names.py --event-element paragraph-split
+21-08-11 18:28:54 | get_args:79 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph-split',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names-paragraphs.json'}
+21-08-11 18:28:54 | load_muc4:235 | Overwrite MUC-4 Loading from args
+21-08-11 18:28:54 | load_muc4:243 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+21-08-11 18:28:54 | prompt_top_event_names:46 | Prompt from paragraph splits
+21-08-11 18:28:55 | prompt_all:21 | loading prompting results from existing file data/muc34/outputs/all-paragraphs-split-prompt-results.json
+21-08-11 18:28:55 | prompt_top_event_names:53 | len = 9320
+21-08-11 18:28:55 | prompt_top_event_names:61 | Prompting names
+21-08-11 18:28:55 | prompt_top_event_names:66 | shrinking from list of length 5708
+
+================================================================================
+21-08-11 18:29:17 | logging:36 | Root Command: source/prompt_top_event_names.py --event-element paragraph-split
+21-08-11 18:29:20 | get_args:79 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph-split',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names.json'}
+21-08-11 18:29:20 | load_muc4:235 | Overwrite MUC-4 Loading from args
+21-08-11 18:29:20 | load_muc4:243 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+21-08-11 18:29:20 | prompt_top_event_names:46 | Prompt from paragraph splits
+21-08-11 18:29:21 | prompt_all:21 | loading prompting results from existing file data/muc34/outputs/all-paragraphs-split-prompt-results.json
+21-08-11 18:29:21 | prompt_top_event_names:53 | len = 9320
+21-08-11 18:29:21 | prompt_top_event_names:61 | Prompting names
+21-08-11 18:29:22 | prompt_top_event_names:66 | shrinking from list of length 5708
+21-08-11 18:30:04 | prompt_top_event_names:119 | Got selected names:
+21-08-11 18:30:04 | prompt_top_event_names:120 | {0: 'attack', 1: 'meeting', 2: 'shooting', 3: 'exchange', 4: 'action', 5: 'massacre', 6: 'explosion', 7: 'murder', 8: 'battle', 9: 'arrest', 10: 'conversation', 11: 'situation', 12: 'interview', 13: 'bombing', 14: 'speech', 15: 'announcement', 16: 'crash', 17: 'raid', 18: 'kidnapping', 19: 'statement', 20: 'protest', 21: 'debate', 22: 'police', 23: 'vote', 24: 'talk', 25: 'demonstration', 26: 'discussion', 27: 'confrontation', 28: 'destruction', 29: 'proceeding', 30: 'strike', 31: 'seizure', 32: 'signing', 33: 'response', 34: 'terror', 35: 'war', 36: 'interaction', 37: 'fire', 38: 'training', 39: 'robbery', 40: 'security', 41: 'trial', 42: 'visit', 43: 'case', 44: 'flight', 45: 'report', 46: 'conference', 47: 'shelling', 48: 'letter', 49: 'ambush', 50: 'damage', 51: 'election', 52: 'traffic', 53: 'decision', 54: 'evidence', 55: 'abduction', 56: 'truth', 57: 'corruption', 58: 'briefing', 59: 'investigation'}
+21-08-11 18:30:04 | prompt_top_event_names:124 | Dump selected names to data/muc34/outputs/top-names.json
+
+================================================================================
+21-08-11 18:32:12 | logging:36 | Root Command: source/prompt_top_event_names.py --event-element paragraph-split
+21-08-11 18:32:15 | get_args:79 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph-split',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names.json'}
+21-08-11 18:32:15 | load_muc4:235 | Overwrite MUC-4 Loading from args
+21-08-11 18:32:15 | load_muc4:243 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+21-08-11 18:32:15 | prompt_top_event_names:46 | Prompt from paragraph splits
+21-08-11 18:32:16 | prompt_all:21 | loading prompting results from existing file data/muc34/outputs/all-paragraphs-split-prompt-results.json
+21-08-11 18:32:16 | prompt_top_event_names:53 | len = 9320
+21-08-11 18:32:16 | prompt_top_event_names:58 | {0: 'attack', 1: 'meeting', 2: 'shooting', 3: 'exchange', 4: 'action', 5: 'massacre', 6: 'explosion', 7: 'murder', 8: 'battle', 9: 'arrest', 10: 'conversation', 11: 'situation', 12: 'interview', 13: 'bombing', 14: 'speech', 15: 'announcement', 16: 'crash', 17: 'raid', 18: 'kidnapping', 19: 'statement', 20: 'protest', 21: 'debate', 22: 'police', 23: 'vote', 24: 'talk', 25: 'demonstration', 26: 'discussion', 27: 'confrontation', 28: 'destruction', 29: 'proceeding', 30: 'strike', 31: 'seizure', 32: 'signing', 33: 'response', 34: 'terror', 35: 'war', 36: 'interaction', 37: 'fire', 38: 'training', 39: 'robbery', 40: 'security', 41: 'trial', 42: 'visit', 43: 'case', 44: 'flight', 45: 'report', 46: 'conference', 47: 'shelling', 48: 'letter', 49: 'ambush', 50: 'damage', 51: 'election', 52: 'traffic', 53: 'decision', 54: 'evidence', 55: 'abduction', 56: 'truth', 57: 'corruption', 58: 'briefing', 59: 'investigation'}
+
+================================================================================
+21-08-11 18:43:35 | logging:36 | Root Command: source/prompt_top_event_names.py --event-element paragraph-split
+21-08-11 18:43:39 | get_args:81 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph-split',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'merge_single_policy': 'max',
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names.json'}
+21-08-11 18:43:39 | load_muc4:235 | Overwrite MUC-4 Loading from args
+21-08-11 18:43:39 | load_muc4:243 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+21-08-11 18:43:39 | prompt_top_event_names:46 | Prompt from paragraph splits
+21-08-11 18:43:40 | prompt_all:21 | loading prompting results from existing file data/muc34/outputs/all-paragraphs-split-prompt-results.json
+21-08-11 18:43:40 | prompt_top_event_names:53 | len = 9320
+21-08-11 18:43:40 | prompt_top_event_names:58 | {0: 'attack', 1: 'meeting', 2: 'shooting', 3: 'exchange', 4: 'action', 5: 'massacre', 6: 'explosion', 7: 'murder', 8: 'battle', 9: 'arrest', 10: 'conversation', 11: 'situation', 12: 'interview', 13: 'bombing', 14: 'speech', 15: 'announcement', 16: 'crash', 17: 'raid', 18: 'kidnapping', 19: 'statement', 20: 'protest', 21: 'debate', 22: 'police', 23: 'vote', 24: 'talk', 25: 'demonstration', 26: 'discussion', 27: 'confrontation', 28: 'destruction', 29: 'proceeding', 30: 'strike', 31: 'seizure', 32: 'signing', 33: 'response', 34: 'terror', 35: 'war', 36: 'interaction', 37: 'fire', 38: 'training', 39: 'robbery', 40: 'security', 41: 'trial', 42: 'visit', 43: 'case', 44: 'flight', 45: 'report', 46: 'conference', 47: 'shelling', 48: 'letter', 49: 'ambush', 50: 'damage', 51: 'election', 52: 'traffic', 53: 'decision', 54: 'evidence', 55: 'abduction', 56: 'truth', 57: 'corruption', 58: 'briefing', 59: 'investigation'}
+
+================================================================================
+21-08-11 18:44:15 | logging:36 | Root Command: source/prompt_top_event_names.py --event-element paragraph-split
+21-08-11 18:44:18 | get_args:81 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph-split',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'merge_single_policy': 'max',
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names.json'}
+21-08-11 18:44:18 | load_muc4:235 | Overwrite MUC-4 Loading from args
+21-08-11 18:44:18 | load_muc4:243 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+21-08-11 18:44:18 | prompt_top_event_names:46 | Prompt from paragraph splits
+21-08-11 18:44:19 | prompt_all:21 | loading prompting results from existing file data/muc34/outputs/all-paragraphs-split-prompt-results.json
+21-08-11 18:44:19 | prompt_top_event_names:53 | len = 9320
+21-08-11 18:44:19 | prompt_top_event_names:58 | {0: 'attack', 1: 'meeting', 2: 'shooting', 3: 'exchange', 4: 'action', 5: 'massacre', 6: 'explosion', 7: 'murder', 8: 'battle', 9: 'arrest', 10: 'conversation', 11: 'situation', 12: 'interview', 13: 'bombing', 14: 'speech', 15: 'announcement', 16: 'crash', 17: 'raid', 18: 'kidnapping', 19: 'statement', 20: 'protest', 21: 'debate', 22: 'police', 23: 'vote', 24: 'talk', 25: 'demonstration', 26: 'discussion', 27: 'confrontation', 28: 'destruction', 29: 'proceeding', 30: 'strike', 31: 'seizure', 32: 'signing', 33: 'response', 34: 'terror', 35: 'war', 36: 'interaction', 37: 'fire', 38: 'training', 39: 'robbery', 40: 'security', 41: 'trial', 42: 'visit', 43: 'case', 44: 'flight', 45: 'report', 46: 'conference', 47: 'shelling', 48: 'letter', 49: 'ambush', 50: 'damage', 51: 'election', 52: 'traffic', 53: 'decision', 54: 'evidence', 55: 'abduction', 56: 'truth', 57: 'corruption', 58: 'briefing', 59: 'investigation'}
+
+================================================================================
+21-08-11 18:47:17 | logging:36 | Root Command: source/prompt_top_event_names.py --event-element paragraph-split
+21-08-11 18:47:20 | get_args:81 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph-split',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'merge_single_policy': 'max',
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names.json'}
+21-08-11 18:47:20 | load_muc4:235 | Overwrite MUC-4 Loading from args
+21-08-11 18:47:20 | load_muc4:243 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+21-08-11 18:47:20 | prompt_top_event_names:46 | Prompt from paragraph splits
+21-08-11 18:47:21 | prompt_all:21 | loading prompting results from existing file data/muc34/outputs/all-paragraphs-split-prompt-results.json
+21-08-11 18:47:21 | prompt_top_event_names:53 | len = 9320
+21-08-11 18:47:21 | prompt_top_event_names:58 | {0: 'attack', 1: 'meeting', 2: 'shooting', 3: 'exchange', 4: 'action', 5: 'massacre', 6: 'explosion', 7: 'murder', 8: 'battle', 9: 'arrest', 10: 'conversation', 11: 'situation', 12: 'interview', 13: 'bombing', 14: 'speech', 15: 'announcement', 16: 'crash', 17: 'raid', 18: 'kidnapping', 19: 'statement', 20: 'protest', 21: 'debate', 22: 'police', 23: 'vote', 24: 'talk', 25: 'demonstration', 26: 'discussion', 27: 'confrontation', 28: 'destruction', 29: 'proceeding', 30: 'strike', 31: 'seizure', 32: 'signing', 33: 'response', 34: 'terror', 35: 'war', 36: 'interaction', 37: 'fire', 38: 'training', 39: 'robbery', 40: 'security', 41: 'trial', 42: 'visit', 43: 'case', 44: 'flight', 45: 'report', 46: 'conference', 47: 'shelling', 48: 'letter', 49: 'ambush', 50: 'damage', 51: 'election', 52: 'traffic', 53: 'decision', 54: 'evidence', 55: 'abduction', 56: 'truth', 57: 'corruption', 58: 'briefing', 59: 'investigation'}
+
+================================================================================
+21-08-11 19:43:08 | logging:36 | Root Command: source/prompt_top_event_names.py --event-element paragraph-split
+21-08-11 19:43:13 | get_args:81 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph-split',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'merge_single_policy': 'max',
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names.json'}
+21-08-11 19:43:13 | load_muc4:235 | Overwrite MUC-4 Loading from args
+21-08-11 19:43:13 | load_muc4:243 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+21-08-11 19:43:13 | prompt_top_event_names:46 | Prompt from paragraph splits
+21-08-11 19:43:13 | prompt_all:21 | loading prompting results from existing file data/muc34/outputs/all-paragraphs-split-prompt-results.json
+21-08-11 19:43:13 | prompt_top_event_names:53 | len = 9320
+21-08-11 19:43:13 | prompt_top_event_names:58 | {0: 'attack', 1: 'meeting', 2: 'shooting', 3: 'exchange', 4: 'action', 5: 'massacre', 6: 'explosion', 7: 'murder', 8: 'battle', 9: 'arrest', 10: 'conversation', 11: 'situation', 12: 'interview', 13: 'bombing', 14: 'speech', 15: 'announcement', 16: 'crash', 17: 'raid', 18: 'kidnapping', 19: 'statement', 20: 'protest', 21: 'debate', 22: 'police', 23: 'vote', 24: 'talk', 25: 'demonstration', 26: 'discussion', 27: 'confrontation', 28: 'destruction', 29: 'proceeding', 30: 'strike', 31: 'seizure', 32: 'signing', 33: 'response', 34: 'terror', 35: 'war', 36: 'interaction', 37: 'fire', 38: 'training', 39: 'robbery', 40: 'security', 41: 'trial', 42: 'visit', 43: 'case', 44: 'flight', 45: 'report', 46: 'conference', 47: 'shelling', 48: 'letter', 49: 'ambush', 50: 'damage', 51: 'election', 52: 'traffic', 53: 'decision', 54: 'evidence', 55: 'abduction', 56: 'truth', 57: 'corruption', 58: 'briefing', 59: 'investigation'}
+
+================================================================================
+21-08-11 19:44:21 | logging:36 | Root Command: source/prompt_top_event_names.py --event-element paragraph-split
+21-08-11 19:44:24 | get_args:81 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph-split',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'merge_single_policy': 'max',
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names.json'}
+21-08-11 19:44:24 | load_muc4:235 | Overwrite MUC-4 Loading from args
+21-08-11 19:44:24 | load_muc4:243 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+21-08-11 19:44:24 | prompt_top_event_names:46 | Prompt from paragraph splits
+21-08-11 19:44:25 | prompt_all:21 | loading prompting results from existing file data/muc34/outputs/all-paragraphs-split-prompt-results.json
+21-08-11 19:44:25 | prompt_top_event_names:53 | len = 9320
+21-08-11 19:44:25 | prompt_top_event_names:58 | {0: 'attack', 1: 'meeting', 2: 'shooting', 3: 'exchange', 4: 'action', 5: 'massacre', 6: 'explosion', 7: 'murder', 8: 'battle', 9: 'arrest', 10: 'conversation', 11: 'situation', 12: 'interview', 13: 'bombing', 14: 'speech', 15: 'announcement', 16: 'crash', 17: 'raid', 18: 'kidnapping', 19: 'statement', 20: 'protest', 21: 'debate', 22: 'police', 23: 'vote', 24: 'talk', 25: 'demonstration', 26: 'discussion', 27: 'confrontation', 28: 'destruction', 29: 'proceeding', 30: 'strike', 31: 'seizure', 32: 'signing', 33: 'response', 34: 'terror', 35: 'war', 36: 'interaction', 37: 'fire', 38: 'training', 39: 'robbery', 40: 'security', 41: 'trial', 42: 'visit', 43: 'case', 44: 'flight', 45: 'report', 46: 'conference', 47: 'shelling', 48: 'letter', 49: 'ambush', 50: 'damage', 51: 'election', 52: 'traffic', 53: 'decision', 54: 'evidence', 55: 'abduction', 56: 'truth', 57: 'corruption', 58: 'briefing', 59: 'investigation'}
+
+================================================================================
+21-08-11 19:48:20 | logging:36 | Root Command: source/prompt_top_event_names.py --event-element paragraph-split
+21-08-11 19:48:23 | get_args:81 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph-split',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'merge_single_policy': 'max',
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names.json'}
+21-08-11 19:48:23 | load_muc4:235 | Overwrite MUC-4 Loading from args
+21-08-11 19:48:23 | load_muc4:243 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+
+================================================================================
+21-08-11 19:48:56 | logging:36 | Root Command: source/prompt_top_event_names.py --event-element paragraph-split
+21-08-11 19:48:59 | get_args:81 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph-split',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'merge_single_policy': 'max',
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names.json'}
+21-08-11 19:48:59 | load_muc4:235 | Overwrite MUC-4 Loading from args
+21-08-11 19:49:00 | load_muc4:243 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+
+================================================================================
+21-08-11 19:49:24 | logging:36 | Root Command: source/prompt_top_event_names.py --event-element paragraph-split
+21-08-11 19:49:28 | get_args:81 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph-split',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'merge_single_policy': 'max',
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names.json'}
+21-08-11 19:49:28 | load_muc4:235 | Overwrite MUC-4 Loading from args
+21-08-11 19:49:28 | load_muc4:243 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+
+================================================================================
+21-08-11 19:50:25 | logging:36 | Root Command: source/prompt_top_event_names.py --event-element paragraph-split
+21-08-11 19:50:28 | get_args:81 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph-split',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'merge_single_policy': 'max',
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names.json'}
+21-08-11 19:50:28 | load_muc4:235 | Overwrite MUC-4 Loading from args
+21-08-11 19:50:29 | load_muc4:243 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+
+================================================================================
+21-08-11 19:59:02 | logging:36 | Root Command: source/prompt_top_event_names.py --event-element paragraph-split
+21-08-11 19:59:05 | get_args:81 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph-split',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'merge_single_policy': 'max',
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names.json'}
+21-08-11 19:59:05 | load_muc4:235 | Overwrite MUC-4 Loading from args
+21-08-11 19:59:05 | load_muc4:243 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+
+================================================================================
+21-08-11 20:02:35 | logging:36 | Root Command: source/prompt_top_event_names.py --event-element paragraph-split
+21-08-11 20:02:38 | get_args:81 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph-split',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'merge_single_policy': 'max',
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names.json'}
+21-08-11 20:02:38 | load_muc4:235 | Overwrite MUC-4 Loading from args
+21-08-11 20:02:38 | load_muc4:243 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json
+
+================================================================================
+21-08-11 20:03:24 | logging:36 | Root Command: source/prompt_top_event_names.py --event-element paragraph-split
+21-08-11 20:03:27 | get_args:81 | {'all_arguments': 'data/muc34/outputs/all-arguments.json',
+ 'all_sentences_file': 'data/muc34/diagnosis/muc4_all_sentences.txt',
+ 'argument_list_len': 5,
+ 'argument_prompts': 'data/muc34/outputs/all-argument-prompt-results.json',
+ 'batch_size': 64,
+ 'data_dir': 'data/muc34',
+ 'event_element': 'paragraph-split',
+ 'extraction_results': 'data/muc34/outputs/full-extraction.json',
+ 'loading_cache_file': 'data/muc34/outputs/muc4_loaded_cache.json',
+ 'max_token_length': 512,
+ 'merge_single_policy': 'max',
+ 'model_name': 'roberta-large',
+ 'num_contents_each_event': 1,
+ 'num_samples': -1,
+ 'num_selected_arguments': 30,
+ 'num_selected_events': 60,
+ 'overwrite_argument_filtering': False,
+ 'overwrite_argument_naming': False,
+ 'overwrite_loading': False,
+ 'overwrite_ner': False,
+ 'overwrite_prompt_cache': False,
+ 'overwrite_prompting_all': False,
+ 'overwrite_top_events': False,
+ 'paragraph_retrieval_output': 'data/muc34/outputs/paragraph-retrieval.json',
+ 'paragraph_split_retrieval_output': 'data/muc34/outputs/paragraph-split-retrieval.json',
+ 'prompt_all_paragraphs_results': 'data/muc34/outputs/all-paragraphs-prompt-results.json',
+ 'prompt_all_paragraphs_split_results': 'data/muc34/outputs/all-paragraphs-split-prompt-results.json',
+ 'prompt_all_sentences_results': 'data/muc34/outputs/all-sentences-prompt-results.json',
+ 'retrieval_diagnosis': 'data/muc34/diagnosis/retrieval_diagnosis.json',
+ 'sentence_retrieval_output': 'data/muc34/outputs/sentence-retrieval.json',
+ 'statistics_file': 'data/muc34/diagnosis/muc4_statistics.txt',
+ 'top_arguments': 'data/muc34/outputs/top-arguments.json',
+ 'top_k': 30,
+ 'top_names_by_type_file': 'data/muc34/diagnosis/top-names-by-type.json',
+ 'top_names_file': 'data/muc34/outputs/top-names.json'}
+21-08-11 20:03:27 | load_muc4:235 | Overwrite MUC-4 Loading from args
+21-08-11 20:03:27 | load_muc4:243 | loading MUC-4 from existing file: data/muc34/outputs/muc4_loaded_cache.json

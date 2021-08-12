@@ -2,7 +2,7 @@ import numpy as np
 
 from collections import defaultdict
 from components.constants import all_event_types
-from components.logging import getLogger
+from components.logging import logger
 
 
 def intersect(set1, set2):
@@ -42,7 +42,6 @@ def merge_ranked_list(lists, merge_policy="power"):
 
 
 def random_choice(candidates, num, as_array=True):
-    logger = getLogger("random-choice")
     if num <= 0 or num >= len(candidates):
         logger.info(f"num={num}, defaulting to original list "
                     f"of length {len(candidates)}")

@@ -10,9 +10,7 @@ from transformers import \
 from torch.nn.utils.rnn import pad_sequence
 
 from components.constants import characters_to_strip
-from components.logging import getLogger
-
-logger = getLogger("LM-prompt")
+from components.logging import logger
 
 
 def LM_prompt(texts, tokenizer, maskedLM,
@@ -69,10 +67,10 @@ def LM_prompt(texts, tokenizer, maskedLM,
                 ))
             if one_per_prompt:
                 predicted_tokens[item[0]] = \
-                    (this_predicted_tokens, probs.numpy().tolist())
+                    (this_predicted_tokens, probs.cpu().numpy().tolist())
             else:
                 predicted_tokens[item[0]].append(
-                    (this_predicted_tokens, probs.numpy().tolist()))
+                    (this_predicted_tokens, probs.cpu().numpy().tolist()))
             sample_output[item[0], item[1]] = top_k_preds[0]
         sample_output = map(
             lambda x: tokenizer.decode(x).replace(tokenizer.pad_token, ""),
