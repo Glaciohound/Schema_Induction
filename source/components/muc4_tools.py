@@ -57,20 +57,20 @@ def get_all_type_contents(
     groupby_type = group_events_by_type(all_events)
     type_sentences = {
         _type: [
-            extract_relevant_sentences(
+            list(extract_relevant_sentences(
                 _event, corpora[_event["MESSAGE: ID"]], content_type
-            )[0]
+            )[0].values())
             for _event in _group
         ]
         for _type, _group in groupby_type.items()
     }
     if to_element:
         type_sentences = {
-            _type: [
-                _sentence
+            _type: {
+                _sentence["index"]: _sentence["sentence"]
                 for _sentences in _group
                 for _sentence in _sentences[:num_contents_each_event]
-            ]
+            }
             for _type, _group in type_sentences.items()
         }
     return type_sentences
@@ -133,20 +133,20 @@ def get_event_keywords(event):
 
 def extract_relevant_sentences(event, article, content_type="sentence"):
     if content_type == "sentence":
-        all_sentences = [
-            _sentence
-            for _paragraph_split in article["content-cased-split"]
-            for _sentence in _paragraph_split
-        ]
+        all_sentences = {
+            (article["title"], (_i, _j), event["event-ID"]): _sentence
+            for _i, _paragraph in enumerate(article["content-cased-split"])
+            for _j, _sentence in enumerate(_paragraph)
+        }
     elif content_type == "paragraph" or content_type == "paragraph-split":
-        all_sentences = [
-            "".join(_paragraph_split)
-            for _paragraph_split in article["content-cased-split"]
-        ]
+        all_sentences = {
+            (article["title"], _i, event["event-ID"]): "".join(_paragraph)
+            for _i, _paragraph in enumerate(article["content-cased-split"])
+        }
     keywords = get_event_keywords(event)
     counter = defaultdict(lambda: {"count": 0, "arguments": {}})
     missing_counter = [True] * len(keywords)
-    for i, sentence in enumerate(all_sentences):
+    for _id, sentence in all_sentences.items():
         sentence_upper = sentence.upper()
         for j, (keyword, _category) in enumerate(keywords.items()):
             if isinstance(keyword, tuple):
@@ -157,17 +157,18 @@ def extract_relevant_sentences(event, article, content_type="sentence"):
             _match = re.search(pattern, sentence_upper)
             if _match is not None:
                 missing_counter[j] = False
-                counter[i]["count"] += len(re.findall(pattern, sentence_upper))
+                counter[_id]["count"] += len(
+                    re.findall(pattern, sentence_upper))
                 submatch = re.search(sub_pattern, _match.group(0).upper())
                 start_pos = _match.start() + submatch.start()
-                counter[i]["arguments"][
+                counter[_id]["arguments"][
                     sentence[start_pos: start_pos + len(submatch.group(0))]
                 ] = _category
-                counter[i]["index"] = i
-                counter[i]["sentence"] = all_sentences[i]
-                counter[i]["article"] = event["MESSAGE: ID"]
-    counter = sorted(list(counter.values()), key=lambda x: x["count"],
-                     reverse=True)
+                counter[_id]["index"] = _id
+                counter[_id]["sentence"] = sentence
+                counter[_id]["article"] = event["MESSAGE: ID"]
+    counter = dict(sorted(list(counter.items()), key=lambda x: x[1]["count"],
+                          reverse=True))
     missing_counter = dict(zip(keywords, missing_counter))
     return counter, missing_counter
 

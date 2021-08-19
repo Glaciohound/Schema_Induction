@@ -5,8 +5,12 @@ from components.constants import all_event_types
 from components.logging import logger
 
 
+def intersection(set1, set2):
+    return len(set(set1).intersection(set(set2)))
+
+
 def intersect(set1, set2):
-    return len(set(set1).intersection(set(set2))) != 0
+    return intersection(set1, set2) != 0
 
 
 def diff(list1, list2):
@@ -54,19 +58,45 @@ def random_choice(candidates, num, as_array=True):
     return results
 
 
-def calculate_precision_recall(pred_list, gt_list):
+def calculate_precision_recall(pred_list, gt_list, count_duplicate=False):
     precision_recall = {}
     total_hit = 0
+    all_hit = []
     for _type in all_event_types:
-        retrieved = pred_list[_type]
-        gt = gt_list[_type]
-        hit = np.intersect1d(retrieved, gt)
-        total_hit += hit.shape[0]
+        if not count_duplicate:
+            retrieved = pred_list[_type]
+            gt = gt_list[_type]
+            hit = np.intersect1d(retrieved, gt)
+        else:
+            retrieved = pred_list[_type]
+            gt = gt_list[_type]
+            hit = list(_item for _item in gt if _item in retrieved)
         precision_recall[_type] = {
-            "precision": hit.shape[0] / retrieved.shape[0] if
-            retrieved.shape[0] != 0 else np.inf,
-            "recall": hit.shape[0] / gt.shape[0],
-            "F1": hit.shape[0] / (gt.shape[0] + retrieved.shape[0]) * 2
+            "hit": hit, "pred": retrieved, "gt": gt
+        }
+
+    for _type in all_event_types:
+        if not count_duplicate:
+            retrieved = pred_list[_type]
+            gt = gt_list[_type]
+            hit = np.intersect1d(retrieved, gt).shape[0]
+            retrieved = len(set(retrieved))
+            gt = len(set(gt))
+        else:
+            retrieved = pred_list[_type]
+            gt = gt_list[_type]
+            hit = sum(_item in retrieved for _item in gt)
+            retrieved = retrieved.shape[0]
+            gt = gt.shape[0]
+        total_hit += hit
+        precision_recall[_type] = {
+            "precision": hit / retrieved if
+            retrieved != 0 else np.inf,
+            "recall": hit / gt,
+            "F1": hit / (gt + retrieved) * 2,
+            "hit": hit,
+            "pred": retrieved,
+            "gt": gt,
         }
     total_pred = sum(map(len, pred_list.values()))
     total_gt = sum(map(len, gt_list.values()))
@@ -74,6 +104,9 @@ def calculate_precision_recall(pred_list, gt_list):
         "precision": total_hit / total_pred,
         "recall": total_hit / total_gt,
         "F1": total_hit / (total_pred + total_gt) * 2,
+        "hit": total_hit,
+        "pred": total_pred,
+        "gt": total_gt,
     }
     return precision_recall
 
